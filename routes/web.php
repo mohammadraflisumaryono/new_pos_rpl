@@ -7,8 +7,15 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 // Route::get('/menus/index', [MenuController::class, 'index'])->name('menus.index');
+
+
+Route::resource('products', ProductController::class);
+Route::resource('categories', CategoryController::class);
+
 
 Route::prefix('menus')->group(function () {
     Route::get('/index', [MenuController::class, 'index'])->name('menus.index');
