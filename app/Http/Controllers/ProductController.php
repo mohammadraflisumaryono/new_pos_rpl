@@ -21,6 +21,13 @@ class ProductController extends Controller
         return view('products.index', compact('products'), $data);
     }
 
+    public function display()
+    {
+        $products = Product::all();
+        $data['page_title'] = "SunnyMart";
+        return view('products.display', compact('products'), $data);
+    }
+
     public function create()
     {
         $categories = Category::all();
@@ -33,7 +40,7 @@ class ProductController extends Controller
         $request->validate([
             'nama' => 'required',
             'barcode' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'harga' => 'required|numeric',
             'netto' => 'required|numeric',
             'dimensi' => 'required',

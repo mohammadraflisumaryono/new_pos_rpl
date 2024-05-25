@@ -11,7 +11,9 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 // Resource routes for products and categories
-Route::resource('products', ProductController::class);
+Route::resource('products', ProductController::class)->except(['show']);
+Route::get('products/display', [ProductController::class, 'display'])->name('products.display');
+Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::resource('categories', CategoryController::class);
 
 // Grouped routes for menus with a prefix

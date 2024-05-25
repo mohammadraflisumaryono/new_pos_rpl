@@ -49,10 +49,7 @@
                           @foreach($menu->children as $child)
                           @if($child->is_aktif == 'y')
                           <li class="nav-item">
-                              @php
-                              $routeParameters =2;
-                              @endphp
-                              <a href="{{ route($child->url, $routeParameters) }}" class="nav-link active">
+                              <a href="{{route( $child->url) }}" class="nav-link active">
                                   <i class="{{ $child->icon }}"></i>
                                   <p>{{ $child->title }}</p>
                               </a>
