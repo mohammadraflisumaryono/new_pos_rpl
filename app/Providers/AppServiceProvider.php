@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Menu;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //Load Menus
+        View::composer('*', function ($view) {
+            // Fetch all active menus
+            $menus = Menu::where('is_aktif', 'y')
+                ->orderBy('menu_parent')
+                ->orderBy('id')
+                ->get();
+
+            // Share the menu data with all views
+            $view->with('menus', $menus);
+        });
     }
 }

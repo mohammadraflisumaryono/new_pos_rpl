@@ -10,12 +10,14 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        $page_title = 'Category Management';
+        return view('categories.index', compact('categories', 'page_title'));
     }
 
     public function create()
     {
-        return view('categories.create');
+        $page_title = 'Create Category';
+        return view('categories.create', compact('page_title'));
     }
 
     public function store(Request $request)
@@ -31,18 +33,22 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        return view('categories.show', compact('category'));
+        $page_title = 'Category Detail';
+        return view('categories.show', compact('category', 'page_title'));
     }
 
     public function edit(Category $category)
     {
-        return view('categories.edit', compact('category'));
+        $page_title = 'Edit Category';
+        return view('categories.edit', compact('category', 'page_title'));
     }
 
     public function update(Request $request, Category $category)
     {
+        dd($request->all(), $category->toArray());
+
         $request->validate([
-            'nama' => 'required|unique:categories,nama,' . $category->category_id,
+            'nama' => 'required|unique:categories,nama,', $category->category_id,
         ]);
 
         $category->update($request->all());

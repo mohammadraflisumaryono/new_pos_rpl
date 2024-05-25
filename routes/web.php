@@ -2,17 +2,21 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Route;
 
-// Route::get('/menus/index', [MenuController::class, 'index'])->name('menus.index');
+// Resource routes for products and categories
+Route::resource('products', ProductController::class);
+Route::resource('categories', CategoryController::class);
 
+// Grouped routes for menus with a prefix
 Route::prefix('menus')->group(function () {
     Route::get('/index', [MenuController::class, 'index'])->name('menus.index');
-    Route::get('/', [MenuController::class, 'index'])->name('menus.index'); // Menambahkan rute GET untuk menampilkan daftar menu
     Route::get('/create', [MenuController::class, 'create'])->name('menus.create');
     Route::post('/', [MenuController::class, 'store'])->name('menus.store');
     Route::get('/{menu}/edit', [MenuController::class, 'edit'])->name('menus.edit');
@@ -20,34 +24,17 @@ Route::prefix('menus')->group(function () {
     Route::delete('/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
 });
 
-
-
-
-Route::get('dashboard', function () {
-    return view('index');
-});
-
+// Dashboard route with authentication and verification middleware
 Route::get('/dashboard', [HomeController::class, 'index'])
-    ->middleware(['auth', 'verified', 'user'])
+    ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::get('/dashboard', [HomeController::class, 'index'])
-    ->middleware(['auth', 'verified', 'superadmin'])
-    ->name('superadmin');
-
-Route::view('manager', 'manager')
-    ->middleware(['auth', 'verified', 'manager'])
-    ->name('manager');
-
-Route::view('kasir', 'kasir')
-    ->middleware(['auth', 'verified', 'kasir'])
-    ->name('kasir');
-
-
+// Grouped routes for profile with authentication middleware
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Authentication routes
 require __DIR__ . '/auth.php';

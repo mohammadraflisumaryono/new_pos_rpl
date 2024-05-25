@@ -89,9 +89,10 @@
 @endsection
 
 @section('page_title_actions')
+@endsection
 
 
-
+@section('page_content')
 <div class="row rowdashboard">
     @foreach($menus as $menu)
     @if($menu->menu_parent == 0 && $menu->is_aktif == 'y')
@@ -118,5 +119,4 @@
     @endif
     @endforeach
 </div>
-
 @endsection
