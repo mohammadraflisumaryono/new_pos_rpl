@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $primaryKey = 'product_id';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'nama', 'barcode', 'image', 'harga', 'netto', 'dimensi', 'deskripsi', 'category_id'
     ];

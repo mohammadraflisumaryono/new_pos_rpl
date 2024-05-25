@@ -10,11 +10,12 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
+// Resource routes for products and categories
 Route::resource('products', ProductController::class);
 Route::resource('categories', CategoryController::class);
 
+// Grouped routes for menus with a prefix
 Route::prefix('menus')->group(function () {
-    Route::get('/', [MenuController::class, 'index'])->name('menus.index');
     Route::get('/index', [MenuController::class, 'index'])->name('menus.index');
     Route::get('/create', [MenuController::class, 'create'])->name('menus.create');
     Route::post('/', [MenuController::class, 'store'])->name('menus.store');
@@ -23,14 +24,17 @@ Route::prefix('menus')->group(function () {
     Route::delete('/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
 });
 
+// Dashboard route with authentication and verification middleware
 Route::get('/dashboard', [HomeController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// Grouped routes for profile with authentication middleware
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Authentication routes
 require __DIR__ . '/auth.php';

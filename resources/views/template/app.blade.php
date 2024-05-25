@@ -22,10 +22,11 @@
         }
     </style>
 
-  
+
 </head>
 
 <body class="hold-transition sidebar-mini">
+
     <div class="wrapper">
         @include('template.navbar')
         @include('template.sidebar')
@@ -48,35 +49,18 @@
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-
-
-            <div class="page-wrapper">
-                <!-- Page header -->
-                <div class="page-header d-print-none">
-                    <div class="container-xl">
-                        <div class="row g-2 align-items-center">
-                            <div class="col">
-                                <!-- Page pre-title -->
-                                <div class="page-pretitle">
-                                    &nbsp;
-                                </div>
-                                <h2 class="page-title">
-                                    {{ $page_title }}
-                                </h2>
-                            </div>
-                            @yield('page_title_actions')
-                        </div>
-                    </div>
-                </div>
-                <!-- Page body -->
-                <div class="page-body mx-8">
-                    @yield('page_content')
-                </div>
-                @include('template.footer')
+            <!-- /.content-header -->
+            <!-- Page body -->
+            <div class="page-body mx-8">
+                @yield('page_content')
             </div>
+            @include('template.footer')
+        </div>
+    </div>
+    </div>
 
 
-            @include('template.js')
+    @include('template.js')
 </body>
 
 </html>
