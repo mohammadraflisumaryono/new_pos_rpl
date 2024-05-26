@@ -2,8 +2,8 @@
 
 @section('page_content')
 <h1>Products</h1>
-<a href="{{ route('products.create') }}">Create Product</a>
-<table>
+<a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Create Product</a>
+<table id="productsTable" class="display">
     <thead>
         <tr>
             <th>ID</th>
@@ -25,16 +25,24 @@
             <td>{{ $product->netto }}</td>
             <td>{{ $product->category->nama }}</td>
             <td>
-                <a href="{{ route('products.show', $product) }}">Show</a>
-                <a href="{{ route('products.edit', $product) }}">Edit</a>
-                <form action="{{ route('products.destroy', $product) }}" method="POST">
+                <a href="{{ route('products.show', $product) }}" class="btn btn-primary btn-sm">Show</a>
+                <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{{ route('products.destroy', $product) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit">Delete</button>
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                 </form>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#productsTable').DataTable();
+    });
+</script>
 @endsection
