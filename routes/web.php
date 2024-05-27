@@ -8,6 +8,7 @@ use App\Http\Controllers\KasirController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
 
 // Resource routes for products and categories
@@ -24,7 +25,11 @@ Route::prefix('menus')->group(function () {
     Route::get('/{menu}/edit', [MenuController::class, 'edit'])->name('menus.edit');
     Route::put('/{menu}', [MenuController::class, 'update'])->name('menus.update');
     Route::delete('/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
-});
+})->middleware(['auth', 'verified']);
+
+Route::prefix('superadmin')->group(function () {
+    Route::get('/', [SuperAdmin::class, 'index'])->name('superadmin.index');
+})->middleware(['auth', 'verified', 'superadmin']);
 
 // Dashboard route with authentication and verification middleware
 Route::get('/dashboard', [HomeController::class, 'index'])

@@ -30,12 +30,6 @@
                  <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
              </a>
          </li>
-         <li class="">
-             <a href="#" class="mx-3 position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                 <iconify-icon icon="mdi:cart" class="fs-4"></iconify-icon>
-                 <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">03</span>
-             </a>
-         </li>
      </ul>
 
  </nav>
