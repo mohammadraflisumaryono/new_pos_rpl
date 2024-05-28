@@ -9,14 +9,27 @@
       <!-- Sidebar -->
       <div class="sidebar">
           <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-              <div class="">
-                  <img src="{{asset('assets/dist/img/AdminLTELogo.png')}}" class="brand-image img-circle elevation-3" style=" width: 40px; height: 40px; margin:auto; padding:auto;">
-              </div>
-              <div class="info">
-                  <a href="#" class="d-block">Alexander Pierce</a>
-              </div>
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+              <a href="{{ route('dashboard') }}" class="brand-link">
+                  @if(Auth::user())
+                  <p class="brand-text font-weight-light h-2">{{ Auth::user()->name }}</p>
+                  <p class="brand-text font-weight-light t h-1">
+                      @switch(Auth::user()->role)
+                      @case(1)
+                      User
+                      @break
+                      @case(2)
+                      Kasir< @break @case(3) Manager @break @case(4) Super Admin @break @default Guest @endswitch </p>
+                          @else
+                          <p class="brand-text font-weight-light h-2">Guest</p>
+                          <p class="brand-text font-weight-light h-1">Guest</p>
+                          @endif
+              </a>
+              @guest
+              <a href="{{ route('login') }}" class="ml-auto">Login</a>
+              @endguest
           </div>
+
 
           <!-- SidebarSearch Form -->
           <div class="form-inline">

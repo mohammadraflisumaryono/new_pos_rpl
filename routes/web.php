@@ -11,12 +11,17 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DiscountProductController;
+use App\Http\Controllers\SliderController;
 
 // Resource routes for products and categories
 Route::resource('products', ProductController::class)->except(['show']);
 Route::get('products/display', [ProductController::class, 'display'])->name('products.display');
 Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::resource('categories', CategoryController::class);
+
+
+
+Route::resource('sliders', SliderController::class);
 
 
 
