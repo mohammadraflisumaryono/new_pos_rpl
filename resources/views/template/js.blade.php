@@ -5,6 +5,8 @@
 <!-- AdminLTE App -->
 <script src="{{asset('assets/dist/js/adminlte.min.js')}}"></script>
 <script src="https://kit.fontawesome.com/0ef72646e9.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@iconify/iconify@1.0.7"></script>
+<script src="
+https://cdn.jsdelivr.net/npm/iconify@1.4.0/src/browser/index.min.js
+"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>

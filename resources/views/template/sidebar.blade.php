@@ -9,14 +9,14 @@
       <!-- Sidebar -->
       <div class="sidebar">
           <!-- Sidebar user panel (optional) -->
-          <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
               <div class="">
                   <img src="{{asset('assets/dist/img/AdminLTELogo.png')}}" class="brand-image img-circle elevation-3" style=" width: 40px; height: 40px; margin:auto; padding:auto;">
               </div>
               <div class="info">
                   <a href="#" class="d-block">Alexander Pierce</a>
               </div>
-          </div> -->
+          </div>
 
           <!-- SidebarSearch Form -->
           <div class="form-inline">

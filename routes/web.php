@@ -10,12 +10,18 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DiscountProductController;
 
 // Resource routes for products and categories
 Route::resource('products', ProductController::class)->except(['show']);
 Route::get('products/display', [ProductController::class, 'display'])->name('products.display');
 Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::resource('categories', CategoryController::class);
+
+
+
+// Route::get('/discount-products', [DiscountProductController::class, 'index']);
+
 
 // Grouped routes for menus with a prefix
 Route::prefix('menus')->group(function () {
@@ -31,9 +37,8 @@ Route::prefix('superadmin')->group(function () {
     Route::get('/', [SuperAdmin::class, 'index'])->name('superadmin.index');
 })->middleware(['auth', 'verified', 'superadmin']);
 
-// Dashboard route with authentication and verification middleware
-Route::get('/dashboard', [HomeController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+// Dashboard route
+Route::get('/', [HomeController::class, 'index'])
     ->name('dashboard');
 
 // Grouped routes for profile with authentication middleware

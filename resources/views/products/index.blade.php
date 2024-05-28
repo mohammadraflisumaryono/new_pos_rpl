@@ -11,7 +11,7 @@
             <th>Barcode</th>
             <th>Harga</th>
             <th>Netto</th>
-            <th>Category</th>
+            <th>Categories</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -23,7 +23,11 @@
             <td>{{ $product->barcode }}</td>
             <td>{{ $product->harga }}</td>
             <td>{{ $product->netto }}</td>
-            <td>{{ $product->category->nama }}</td>
+            <td>
+                @foreach ($product->categories as $category)
+                <span class="badge badge-info">{{ $category->nama }}</span>
+                @endforeach
+            </td>
             <td>
                 <a href="{{ route('products.show', $product) }}" class="btn btn-primary btn-sm">Show</a>
                 <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm">Edit</a>

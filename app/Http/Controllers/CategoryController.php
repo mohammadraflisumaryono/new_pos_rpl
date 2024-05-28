@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -24,12 +25,22 @@ class CategoryController extends Controller
     {
         $request->validate([
             'nama' => 'required|unique:categories',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Category::create($request->all());
+        $category = new Category;
+        $category->nama = $request->nama;
+
+        if ($request->hasFile('icon')) {
+            $iconPath = $request->file('icon')->store('images/categories', 'public');
+            $category->icon = $iconPath;
+        }
+
+        $category->save();
 
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
+
 
     public function show(Category $category)
     {
@@ -45,19 +56,32 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        dd($request->all(), $category->toArray());
-
         $request->validate([
-            'nama' => 'required|unique:categories,nama,', $category->category_id,
+            'nama' => 'required|unique:categories,nama,' . $category->id,
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $category->update($request->all());
+        $data = $request->all();
+        if ($request->hasFile('icon')) {
+            // Delete old icon if exists
+            if ($category->icon) {
+                Storage::disk('public')->delete($category->icon);
+            }
+            $data['icon'] = $request->file('icon')->store('images/categories', 'public');
+        } else {
+            unset($data['icon']);
+        }
+
+        $category->update($data);
 
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     public function destroy(Category $category)
     {
+        if ($category->icon) {
+            Storage::disk('public')->delete($category->icon);
+        }
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');

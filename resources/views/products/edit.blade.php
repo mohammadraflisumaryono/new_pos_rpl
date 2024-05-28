@@ -1,7 +1,41 @@
 @extends('template.app')
 
 @section('page_content')
+@section('styles')
+<style>
+    .categories-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 15px;
+    }
 
+    img {
+        margin-top: 10px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .category-bubble {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .category-bubble.active {
+        background-color: #3490dc;
+        border-color: #3490dc;
+        color: #fff;
+    }
+
+    .kategori-label {
+        display: block;
+    }
+</style>
+@endsection
 
 <h1>Edit Product</h1>
 <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
@@ -19,7 +53,7 @@
         <label for="image">Image:</label>
         <input type="file" class="form-control" name="image" id="image">
         @if ($product->image)
-        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->nama }}" style="width: 150px;">
+        <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->nama }}">
         @endif
     </div>
     <div class="form-group">
@@ -38,14 +72,37 @@
         <label for="deskripsi">Deskripsi:</label>
         <textarea class="form-control" name="deskripsi" id="deskripsi">{{ $product->deskripsi }}</textarea>
     </div>
-    <div class="form-group">
-        <label for="id">Category:</label>
-        <select class="form-control" name="id" id="id" required>
-            @foreach ($categories as $category)
-            <option value="{{ $category->id }}" @if($product->id == $category->id) selected @endif>{{ $category->nama }}</option>
-            @endforeach
-        </select>
+    <div class="categories-container">
+        <label for="category ">Kategori:</label>
+
+        @foreach ($categories as $category)
+        <div class="category-bubble {{ $product->categories->contains($category->category_id) ? 'active' : '' }}" data-id="{{ $category->category_id }}">
+            <span class="category-name">{{ $category->nama }}</span>
+            <input type="hidden" name="categories[]" value="{{ $category->category_id }}" class="category-input" {{ $product->categories->contains($category->category_id) ? '' : 'disabled' }}>
+        </div>
+        @endforeach
+
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
 </form>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.category-bubble').forEach(function(bubble) {
+            bubble.addEventListener('click', function() {
+                bubble.classList.toggle('active');
+                var input = bubble.querySelector('.category-input');
+                if (input) {
+                    if (bubble.classList.contains('active')) {
+                        input.removeAttribute('disabled');
+                    } else {
+                        input.setAttribute('disabled', 'disabled');
+                    }
+                }
+            });
+        });
+    });
+</script>
 @endsection
