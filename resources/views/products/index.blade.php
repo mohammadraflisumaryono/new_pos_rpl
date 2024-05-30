@@ -3,6 +3,19 @@
 @section('page_content')
 <h1>Products</h1>
 <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Create Product</a>
+<a href="{{ route('products.addstock') }}" class="btn btn-primary mb-3">Add Stock Products</a>
+
+@if($productHampirHabis->count() > 0)
+<div class="alert alert-danger">
+    <h4>Produk Hampir Habis</h4>
+    <ul>
+        @foreach($productHampirHabis as $product)
+        <li>{{ $product->nama }} (Stock: {{ $product->stock }})</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <table id="productsTable" class="display">
     <thead>
         <tr>
@@ -10,6 +23,7 @@
             <th>Nama</th>
             <th>Barcode</th>
             <th>Harga</th>
+            <th>Stock</th>
             <th>Netto</th>
             <th>Categories</th>
             <th>Actions</th>
@@ -21,7 +35,8 @@
             <td>{{ $product->id }}</td>
             <td>{{ $product->nama }}</td>
             <td>{{ $product->barcode }}</td>
-            <td>{{ $product->harga }}</td>
+            <td>{{ $product->readAblePrice }}</td>
+            <td>{{ $product->stock }}</td>
             <td>{{ $product->netto }}</td>
             <td>
                 @foreach ($product->categories as $category)

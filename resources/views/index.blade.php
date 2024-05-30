@@ -568,7 +568,33 @@ Blog section style start
     .pagination .page-numbers.current {
         color: var(--accent-color);
     }
+
+    #categories {
+        padding: 3rem 1rem;
+    }
+
+    .container {
+        max-width: calc(100% - 8rem);
+        /* Perkecil container */
+    }
+
+    #slider {
+        text-align: left;
+        /* Geser konten ke kiri */
+    }
+
+    .container {
+        max-width: calc(100% - 4rem);
+        /* Perkecil container */
+    }
+
+    #slider {
+        text-align: left;
+        /* Geser konten ke kiri */
+    }
 </style>
+</style>
+
 
 
 @endsection
@@ -590,31 +616,59 @@ Blog section style start
         <div class="swiper-wrapper">
             @foreach($sliders as $slider)
             <div class="swiper-slide">
-                <img src="{{ asset('storage/' . $slider->image_path) }}" class="img-fluid" alt="Banner Image">
-                <a href="{{ $slider->link }}" id="dynamic-button" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1 center-button">{{ $slider->button_text }}</a>
-            </div>
-            @endforeach
-            <div class="swiper-pagination"></div>
-        </div>
-
-</section>
-
-
-
-<section id="categories">
-    <div class="container my-3 py-5">
-        <div class="row">
-            @foreach($categories as $category)
-            <div class="col-md-4 col-sm-6 text-center my-3">
-                <a href="#" class="categories-item text-decoration-none d-inline-block">
-                    <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->nama }}" class="img-fluid mb-2 mx-auto" style="max-width: 100px;">
-                    <p class="mb-0">{{ $category->nama }}</p>
+                <a href="{{ $slider->link }}">
+                    <img src="{{ asset('storage/' . $slider->image_path) }}" class="img-fluid" alt="Banner Image">
                 </a>
             </div>
             @endforeach
         </div>
+        <div class="swiper-pagination"></div>
     </div>
 </section>
+
+
+
+
+<section id="categories" class="py-24 sm:py-8 px-4">
+    <div class="container mx-auto max-w-[calc(100%-4rem)]"> <!-- Perkecil container -->
+        <div class="relative flex items-center justify-center">
+            <button aria-label="slide backward" class=" z-30 left-0 ml-4 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer rounded-full border-2 border-gray-400 p-2" id="prev">
+                <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            <div class="w-full h-full mx-auto overflow-hidden relative px-12">
+                <div id="slider" class="h-full flex items-center justify-start transition-transform ease-out duration-700" style="text-align: left;"> <!-- Geser isi ke kiri -->
+                    @foreach($categories as $category)
+                    <div class="flex flex-shrink-0 relative w-auto sm:w-auto text-center mx-2">
+                        <a href="#" class="categories-item text-decoration-none d-inline-block">
+                            <span class="badge bg-light text-dark d-flex align-items-center justify-center" style="font-size: 1em; padding: 0.5em;">
+                                <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->nama }}" class="img-fluid me-2" style="max-width: 20px;">
+                                {{ $category->nama }}
+                            </span>
+                        </a>
+                    </div>
+
+                    @endforeach
+                </div>
+            </div>
+            <button aria-label="slide forward" class="z-30 mr-4 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer rounded-full border-2 border-gray-400 p-2" id="next">
+                <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L7 7L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
 
 
 <section class="products">
@@ -1082,6 +1136,45 @@ Blog section style start
                 effect: 'slide', // Default effect, you can change to 'fade', 'cube', etc.
                 speed: 600, // Duration of transition between slides (in ms)
             });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentTransform = 0;
+            const badgeWidth = document.querySelector('.categories-item').offsetWidth + 16; // Sesuaikan dengan desain dan padding/margin Anda
+
+            function showSlide(index) {
+                // Pastikan index berada dalam rentang yang benar
+                if (index < 0) {
+                    index = totalSlides - 1; // Jika index kurang dari 0, pindahkan ke slide terakhir
+                } else if (index >= totalSlides) {
+                    index = 0; // Jika index melebihi totalSlides, pindahkan ke slide pertama
+                }
+            }
+
+
+            function goNext() {
+                const slider = document.getElementById("slider");
+                const containerWidth = slider.parentElement.clientWidth;
+                const maxTransform = slider.scrollWidth - containerWidth;
+                if (currentTransform - badgeWidth > -maxTransform) {
+                    currentTransform -= badgeWidth;
+                } else {
+                    currentTransform = -maxTransform;
+                }
+                slider.style.transform = "translateX(" + currentTransform + "px)";
+            }
+
+            function goPrev() {
+                if (currentTransform + badgeWidth <= 0) {
+                    currentTransform += badgeWidth;
+                } else {
+                    currentTransform = 0;
+                }
+                const slider = document.getElementById("slider");
+                slider.style.transform = "translateX(" + currentTransform + "px)";
+            }
+
+            document.getElementById("next").addEventListener("click", goNext);
+            document.getElementById("prev").addEventListener("click", goPrev);
         });
     </script>
     @endsection

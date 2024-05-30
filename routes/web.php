@@ -14,11 +14,34 @@ use App\Http\Controllers\DiscountProductController;
 use App\Http\Controllers\SliderController;
 
 // Resource routes for products and categories
-Route::resource('products', ProductController::class)->except(['show']);
-Route::get('products/display', [ProductController::class, 'display'])->name('products.display');
-Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
-Route::resource('categories', CategoryController::class);
+Route::prefix('categories')->group(function () {
+    Route::get('/index', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+})->middleware(['auth', 'verified', 'superadmin']);
 
+Route::prefix('products')->group(function () {
+    Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
+
+    Route::get('/addstock', [ProductController::class, 'addstock'])->name('products.addstock');
+    Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+})->middleware(['auth', 'verified', 'superadmin', 'manager']);
+
+// routes/web.php
+
+Route::post('/product/info', [ProductController::class, 'getProductInfo'])->name('product.info');
+Route::post('/products/updatestock', [ProductController::class, 'updatestock'])->name('products.updatestock');
+
+
+Route::get('/display', [ProductController::class, 'display'])->name('products.display');
+Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
 
 
 Route::resource('sliders', SliderController::class);
@@ -26,6 +49,7 @@ Route::resource('sliders', SliderController::class);
 
 
 // Route::get('/discount-products', [DiscountProductController::class, 'index']);
+
 
 
 // Grouped routes for menus with a prefix
@@ -36,7 +60,7 @@ Route::prefix('menus')->group(function () {
     Route::get('/{menu}/edit', [MenuController::class, 'edit'])->name('menus.edit');
     Route::put('/{menu}', [MenuController::class, 'update'])->name('menus.update');
     Route::delete('/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
-})->middleware(['auth', 'verified']);
+})->middleware(['auth', 'verified', 'superadmin']);
 
 Route::prefix('superadmin')->group(function () {
     Route::get('/', [SuperAdmin::class, 'index'])->name('superadmin.index');
