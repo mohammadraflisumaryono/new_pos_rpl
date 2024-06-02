@@ -93,7 +93,7 @@
                 <span><i class="fas fa-shopping-cart"></i></span>
             </a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
+        <li class="nav-item d-none d-sm-inline-block mr-3">
             <div class="dropdown">
                 <!-- Sesuaikan kelas dan gaya tombol dropdown -->
                 <button class="nav-link dropbtn"><i class="fas fa-user"></i></button>
