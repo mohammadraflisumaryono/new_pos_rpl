@@ -2,43 +2,33 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
-use App\Models\User as UserModel;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Menu;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Slider;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        $role = $user->role;
-        // Fetch menus based on user's role
-        $menus = Menu::where(function ($query) use ($role) {
-            $query->where('menu_roles', 'all')
-                ->orWhere('menu_roles', 'like', '%1%')
-                ->orWhere('menu_roles', 'like', '%2%')
-                ->orWhere('menu_roles', 'like', '%3%')
-                ->orWhere('menu_roles', 'like', '%4%');
-        })->where('is_aktif', 'y')
-            ->orderBy('menu_parent')
-            ->orderBy('id')
-            ->get();
+        $products = Product::all();
+        $sliders = Slider::all();
 
-        // dd($menus);
 
-        $data['page_title'] = "Dashboard Super Admin";
-        $data['menus'] = $menus;
-        return view('index', $data);
-    }
-
-    private function hasAccess($menuRoles, $userRole)
-    {
-        if ($menuRoles === 'all') {
-            return true;
+        foreach ($products as $product) {
+            $product->short_description = Str::limit($product->deskripsi, 100);
+            $product->readAblePrice = 'Rp.' .  number_format($product->harga, 0, ',', '.');
         }
 
-        $roleArray = explode(',', $menuRoles);
-        return in_array($userRole, $roleArray) || in_array('4', $roleArray);
+        $data['page_title'] = "SunnyMart";
+        $data['products'] = $products;
+        $data['categories'] = Category::all();
+        $data['sliders'] = $sliders;
+
+        //dd($data['categories']);
+
+        return view('index', $data);
     }
 }

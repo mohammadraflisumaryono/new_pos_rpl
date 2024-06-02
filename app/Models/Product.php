@@ -12,12 +12,11 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
     protected $primaryKey = 'id';
-    protected $fillable = [
-        'nama', 'barcode', 'image', 'harga', 'netto', 'dimensi', 'deskripsi', 'category_id'
-    ];
+    protected $fillable = ['nama', 'barcode', 'harga', 'netto', 'dimensi', 'deskripsi', 'stock'];
 
-    public function category()
+
+    public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id');
     }
 }

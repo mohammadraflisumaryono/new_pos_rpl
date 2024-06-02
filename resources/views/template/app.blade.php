@@ -10,6 +10,7 @@
     @include('template.css')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
+    @yield('head_khusus')
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -34,9 +35,11 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
+            @if($page_title != 'SunnyMart')
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
+
                         <div class="col-sm-6">
                             <h1 class="m-0">{{ $page_title }}</h1>
                         </div><!-- /.col -->
@@ -49,6 +52,7 @@
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
+            @endif
             <!-- /.content-header -->
             <!-- Page body -->
             <div class="page-body mx-8">
@@ -61,6 +65,7 @@
 
 
     @include('template.js')
+    @yield('scripts')
 </body>
 
 </html>
