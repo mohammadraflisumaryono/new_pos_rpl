@@ -10,8 +10,13 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DiscountProductController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+// Authentication routes
+require __DIR__ . '/auth.php';
 
 // Resource routes for products and categories
 Route::prefix('categories')->group(function () {
@@ -76,6 +81,3 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-// Authentication routes
-require __DIR__ . '/auth.php';
