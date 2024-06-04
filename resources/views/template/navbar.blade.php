@@ -88,11 +88,12 @@
             <a href="contact.html" class="nav-link">Contact</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <span class="badge badge-pill bg-danger">1</span>
+            <a class="nav-link" href="{{ route('cart.index') }}">
+                <span class="badge badge-pill bg-danger">{{ \App\Models\Cart::countByUserId(auth()->id()) }}</span>
                 <span><i class="fas fa-shopping-cart"></i></span>
             </a>
         </li>
+
         <li class="nav-item d-none d-sm-inline-block mr-3">
             <div class="dropdown">
                 <!-- Sesuaikan kelas dan gaya tombol dropdown -->
