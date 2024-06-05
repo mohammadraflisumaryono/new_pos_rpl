@@ -593,8 +593,52 @@ Blog section style start
         /* Geser konten ke kiri */
     }
 </style>
-</style>
+<style>
+    .products .card-custom {
+        width: 100%;
+        max-height: 350px;
+        padding: 10px;
+    }
 
+    .products .card-img-top {
+        height: 120px;
+        object-fit: contain;
+    }
+
+    .products .card-body {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .products .card-title {
+        max-height: 3em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .products .price-and-button {
+        margin-top: auto;
+    }
+
+    .products .btn-custom {
+        width: 100%;
+        padding: 5px 0;
+    }
+
+    .products.title-clamp {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 3em;
+        /* Adjust based on the line height of your text */
+    }
+</style>
 
 
 @endsection
@@ -674,30 +718,32 @@ Blog section style start
 <section class="products">
     <div class="container">
         <div class="row">
-
             @foreach($products as $product)
-            <div class="card-product col-md-4 mb-4">
-                <div class="card" style="width: 100%;">
-                    <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title font-semibold">{{$product->nama}}</h5>
-                        <p class="card-text">{{ $product->short_description }}</p>
-                        <p class="card-text text-green-500 text-right ">{{$product->readAblePrice}}</p>
-                        <form action="{{ route('cart.store') }}" method="POST" style="display: inline;">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{$product->id}}">
-                            <input type="hidden" name="quantity" value="1"> <!-- Default quantity is 1 -->
-                            <button type="submit" class="btn btn-primary">Add to Cart</button>
-                        </form>
-                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-secondary">View Product</a>
+            <div class="col-6 col-md-4 col-lg-2 mb-4">
+                <div class="card card-custom h-100">
+                    <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
+                        <div class="price-and-button mt-auto">
+                            <p class="card-text text-green-500 text-right">{{$product->readAblePrice}}</p>
+                            <div class="d-flex justify-content-between">
+                                <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn btn-primary btn-custom">Beli</button>
+                                </form>
+                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-secondary d-inline-block">Lihat</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             @endforeach
-
         </div>
     </div>
 </section>
+
 
 <section id="banner-2" class="my-3" style="background: #F9F3EC;">
     <div class="container">
