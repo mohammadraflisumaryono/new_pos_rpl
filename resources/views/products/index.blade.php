@@ -44,7 +44,7 @@
                 @endforeach
             </td>
             <td>
-                <a href="{{ route('products.show', $product) }}" class="btn btn-primary btn-sm">Show</a>
+                <a href="" class="btn btn-primary btn-sm">Show</a>
                 <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm">Edit</a>
                 <form action="{{ route('products.destroy', $product) }}" method="POST" style="display:inline;">
                     @csrf
