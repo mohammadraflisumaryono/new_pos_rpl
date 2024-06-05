@@ -153,7 +153,7 @@
                     <li>Dikirim oleh SAPA Instant Delivery</li>
                     <li>Biaya Pengiriman Gratis</li>
                 </ul>
-                <p>Promo lebih banyak dengan belanja di aplikasi Alfagift. Scan QR untuk download.</p>
+                <p>Promo lebih banyak dengan belanja di aplikasi SunnyMart. Scan QR untuk download.</p>
                 <button type="button">Lihat QR</button>
             </div>
 
