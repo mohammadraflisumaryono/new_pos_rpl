@@ -2,121 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Transaksi;
 use App\Models\TransaksiDetail;
-use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
-    public function index()
-    {
-        $transaksis = Transaksi::with('details.product')->get();
-        $data['transaksis'] = $transaksis;
-        $data['page_title'] = 'Transaksi';
-        return view('transaksis.index', compact('transaksis'));
-    }
-
-    public function create()
-    {
-        return view('transaksis.create');
-    }
-
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'details.*.product_id' => 'required|exists:products,id',
-            'details.*.quantity' => 'required|integer|min:1',
-            'details.*.harga' => 'required|numeric',
-            'details.*.delivery_method' => 'required|in:pickup,delivery',
-            'details.*.alamat' => 'nullable|required_if:details.*.delivery_method,delivery',
+            'products' => 'required|array',
+            'products.*.id' => 'required|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1',
+            'products.*.delivery_method' => 'required|string|in:cod,store_pickup',
+            'products.*.alamat' => 'required_if:products.*.delivery_method,cod|string|max:255',
         ]);
 
+        $user = Auth::user();
         $totalHarga = 0;
-        foreach ($request->details as $detail) {
-            $totalHarga += $detail['quantity'] * $detail['harga'];
-            if ($detail['delivery_method'] === 'delivery') {
-                $totalHarga += 10000;
-            }
+
+        foreach ($request->products as $product) {
+            $productData = Product::find($product['id']);
+            $totalHarga += $productData->harga * $product['quantity'];
         }
 
-        $transaksi = Transaksi::create([
-            'user_id' => $request->user_id,
-            'total_harga' => $totalHarga,
-        ]);
+        $transaksi = new Transaksi();
+        $transaksi->user_id = $user->id;
+        $transaksi->total_harga = $totalHarga;
+        $transaksi->save();
 
-        foreach ($request->details as $detail) {
-            TransaksiDetail::create([
-                'transaksi_id' => $transaksi->id,
-                'product_id' => $detail['product_id'],
-                'quantity' => $detail['quantity'],
-                'harga' => $detail['harga'],
-                'delivery_method' => $detail['delivery_method'],
-                'alamat' => $detail['delivery_method'] === 'delivery' ? $detail['alamat'] : null,
-                'service_fee' => $detail['delivery_method'] === 'delivery' ? 10000 : 0,
-            ]);
+        foreach ($request->products as $product) {
+            $productData = Product::find($product['id']);
+            $transaksiDetail = new TransaksiDetail();
+            $transaksiDetail->transaksi_id = $transaksi->id;
+            $transaksiDetail->product_id = $productData->id;
+            $transaksiDetail->quantity = $product['quantity'];
+            $transaksiDetail->harga = $productData->harga;
+            $transaksiDetail->delivery_method = $product['delivery_method'];
+            $transaksiDetail->alamat = $product['delivery_method'] === 'cod' ? $product['alamat'] : null;
+            $transaksiDetail->save();
         }
 
-        return redirect()->route('transaksis.index')->with('success', 'Transaksi created successfully.');
-    }
-
-    public function show($id)
-    {
-        $transaksi = Transaksi::with('details.product')->findOrFail($id);
-        return view('transaksis.show', compact('transaksi'));
-    }
-
-    public function edit($id)
-    {
-        $transaksi = Transaksi::with('details.product')->findOrFail($id);
-        return view('transaksis.edit', compact('transaksi'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'details.*.product_id' => 'required|exists:products,id',
-            'details.*.quantity' => 'required|integer|min:1',
-            'details.*.harga' => 'required|numeric',
-            'details.*.delivery_method' => 'required|in:pickup,delivery',
-            'details.*.alamat' => 'nullable|required_if:details.*.delivery_method,delivery',
-        ]);
-
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->update(['user_id' => $request->user_id]);
-
-        $transaksi->details()->delete();
-
-        $totalHarga = 0;
-        foreach ($request->details as $detail) {
-            $totalHarga += $detail['quantity'] * $detail['harga'];
-            if ($detail['delivery_method'] === 'delivery') {
-                $totalHarga += 10000;
-            }
-        }
-
-        $transaksi->update(['total_harga' => $totalHarga]);
-
-        foreach ($request->details as $detail) {
-            TransaksiDetail::create([
-                'transaksi_id' => $transaksi->id,
-                'product_id' => $detail['product_id'],
-                'quantity' => $detail['quantity'],
-                'harga' => $detail['harga'],
-                'delivery_method' => $detail['delivery_method'],
-                'alamat' => $detail['delivery_method'] === 'delivery' ? $detail['alamat'] : null,
-                'service_fee' => $detail['delivery_method'] === 'delivery' ? 10000 : 0,
-            ]);
-        }
-
-        return redirect()->route('transaksis.index')->with('success', 'Transaksi updated successfully.');
-    }
-
-    public function destroy($id)
-    {
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->delete();
-        return redirect()->route('transaksis.index')->with('success', 'Transaksi deleted successfully.');
+        return response()->json(['message' => 'Transaction created successfully', 'transaksi' => $transaksi], 201);
     }
 }
