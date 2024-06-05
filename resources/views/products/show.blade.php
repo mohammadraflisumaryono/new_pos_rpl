@@ -14,7 +14,6 @@
         <p class="card-text"><strong>Netto:</strong> {{ $product->netto }} kg</p>
         <p class="card-text"><strong>Dimensi:</strong> {{ $product->dimensi }}</p>
         <p class="card-text"><strong>Deskripsi:</strong> {{ $product->deskripsi }}</p>
-        <p class="card-text"><strong>Category:</strong> {{ $product->category->nama }}</p>
         <a href="{{ route('products.index') }}" class="btn btn-primary">Back to Products</a>
     </div>
 </div>

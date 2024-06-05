@@ -683,7 +683,13 @@ Blog section style start
                         <h5 class="card-title font-semibold">{{$product->nama}}</h5>
                         <p class="card-text">{{ $product->short_description }}</p>
                         <p class="card-text text-green-500 text-right ">{{$product->readAblePrice}}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <form action="{{ route('cart.store') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                            <input type="hidden" name="quantity" value="1"> <!-- Default quantity is 1 -->
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                        <a href="{{ route('products.show', $product->id) }}" class="btn btn-secondary">View Product</a>
                     </div>
                 </div>
             </div>
