@@ -593,6 +593,8 @@ Blog section style start
         /* Geser konten ke kiri */
     }
 </style>
+
+
 <style>
     .products .card-custom {
         width: 100%;
@@ -629,7 +631,7 @@ Blog section style start
         padding: 5px 0;
     }
 
-    .products.title-clamp {
+    .products .title-clamp {
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -639,6 +641,7 @@ Blog section style start
         /* Adjust based on the line height of your text */
     }
 </style>
+
 
 
 @endsection
