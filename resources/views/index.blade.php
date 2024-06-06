@@ -663,14 +663,6 @@ Blog section style start
 </section>
 
 
-
-
-
-
-
-
-
-
 <section class="products">
     <div class="container">
         <div class="row">
@@ -683,7 +675,7 @@ Blog section style start
                         <h5 class="card-title font-semibold">{{$product->nama}}</h5>
                         <p class="card-text">{{ $product->short_description }}</p>
                         <p class="card-text text-green-500 text-right ">{{$product->readAblePrice}}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="{{url('/products/'.$product->id .'/show')}}" class="btn btn-primary">BELI SEKARANG</a>
                     </div>
                 </div>
             </div>

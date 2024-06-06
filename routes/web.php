@@ -10,8 +10,13 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DiscountProductController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+// Authentication routes
+require __DIR__ . '/auth.php';
 
 // Resource routes for products and categories
 Route::prefix('categories')->group(function () {
@@ -32,6 +37,8 @@ Route::prefix('products')->group(function () {
 
     Route::get('/addstock', [ProductController::class, 'addstock'])->name('products.addstock');
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/display', [ProductController::class, 'display'])->name('products.display');
+    Route::get('/{product}/show', [ProductController::class, 'show'])->name('products.show');
 })->middleware(['auth', 'verified', 'superadmin', 'manager']);
 
 // routes/web.php
@@ -40,8 +47,6 @@ Route::post('/product/info', [ProductController::class, 'getProductInfo'])->name
 Route::post('/products/updatestock', [ProductController::class, 'updatestock'])->name('products.updatestock');
 
 
-Route::get('/display', [ProductController::class, 'display'])->name('products.display');
-Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
 
 
 Route::resource('sliders', SliderController::class);
@@ -76,6 +81,3 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-// Authentication routes
-require __DIR__ . '/auth.php';
