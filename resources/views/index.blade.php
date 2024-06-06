@@ -710,14 +710,6 @@ Blog section style start
 </section>
 
 
-
-
-
-
-
-
-
-
 <section class="products">
     <div class="container">
         <div class="row">

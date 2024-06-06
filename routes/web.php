@@ -40,6 +40,8 @@ Route::prefix('products')->group(function () {
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/addstock', [ProductController::class, 'addstock'])->name('products.addstock');
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/display', [ProductController::class, 'display'])->name('products.display');
+    Route::get('/{product}/show', [ProductController::class, 'show'])->name('products.show');
 })->middleware(['auth', 'verified', 'superadmin', 'manager']);
 
 // routes/web.php
