@@ -512,7 +512,9 @@
             right: 0;
             top: 21px;
         }
+        
     }
+   
 
 
     /*--------------------------------------------------------------
@@ -575,7 +577,6 @@ Blog section style start
 
     .container {
         max-width: calc(100% - 8rem);
-        /* Perkecil container */
     }
 
     #slider {
@@ -585,8 +586,8 @@ Blog section style start
 
     .container {
         max-width: calc(100% - 4rem);
-        /* Perkecil container */
-    }
+}
+
 
     #slider {
         text-align: left;
@@ -668,8 +669,8 @@ Blog section style start
         <div class="row">
 
             @foreach($products as $product)
-            <div class="card-product col-md-4 mb-4">
-                <div class="card" style="width: 100%;">
+            <div class="card-product col-md-3 mb-4 h-75">
+                <div class="card h-100">
                     <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title font-semibold">{{$product->nama}}</h5>
@@ -685,23 +686,22 @@ Blog section style start
     </div>
 </section>
 
-<section id="banner-2" class="my-3" style="background: #F9F3EC;">
-    <div class="container">
-        <div class="row flex-row-reverse banner-content align-items-center">
+<section id="banner-2" class="my-3 d-flex">
+    <div class="card img-fluid" style="width:100%">
+        <div class="row align-items-center">
             <div class="img-wrapper col-12 col-md-6">
-                <img src="images/banner-img2.png" class="img-fluid">
+                <img class="card-img-top"src="{{ asset('storage/images/clearance sale.jpg') }}" class="img-fluid" alt="Clearance Sale">
             </div>
-            <div class="content-wrapper col-12 offset-md-1 col-md-5 p-5">
-                <div class="secondary-font text-primary text-uppercase mb-3 fs-4">Upto 40% off</div>
-                <h2 class="banner-title display-1 fw-normal">Clearance sale !!!
-                </h2>
+            <div class="card-img-overlay text-end">
+                <div class="secondary-font text-primary text-uppercase mb-3 fs-4">Upto 50% off</div>
+                <h2 class="banner-title display-1 fw-normal">Clearance sale !!!</h2>
                 <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-                    shop now
+                    Shop Now
                     <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                         <use xlink:href="#arrow-right"></use>
-                    </svg></a>
+                    </svg>
+                </a>
             </div>
-
         </div>
     </div>
 </section>
@@ -798,7 +798,7 @@ Blog section style start
 
 <section id="latest-blog" class="my-5">
     <div class="container py-5 my-5">
-        <div class="row mt-5">
+        <div class="row mt-5 h-100">
             <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
                 <h2 class="display-3 fw-normal">Latest Blog Post</h2>
                 <div>
