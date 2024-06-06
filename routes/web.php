@@ -41,17 +41,10 @@ Route::prefix('products')->group(function () {
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/addstock', [ProductController::class, 'addstock'])->name('products.addstock');
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
-    Route::get('/display', [ProductController::class, 'display'])->name('products.display');
-    Route::get('/{product}/show', [ProductController::class, 'show'])->name('products.show');
 })->middleware(['auth', 'verified', 'superadmin', 'manager']);
-
-// routes/web.php
 
 Route::post('/product/info', [ProductController::class, 'getProductInfo'])->name('product.info');
 Route::post('/products/updatestock', [ProductController::class, 'updatestock'])->name('products.updatestock');
-
-
-
 
 Route::resource('sliders', SliderController::class);
 
@@ -62,14 +55,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
 });
 
-
-
-
-// Route::get('/discount-products', [DiscountProductController::class, 'index']);
-
-
-
-// Grouped routes for menus with a prefix
 Route::prefix('menus')->group(function () {
     Route::get('/index', [MenuController::class, 'index'])->name('menus.index');
     Route::get('/create', [MenuController::class, 'create'])->name('menus.create');
@@ -80,23 +65,17 @@ Route::prefix('menus')->group(function () {
 })->middleware(['auth', 'verified', 'superadmin']);
 
 Route::prefix('superadmin')->group(function () {
-    Route::get('/', [SuperAdmin::class, 'index'])->name('superadmin.index');
+    Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin.index');
 })->middleware(['auth', 'verified', 'superadmin']);
 
-// Dashboard route
-Route::get('/', [HomeController::class, 'index'])
-    ->name('dashboard');
+Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
-// Grouped routes for profile with authentication middleware
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout');
-
 Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.show');
-
 Route::delete('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
