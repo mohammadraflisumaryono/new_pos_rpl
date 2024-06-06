@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DiscountProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CartController;
 
 // Authentication routes
 require __DIR__ . '/auth.php';
@@ -35,6 +36,8 @@ Route::prefix('products')->group(function () {
     Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
 
+    Route::get('/display', [ProductController::class, 'display'])->name('products.display');
+    Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/addstock', [ProductController::class, 'addstock'])->name('products.addstock');
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/display', [ProductController::class, 'display'])->name('products.display');
@@ -50,6 +53,14 @@ Route::post('/products/updatestock', [ProductController::class, 'updatestock'])-
 
 
 Route::resource('sliders', SliderController::class);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+    Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+});
+
 
 
 

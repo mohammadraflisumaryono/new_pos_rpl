@@ -1,4 +1,21 @@
-  <!-- Main Sidebar Container -->
+<style>
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: underline;
+}
+</style>
+ <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{route('dashboard')}}" class="brand-link">
@@ -13,6 +30,7 @@
               <a href="{{ route('dashboard') }}" class="brand-link">
                   @if(Auth::user())
                   <p class="brand-text font-weight-light h-2">{{ Auth::user()->name }}</p>
+                  <p class="brand-text font-weight-light h-2">   </p>
                   <p class="brand-text font-weight-light t h-1">
                       @switch(Auth::user()->role)
                       @case(1)
@@ -22,6 +40,7 @@
                       Kasir< @break @case(3) Manager @break @case(4) Super Admin @break @default Guest @endswitch </p>
                           @else
                           <p class="brand-text font-weight-light h-2">Guest</p>
+                          <p class="brand-text font-weight-light h-2">     </p>
                           <p class="brand-text font-weight-light h-1">Guest</p>
                           @endif
               </a>
@@ -73,7 +92,7 @@
                   </li>
                   @endif
                   @endforeach
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                       <a href="#" class="nav-link">
                           <i class="nav-icon fas fa-th"></i>
                           <p>
@@ -81,7 +100,7 @@
                               <span class="right badge badge-danger">New</span>
                           </p>
                       </a>
-                  </li>
+                  </li> -->
               </ul>
           </nav>
           <!-- /.sidebar-menu -->
