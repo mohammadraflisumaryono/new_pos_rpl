@@ -19,8 +19,8 @@
                 <tr>
                     <td>{{ $cart->product->nama }}</td>
                     <td>{{ $cart->quantity }}</td>
-                    <td>{{ $cart->product->readable_price }}</td>
-                    <td>{{ $cart->readable_total }}</td>
+                    <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
+                    <td>{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
                     <input type="hidden" name="products[]" value="{{ $cart->id }}">
                 </tr>
                 @endforeach
@@ -44,10 +44,11 @@
         <h3>Total: {{ 'Rp.' . number_format($totalAmount, 0, ',', '.') }}</h3>
         <button type="submit" class="btn btn-primary">Complete Purchase</button>
     </form>
+
 </div>
 @endsection
-
 @section('scripts')
+
 <script>
     $(document).ready(function() {
         $('#delivery_type').change(function() {

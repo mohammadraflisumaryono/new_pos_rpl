@@ -2,12 +2,10 @@
 
 @section('page_content')
 <div class="container">
-
     @if($carts->isEmpty())
     <p>Your cart is empty.</p>
     @else
-
-    <form id="cartForm" action="{{ route('checkout') }}" method="POST">
+    <form id="cartForm" action="{{ route('checkout.show') }}" method="POST">
         @csrf
         <table id="cartTable" class="table">
             <thead>
@@ -32,11 +30,7 @@
                     <td class="product-total">{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
                     <td>
                         <button type="button" class="btn btn-primary btn-sm edit-btn" data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Edit</button>
-                        <form action="{{ route('cart.destroy', $cart->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
+
                     </td>
                 </tr>
                 @endforeach
@@ -46,46 +40,13 @@
             <h3>Total: <span id="totalAmount">{{ 'Rp.' . number_format(0, 0, ',', '.') }}</span></h3>
             <button type="submit" id="checkoutBtn" class="btn btn-primary float-right">Proceed to Checkout</button>
         </div>
-
     </form>
-
     @endif
 </div>
 @endsection
 
 @section('scripts')
-
 <script>
-    $(document).ready(function() {
-        $('#checkoutBtn').click(function() {
-            var products = [];
-            $('.product-checkbox:checked').each(function() {
-                products.push($(this).val());
-            });
-
-            if (products.length === 0) {
-                alert('Please select at least one product to checkout.');
-                return;
-            }
-
-            if (confirm('Are you sure you want to proceed to checkout?')) {
-                $.ajax({
-                    url: '{{ route("checkout") }}',
-                    type: 'POST', // Change to POST
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        products: products
-                    },
-                    success: function(response) {
-                        // Redirect or show success message
-                    },
-                    error: function(xhr) {
-                        console.log(xhr.responseText);
-                    }
-                });
-            }
-        });
-    });
     $(document).ready(function() {
         $('#cartTable').DataTable();
 
