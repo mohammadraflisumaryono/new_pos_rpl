@@ -104,7 +104,7 @@
                     <!-- Sesuaikan kelas dan gaya untuk tautan dropdown -->
                     <a href="{{ url('/dashboard') }}" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                     <a href="#" class="nav-link"><i class="fas fa-history"></i> Riwayat Transaksi</a>
-                    <a href="#" class="nav-link"><i class="fas fa-user-edit"></i> Edit Profile</a>
+                    <a href="{{ url('/profile') }}" class="nav-link"><i class="fas fa-user-edit"></i> Edit Profile</a>
                     <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fa-solid fa-right-from-bracket"></i> Logout
                     </a>
