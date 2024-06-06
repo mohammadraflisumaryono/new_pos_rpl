@@ -142,10 +142,14 @@
             </div>
 
             <div class="cart-section">
-                <label for="quantity">Jumlah Pembelian</label>
-                <input type="number" id="quantity" name="quantity" value="1" min="1">
-                <button type="button">+ Keranjang</button>
-            </div>
+                    <form action="{{ route('cart.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <label for="quantity">Jumlah Pembelian</label>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                        <button type="submit">+ Keranjang</button>
+                    </form>
+                </div>
 
             <div class="delivery">
                 <p>Pengiriman</p>
