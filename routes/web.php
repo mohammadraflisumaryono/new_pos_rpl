@@ -15,6 +15,7 @@ use App\Http\Controllers\DiscountProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 // Authentication routes
 require __DIR__ . '/auth.php';
@@ -92,3 +93,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout');
+
+Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.show');
+
+Route::delete('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');

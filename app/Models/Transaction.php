@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaksi extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'total_harga',
+        'total_amount',
+        'status',
+        'delivery_type',
+        'address',
+        'phone_number',
+        'service_fee'
     ];
 
     public function user()
@@ -19,8 +24,8 @@ class Transaksi extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function details()
+    public function transactionDetails()
     {
-        return $this->hasMany(TransaksiDetail::class);
+        return $this->hasMany(TransactionDetail::class);
     }
 }
