@@ -10,26 +10,48 @@ use App\Models\Product;
 
 class CheckoutController extends Controller
 {
-    public function checkout(Request $request)
+    public function showCheckoutForm(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'products' => 'required|array',
+            'products.*' => 'exists:carts,id',
+        ]);
+        $page_title = 'Checkout';
         $cartIds = $request->input('products');
-        $totalAmount = 0;
+        $carts = Cart::with('product')->whereIn('id', $cartIds)->get();
+        $totalAmount = $carts->sum(function ($cart) {
+            return $cart->quantity * $cart->product->harga;
+        });
 
-        if (empty($cartIds)) {
-            return redirect()->back()->with('error', 'No products selected for checkout.');
-        }
 
-        $carts = Cart::whereIn('id', $cartIds)->get();
+        return view('checkout.index', compact('carts', 'totalAmount', 'page_title'));
+    }
 
-        foreach ($carts as $cart) {
-            $totalAmount += $cart->quantity * $cart->product->harga;
-        }
+    public function processCheckout(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'products' => 'required|array',
+            'products.*' => 'exists:carts,id',
+            'phone_number' => 'required|string',
+            'delivery_type' => 'required|in:home_delivery,store_pickup',
+            'address' => 'required_if:delivery_type,home_delivery|string',
+        ]);
+
+        $carts = Cart::with('product')->whereIn('id', $request->products)->get();
+        $totalAmount = $carts->sum(function ($cart) {
+            return $cart->quantity * $cart->product->harga;
+        });
+        $serviceFee = $request->delivery_type == 'home_delivery' ? 5000 : 0;
 
         $transaction = Transaction::create([
             'user_id' => auth()->id(),
-            'total_amount' => $totalAmount,
-            'status' => 'pending'
+            'total_amount' => $totalAmount + $serviceFee,
+            'status' => 'pending',
+            'delivery_type' => $request->delivery_type,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'service_fee' => $serviceFee,
         ]);
 
         foreach ($carts as $cart) {
@@ -38,7 +60,6 @@ class CheckoutController extends Controller
                 'product_id' => $cart->product_id,
                 'quantity' => $cart->quantity,
                 'price' => $cart->product->harga,
-                'total' => $cart->quantity * $cart->product->harga,
             ]);
 
             $product = Product::find($cart->product_id);
@@ -49,32 +70,5 @@ class CheckoutController extends Controller
         }
 
         return redirect()->route('transactions.show', $transaction->id)->with('success', 'Checkout successful!');
-    }
-
-    public function showCheckoutForm(Request $request)
-    {
-        $cartIds = $request->input('products');
-        $carts = Cart::with('product')->whereIn('id', $cartIds)->get();
-        $totalAmount = $carts->sum(function ($cart) {
-            return $cart->quantity * $cart->product->harga;
-        });
-
-        return view('checkout.index', compact('carts', 'totalAmount'));
-    }
-
-    public function processCheckout(Request $request)
-    {
-        dd($request->all());
-        $request->validate([
-            'products' => 'required|array',
-            'products.*' => 'exists:carts,id',
-            'phone_number' => 'required|string',
-            'delivery_type' => 'required|in:home_delivery,store_pickup',
-            'address' => 'required_if:delivery_type,home_delivery|string',
-        ]);
-
-        // Proses checkout, buat transaksi, dll.
-
-        return redirect()->route('transactions.index')->with('success', 'Transaction completed successfully!');
     }
 }

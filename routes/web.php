@@ -95,8 +95,5 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout');
-
-Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.show');
-
-Route::delete('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.show');
+Route::post('/checkout/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
