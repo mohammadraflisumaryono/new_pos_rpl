@@ -44,18 +44,11 @@ class SliderController extends Controller
 
 
 
-<<<<<<< Updated upstream
     public function edit(Slider $slider)
     {
         $data['page_title'] = 'Edit Slider';
         return view('sliders.edit', compact('slider', 'data'));
     }
-=======
-    public function edit($id){
-        $page_title = 'Edit Slider';
-        return view('sliders.edit', compact('slider', 'page_title'));
-}
->>>>>>> Stashed changes
 
     public function update(Request $request, Slider $slider)
     {
@@ -84,5 +77,6 @@ class SliderController extends Controller
         Storage::delete('public/' . $slider->image_path);
         $slider->delete();
         return redirect()->route('sliders.index')->with('success', 'Slider deleted successfully.');
+
     }
 }
