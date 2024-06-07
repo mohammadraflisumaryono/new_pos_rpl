@@ -800,11 +800,11 @@ Blog section style start
             <div class="card border-0 shadow">
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-center mb-3">
-                        <img src="storage/images/freedelivery.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
-                        <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Free Delivery</h3>
+                        <img src="storage/images/qualityservice.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
+                        <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Quality Service</h3>
                     </div>
                     <div class="card-text text-center">
-                        <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Dapatkan pengiriman gratis untuk setiap pembelian anda!</p>
+                        <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Hubungi kami, maka kami siap melayani anda</p>
                     </div>
                 </div>
             </div>
@@ -853,104 +853,35 @@ Blog section style start
     </div>
 </section>
 
-<footer id="footer" class="my-5">
-    <div class="container py-5 my-5">
+<footer class="footer mt-auto py-5" style="background-color: #FFCCCB80;">
+    <div class="container">
         <div class="row">
-
-            <div class="col-md-3">
-                <div class="footer-menu">
-                    <img src="images/logo.png" alt="logo">
-                    <p class="blog-paragraph fs-6 mt-3">Subscribe to our newsletter to get updates about our grand offers.</p>
-                    <div class="social-links">
-                        <ul class="d-flex list-unstyled gap-2">
-                            <li class="social">
-                                <a href="#">
-                                    <iconify-icon class="social-icon" icon="ri:facebook-fill"></iconify-icon>
-                                </a>
-                            </li>
-                            <li class="social">
-                                <a href="#">
-                                    <iconify-icon class="social-icon" icon="ri:twitter-fill"></iconify-icon>
-                                </a>
-                            </li>
-                            <li class="social">
-                                <a href="#">
-                                    <iconify-icon class="social-icon" icon="ri:pinterest-fill"></iconify-icon>
-                                </a>
-                            </li>
-                            <li class="social">
-                                <a href="#">
-                                    <iconify-icon class="social-icon" icon="ri:instagram-fill"></iconify-icon>
-                                </a>
-                            </li>
-                            <li class="social">
-                                <a href="#">
-                                    <iconify-icon class="social-icon" icon="ri:youtube-fill"></iconify-icon>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-4" style="color: ##562D33;">Tentang Kami</h5>
+                <p style="color: #62D33;">Sunny Mart merupakan website supermarket yang bisa anda gunakan kapan dan dimana saja untuk memenuhi kebutuhan anda..</p>
             </div>
-            <div class="col-md-3">
-                <div class="footer-menu">
-                    <h3>Quick Links</h3>
-                    <ul class="menu-list list-unstyled">
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">Home</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">About us</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">Offer </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">Services</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">Conatct Us</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-4" style="color: #562D33;">Hubungi Kami</h5>
+                <p style="color: #562D33;">Alamat: Jalan A.H Nasution No.76, Bandung, Jawa Barat, 40614</p>
+                <p style="color: #562D33;">Email: sunnymart@gmail.com</p>
+                <p style="color: #562D33;">Telepon: 123-456-7890</p>
             </div>
-            <div class="col-md-3">
-                <div class="footer-menu">
-                    <h3>Help Center</h5>
-                        <ul class="menu-list list-unstyled">
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">FAQs</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Payment</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Returns & Refunds</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Checkout</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#" class="nav-link">Delivery Information</a>
-                            </li>
-                        </ul>
-                </div>
+            <div class="col-md-4">
+                <h5 class="mb-4" style="color: #562D33;">Ikuti Kami</h5>
+                <ul class="list-inline social-icons">
+                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
             </div>
-            <div class="col-md-3">
-                <div>
-                    <h3>Our Newsletter</h3>
-                    <p class="blog-paragraph fs-6">Subscribe to our newsletter to get updates about our grand offers.</p>
-                    <div class="search-bar border rounded-pill border-dark-subtle px-2">
-                        <form class="text-center d-flex align-items-center" action="" method="">
-                            <input type="text" class="form-control border-0 bg-transparent" placeholder="Enter your email here" />
-                            <iconify-icon class="send-icon" icon="tabler:location-filled"></iconify-icon>
-                        </form>
-                    </div>
-                </div>
+            <div class="col-md-4">
+                <h5 img src="storage/images/logo.png" alt="logo">
             </div>
-
         </div>
+    </div>
+    <div class="container text-center">
+        <p class="text-muted mb-0" style="color: #562D33;">© 2024 SunnyMart. All rights reserved.</p>
     </div>
 </footer>
 

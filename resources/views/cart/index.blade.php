@@ -4,51 +4,48 @@
 <div class="container">
 
     @if($carts->isEmpty())
-    <p>Your cart is empty.</p>
+        <p style="color: #FFA07A;">Your cart is empty.</p>
     @else
-
-    <form id="cartForm" action="{{ route('checkout') }}" method="POST">
-        @csrf
-        <table id="cartTable" class="table">
-            <thead>
-                <tr>
-                    <th>Select</th>
-                    <th>Image</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($carts as $cart)
-                <tr>
-                    <td><input type="checkbox" class="product-checkbox" name="products[]" value="{{ $cart->id }}"></td>
-                    <td><img src="{{ asset('storage/'.$cart->product->image) }}" alt="{{ $cart->product->nama }}" style="width: 40px;"></td>
-                    <td>{{ $cart->product->nama }}</td>
-                    <td>{{ $cart->quantity }}</td>
-                    <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
-                    <td class="product-total">{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
-                    <td>
-                        <button type="button" class="btn btn-primary btn-sm edit-btn" data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Edit</button>
-                        <form action="{{ route('cart.destroy', $cart->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="total">
-            <h3>Total: <span id="totalAmount">{{ 'Rp.' . number_format(0, 0, ',', '.') }}</span></h3>
-            <button type="submit" id="checkoutBtn" class="btn btn-primary float-right">Proceed to Checkout</button>
-        </div>
-
-    </form>
-
+        <form id="cartForm" action="{{ route('checkout') }}" method="POST">
+            @csrf
+            <table id="cartTable" class="table table-bordered" style="background-color: #FFECDB;">
+                <thead style="background-color: #FFCCCB; color: #562D33;">
+                    <tr>
+                        <th>Select</th>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($carts as $cart)
+                    <tr>
+                        <td><input type="checkbox" class="product-checkbox" name="products[]" value="{{ $cart->id }}"></td>
+                        <td><img src="{{ asset('storage/'.$cart->product->image) }}" alt="{{ $cart->product->nama }}" style="width: 40px;"></td>
+                        <td>{{ $cart->product->nama }}</td>
+                        <td>{{ $cart->quantity }}</td>
+                        <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
+                        <td class="product-total">{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-sm edit-btn" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33" Editdata-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Edit</button>
+                            <form action="{{ route('cart.destroy', $cart->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this menu?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="total" style="margin-top: 20px;">
+                <h3 style="color: #562D33;">Total: <span id="totalAmount">{{ 'Rp.' . number_format(0, 0, ',', '.') }}</span></h3>
+                <button type="submit" id="checkoutBtn" class="btn btn-primary float-right" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Proceed to Checkout</button>
+            </div>
+        </form>
     @endif
 </div>
 @endsection
@@ -85,8 +82,7 @@
                 });
             }
         });
-    });
-    $(document).ready(function() {
+
         $('#cartTable').DataTable();
 
         function calculateTotal() {
