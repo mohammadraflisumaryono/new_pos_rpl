@@ -1,10 +1,8 @@
 @extends('template.app')
 
 @section('page_content')
-<h1>Products</h1>
-<a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Create Product</a>
-<a href="{{ route('products.addstock') }}" class="btn btn-primary mb-3">Add Stock Products</a>
-
+<a href="{{ route('products.create') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Create Product</a>
+<a href="{{ route('products.addstock') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Add Stock Products</a>
 @if($productHampirHabis->count() > 0)
 <div class="alert alert-danger">
     <h4>Produk Hampir Habis</h4>
@@ -43,16 +41,17 @@
                 <span class="badge badge-info">{{ $category->nama }}</span>
                 @endforeach
             </td>
-            <td>
-                <a href="" class="btn btn-primary btn-sm">Show</a>
-                <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm">Edit</a>
-                <form action="{{ route('products.destroy', $product) }}" method="POST" style="display:inline;">
+            <td class="d-flex">
+                <a href=""class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Show</a>
+                <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Edit</a>
+                <form action="{{ route('products.destroy', $product) }}" method="POST" class="mr-1">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                 </form>
             </td>
-        </tr>
+
+
         @endforeach
     </tbody>
 </table>

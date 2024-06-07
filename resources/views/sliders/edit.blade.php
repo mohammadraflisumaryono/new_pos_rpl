@@ -1,7 +1,6 @@
 @extends('template.app')
 
 @section('page_content')
-<h1>Edit Slider</h1>
 <form action="{{ route('sliders.update', $slider->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')

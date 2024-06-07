@@ -2,15 +2,14 @@
 
 @section('page_content')
 <div class="container my-3 py-5">
-    <h1>Categories</h1>
-    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3">Create Category</a>
-    <table id="categoriesTable" class="table table-striped table-bordered">
+    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Create Category</a>
+    <table id="categoriesTable" class="table table-striped table-bordered" style="background-color: #FFECDB;">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>Icon</th>
-                <th>Actions</th>
+                <th style="color: #562D33;">ID</th>
+                <th style="color: #562D33;">Nama</th>
+                <th style="color: #562D33;">Icon</th>
+                <th style="color: #562D33;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -26,11 +25,11 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('categories.edit', $category) }}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{{ route('categories.edit', $category) }}" class="btn btn-sm btn-danger" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33" >Edit</a>
                     <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this menu?')">Delete</button>
                     </form>
                 </td>
             </tr>
