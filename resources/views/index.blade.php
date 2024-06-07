@@ -662,8 +662,8 @@ Blog section style start
     </div>
 </section>
 
-
 <section class="products">
+<<<<<<< Updated upstream
     <div class="container">
         <div class="row">
 
@@ -676,6 +676,28 @@ Blog section style start
                         <p class="card-text">{{ $product->short_description }}</p>
                         <p class="card-text text-green-500 text-right ">{{$product->readAblePrice}}</p>
                         <a href="{{url('/products/'.$product->id .'/show')}}" class="btn btn-primary">BELI SEKARANG</a>
+=======
+    <div class="container mx-auto"> <!-- Tambahkan kelas mx-auto -->
+        <div class="row justify-content-center"> <!-- Tambahkan kelas justify-content-center -->
+            @foreach($products as $product)
+            <div class="col-6 col-md-4 col-lg-2 mb-4">
+                <div class="card card-custom h-100">
+                    <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
+                        <div class="price-and-button mt-auto">
+                            <p class="card-text text-green-500 text-right">{{$product->readAblePrice}}</p>
+                            <div class="d-flex justify-content-between">
+                                <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn btn-sm btn-danger" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33">Beli</button>
+                                </form>
+                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-danger" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33">Lihat</a>
+                            </div>
+                        </div>
+>>>>>>> Stashed changes
                     </div>
                 </div>
             </div>
@@ -685,6 +707,7 @@ Blog section style start
     </div>
 </section>
 
+<<<<<<< Updated upstream
 <section id="banner-2" class="my-3" style="background: #F9F3EC;">
     <div class="container">
         <div class="row flex-row-reverse banner-content align-items-center">
@@ -767,6 +790,8 @@ Blog section style start
     </div>
 </section>
 
+=======
+>>>>>>> Stashed changes
 @if(!Auth::user())
 
 <section id="register" style="background: url('images/background-img.png') no-repeat;">
@@ -936,11 +961,20 @@ Blog section style start
     </div>
 </section>
 
+<<<<<<< Updated upstream
 <section id="insta" class="my-5">
     <div class="row g-0 py-5">
         <div class="col instagram-item  text-center position-relative">
             <div class="icon-overlay d-flex justify-content-center position-absolute">
                 <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+=======
+<footer class="footer mt-auto py-5" style="background-color: #F4E2E1;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-4" style="color: ##562D33;">Tentang Kami</h5>
+                <p style="color: #62D33;">Sunny Mart merupakan website supermarket yang bisa anda gunakan kapan dan dimana saja untuk memenuhi kebutuhan anda..</p>
+>>>>>>> Stashed changes
             </div>
             <a href="#">
                 <img src="images/insta1.jpg" alt="insta-img" class="img-fluid rounded-3">

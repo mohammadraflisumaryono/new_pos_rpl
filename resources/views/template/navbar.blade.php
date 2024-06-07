@@ -30,7 +30,11 @@
     .dropdown-content {
         display: none;
         position: absolute;
+<<<<<<< Updated upstream
         background-color: #f9f9f9;
+=======
+        background-color: #F9F9F9; /* Change to semi-white */
+>>>>>>> Stashed changes
         min-width: 160px;
         z-index: 1;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -56,6 +60,49 @@
     .dropdown:hover .dropdown-content {
         display: block;
     }
+<<<<<<< Updated upstream
+=======
+
+    /* Navbar styling */
+    .navbar {
+        background-color: #F9F9F9; /* Change to semi-white */
+        padding: 0.75rem 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        color: #562D33;
+        font-weight: bold;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #7D6040;
+    }
+
+    .navbar-brand {
+        color: #562D33;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .navbar-search input {
+        background-color: #F1F1F1; /* Change to light grey */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .navbar-search button {
+        background-color: #F1F1F1; /* Change to light grey */
+        color: #562D33;
+        border-color: #F1F1F1;
+        border-radius: 5px;
+        padding: 0.375rem 0.75rem;
+        font-weight: bold;
+    }
+
+    .navbar-search button:hover {
+        background-color: #FF6347; /* Darker pink peach on hover */
+    }
+>>>>>>> Stashed changes
 </style>
 
 
@@ -128,7 +175,7 @@
 </nav>
 
 <script>
-    // Tambahkan event listener untuk menangani klik pada tombol dropdown
+    // Add event listener to handle click on dropdown button
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.dropbtn').forEach(function(dropbtn) {
             dropbtn.addEventListener('click', function() {
@@ -137,7 +184,7 @@
         });
     });
 
-    // Tutup dropdown saat pengguna mengklik di luar dropdown
+    // Close dropdown when user clicks outside of it
     window.onclick = function(event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
