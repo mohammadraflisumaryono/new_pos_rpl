@@ -2,7 +2,10 @@
 
 @section('page_content')
 <div class="container">
-    <h1>Create Category</h1>
+    <a href="{{ route('sliders.create') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Add New Categories</a>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
     <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
