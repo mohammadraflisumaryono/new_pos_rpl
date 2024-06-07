@@ -54,17 +54,14 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @foreach($menus as $menu)
-                    @if($menu->menu_parent == 0 && $menu->is_aktif == 'y')
                         <li class="nav-item menu-open" style="background-color: #ffcccb; border-radius: 10px;">
                             <!-- Highlight specific menus -->
-                            <a href="#" class="nav-link" style="color: {{ in_array($menu->title, ['Layanan', 'Master Data', 'User Management', 'User', 'Kasir']) ? '#562D33; font-weight: bold;' : '#562D33; ' }}">
-                                <i class="{{ $menu->icon }}" style="color: {{ in_array($menu->title, ['Layanan', 'Master Data', 'User Management', 'User', 'Kasir']) ? '#562D33;' : '#562D33;' }}"></i>
+                                <a href="#" class="nav-link" style="color: #562D33; font-weight: bold;">
+                                <i class="{{ $menu->icon }}" style="color: #562D33;"></i>
                                 <p>{{ $menu->title }}</p>
                             </a>
-                            @if(!empty($menu->children))
                                 <ul class="nav nav-treeview">
                                     @foreach($menu->children as $child)
-                                        @if($child->is_aktif == 'y')
                                             <li class="nav-item">
                                                 <a href="{{ route($child->url) }}" class="nav-link" style="color: #562D33;">
                                                     <i class="far fa-circle nav-icon" style="color: #562D33;"></i>
