@@ -10,7 +10,7 @@
                 <div class="card-body" style="background-color: #FFECDB;">
                     <a href="{{ route('menus.create') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33" >Add New Menu</a>
 
-                    @if(session('success'))
+                    @if(session('success')) 
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>

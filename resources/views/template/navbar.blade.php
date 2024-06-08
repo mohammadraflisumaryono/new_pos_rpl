@@ -1,5 +1,35 @@
 <!-- Navbar -->
 <style>
+    .navbar {
+        background-color: #FFFFFF;
+    }
+
+    .navbar .nav-link {
+        color: #562D33;
+    }
+
+    .navbar .nav-link.active {
+        font-weight: bold;
+    }
+
+    .navbar .form-control {
+        background-color: #FFFFFF;
+        color: #562D33;
+        border: 1px solid #F9DAD6;
+        border-radius: 20px;
+    }
+
+    .navbar .btn {
+        background-color: #F9DAD6;
+        color: #562D33;
+        border: none;
+        border-radius: 20px;
+    }
+
+    .navbar .btn:hover {
+        background-color: #FFE0E6;
+    }
+
     /* Style the dropdown button */
     .dropbtn {
         background-color: transparent;
@@ -26,7 +56,7 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #f9f9f9;
+        background-color: #FFFFFF;
         min-width: 160px;
         z-index: 1;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -44,7 +74,7 @@
 
     /* Change color of dropdown links on hover */
     .dropdown-content a:hover {
-        background-color: #ddd;
+        background-color: #F9DAD6;
     }
 
     /* Show the dropdown menu on hover */
@@ -75,7 +105,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('dashboard')}}" class="nav-link active">Home</a>
+            <a href="{{ route('dashboard') }}" class="nav-link active">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="contact.html" class="nav-link">Contact</a>
