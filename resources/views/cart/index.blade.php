@@ -3,7 +3,7 @@
 @section('page_content')
 <div class="container">
     @if($carts->isEmpty())
-        <p style="color: #FFA07A;">Your cart is empty.</p>
+        <p class="btn btn-primary mb-3" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33; font-weight: bold;">Your cart is empty.</p>
     @else
 
     <form id="cartForm" action="{{ route('checkout') }}" method="POST">
@@ -30,7 +30,11 @@
                     <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
                     <td class="product-total">{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
                     <td>
+<<<<<<< HEAD
                         <button type="button" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33; data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Edit</button>
+=======
+                        <button type="button" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33; "data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Edit</button>
+>>>>>>> 24da98b8c64b09f79e0ec665603f136fa7575860
                         <form action="{{ route('cart.destroy', $cart->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
