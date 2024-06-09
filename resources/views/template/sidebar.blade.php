@@ -11,7 +11,7 @@
         <div class="user-panel align-items-center justify-content-center text-center user-info" style="background-color: #F9DAD6; border-radius: 10px; padding: 10px 5px; margin: 10px auto; width: auto; max-width: 90%;">
             <div class="info text-center">
                 @if(Auth::check())
-                <a href="#" class="d-block" style="color: #7D6040; font-size: 18px;">{{ Auth::user()->name }}</a>
+                <a href="#" class="d-block" style="color: #7D6040; font-size: 18px; font-weight: bold; ">{{ Auth::user()->name }}</a>
                 <p style="color: #7D6040; font-size: 16px;">
                     @switch(Auth::user()->role)
                     @case(1)
