@@ -512,9 +512,9 @@
             right: 0;
             top: 21px;
         }
-        
+
     }
-   
+
 
 
     /*--------------------------------------------------------------
@@ -586,7 +586,7 @@ Blog section style start
 
     .container {
         max-width: calc(100% - 4rem);
-}
+    }
 
 
     #slider {
@@ -796,58 +796,58 @@ Blog section style start
 <section id="service">
     <div class="container py-5 my-5">
         <div class="row g-md-5 pt-4">
-        <div class="col-md-3 my-3">
-            <div class="card border-0 shadow">
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-center mb-3">
-                        <img src="storage/images/qualityservice.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
-                        <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Quality Service</h3>
-                    </div>
-                    <div class="card-text text-center">
-                        <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Hubungi kami, maka kami siap melayani anda</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 my-3">
-            <div class="card border-0 shadow">
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-center mb-3">
-                        <img src="storage/images/securepayment.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
-                        <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">100% Secure Payment</h3>
-                    </div>
-                    <div class="card-text text-center">
-                        <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Kami menjamin pembayaran anda aman dan terlindungi.</p>
+            <div class="col-md-3 my-3">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <img src="storage/images/qualityservice.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
+                            <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Quality Service</h3>
+                        </div>
+                        <div class="card-text text-center">
+                            <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Hubungi kami, maka kami siap melayani anda</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 my-3">
-            <div class="card border-0 shadow">
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-center mb-3">
-                        <img src="storage/images/dailyoffer.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
-                        <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Daily Offer</h3>
-                    </div>
-                    <div class="card-text text-center">
-                        <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Jangan lewatkan penawaran harian kami!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 my-3">
-            <div class="card border-0 shadow">
-                <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-center mb-3">
-                        <img src="storage/images/qualityguarantee.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
-                        <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Quality Guarantee</h3>
-                    </div>
-                    <div class="card-text text-center">
-                        <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Jangan khawatir! Kami siap memberikan kualitas terbaik!</p>
+            <div class="col-md-3 my-3">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <img src="storage/images/securepayment.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
+                            <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">100% Secure Payment</h3>
+                        </div>
+                        <div class="card-text text-center">
+                            <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Kami menjamin pembayaran anda aman dan terlindungi.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="col-md-3 my-3">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <img src="storage/images/dailyoffer.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
+                            <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Daily Offer</h3>
+                        </div>
+                        <div class="card-text text-center">
+                            <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Jangan lewatkan penawaran harian kami!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 my-3">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            <img src="storage/images/qualityguarantee.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
+                            <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Quality Guarantee</h3>
+                        </div>
+                        <div class="card-text text-center">
+                            <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Jangan khawatir! Kami siap memberikan kualitas terbaik!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
@@ -857,8 +857,8 @@ Blog section style start
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-4">
-                <h5 class="mb-4" style="color: ##562D33;">Tentang Kami</h5>
-                <p style="color: #62D33;">Sunny Mart merupakan website supermarket yang bisa anda gunakan kapan dan dimana saja untuk memenuhi kebutuhan anda..</p>
+                <h5 class="mb-4" style="color: #562D33">Tentang Kami</h5>
+                <p style="color: 62D33 ">Sunny Mart merupakan website supermarket yang bisa anda gunakan kapan dan dimana saja untuk memenuhi kebutuhan anda..</p>
             </div>
             <div class="col-md-4 mb-4">
                 <h5 class="mb-4" style="color: #562D33;">Hubungi Kami</h5>
