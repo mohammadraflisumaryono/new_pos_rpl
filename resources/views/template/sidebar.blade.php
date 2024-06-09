@@ -13,7 +13,7 @@
                 @if(Auth::check())
                 <a href="#" class="d-block" style="color: #7D6040; font-size: 18px;">{{ Auth::user()->name }}</a>
                 <p style="color: #7D6040; font-size: 16px;">
-                    @switch($i)
+                    @switch(Auth::user()->role)
                     @case(1)
                     User
                     @break
@@ -25,11 +25,11 @@
                     @case(3)
                     Manager
                     @break
-                    
+
                     @case(4)
                     Super Admin
                     @break
-                    
+
                     @endswitch
 
 
