@@ -179,7 +179,7 @@
     </div>
 </section>
 
-<footer class="footer mt-auto py-5" style="background-color: #FFCCCB80;">
+<footer class="footer mt-auto py-5" style="background-color: #F9DAD680;">
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-4">

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style="background-color: #FFCCCB; color: #562D33;">Add New Menu</div>
+                <div class="card-header" style="background-color: #F9DAD6; color: #562D33;">Add New Menu</div>
 
                 <div class="card-body" style="background-color: #FFECDB;">
                     <form action="{{ route('menus.store') }}" method="POST">

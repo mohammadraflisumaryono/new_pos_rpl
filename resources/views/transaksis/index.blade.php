@@ -2,7 +2,7 @@
 
 @section('page_content')
 <div class="card" style="background-color: #F9DAD6; border-radius: 10px;">
-    <div class="card-header" style="background-color: #ffcccb; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+    <div class="card-header" style="background-color: #F9DAD6; border-top-left-radius: 10px; border-top-right-radius: 10px;">
         <h3 class="card-title" style="color: #562D33;">Create Transaksi</h3>
     </div>
     <div class="card-body">
@@ -18,7 +18,7 @@
                 <label for="details" class="form-label" style="color: #562D33;">Details</label>
                 <table class="table" id="details-table" style="background-color: #fff;">
                     <thead>
-                        <tr style="background-color: #ffcccb; color: #562D33;">
+                        <tr style="background-color: #F9DAD6; color: #562D33;">
                             <th>Product ID</th>
                             <th>Quantity</th>
                             <th>Harga</th>

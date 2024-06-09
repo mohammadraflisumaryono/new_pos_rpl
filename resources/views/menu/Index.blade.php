@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header" style="background-color: #FFCCCB; color: #562D33;">Menu List</div>
+                <div class="card-header" style="background-color: #F9DAD6; color: #562D33;">Menu List</div>
 
-                <div class="card-body" style="background-color: #FFECDB;">
-                    <a href="{{ route('menus.create') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33" >Add New Menu</a>
+                <div class="card-body" style="background-color: #FFCCCB;">
+                    <a href="{{ route('menus.create') }}" class="btn btn-primary mb-3" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33" >Add New Menu</a>
 
                     @if(session('success')) 
                     <div class="alert alert-success">
@@ -34,7 +34,7 @@
                                 <td>{{ $menu->url }}</td>
                                 <td>{{ $menu->menu_parent }}</td>
                                 <td>
-                                    <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-danger" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33" >Edit</a>
+                                    <a href="{{ route('menus.edit', $menu->id) }}" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33" >Edit</a>
                                     <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" style="display: inline-block;">
                                         @csrf
                                         @method('DELETE')
