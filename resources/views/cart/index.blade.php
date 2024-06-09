@@ -30,7 +30,7 @@
                     <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
                     <td class="product-total">{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-danger" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Edit</button>
+                        <button type="button" class="btn btn-sm btn-danger" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; "data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Edit</button>
                         <form action="{{ route('cart.destroy', $cart->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
