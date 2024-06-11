@@ -29,7 +29,7 @@ class CheckoutController extends Controller
 
     public function processCheckout(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $request->validate([
             'products' => 'required|array',
             'products.*' => 'exists:carts,id',
@@ -70,5 +70,11 @@ class CheckoutController extends Controller
         }
 
         return redirect()->route('transactions.show', $transaction->id)->with('success', 'Checkout successful!');
+    }
+
+    public function destroy(Cart $cart)
+    {
+        $cart->delete();
+        return redirect()->route('cart.index');
     }
 }

@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DiscountProductController;
 use App\Http\Controllers\SliderController;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ComingSoonController;
 
 // Authentication routes
 require __DIR__ . '/auth.php';
@@ -51,8 +53,8 @@ Route::resource('sliders', SliderController::class);
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
-    Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
-    Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+    Route::patch('/cart/{cart}/update', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('checkout.destroy');
 });
 
 Route::prefix('menus')->group(function () {
@@ -81,3 +83,5 @@ Route::prefix('checkout')->middleware('auth')->group(function () {
     Route::post('/', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.show');
     Route::post('/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 });
+
+Route::get('/comingsoon', [ComingSoonController::class, 'index'])->name('comingsoon');

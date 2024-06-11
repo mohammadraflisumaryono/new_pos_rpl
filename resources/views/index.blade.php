@@ -869,10 +869,10 @@ Blog section style start
             <div class="col-md-4">
                 <h5 class="mb-4" style="color: #562D33;">Ikuti Kami</h5>
                 <ul class="list-inline social-icons">
-                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-facebook-f"></i></a></li>
-                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-twitter"></i></a></li>
-                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-instagram"></i></a></li>
-                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-linkedin"></i></a></li>
+                    <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-linkedin"></i></a></li>
                 </ul>
             </div>
             <div class="col-md-4">
