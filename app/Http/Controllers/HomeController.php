@@ -31,4 +31,29 @@ class HomeController extends Controller
 
         return view('index', $data);
     }
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        if ($query) {
+            $products = Product::where('nama', 'LIKE', "%{$query}%")
+                ->orWhere('deskripsi', 'LIKE', "%{$query}%")
+                ->get();
+        } else {
+            $products = Product::all();
+        }
+
+        foreach ($products as $product) {
+            $product->short_description = Str::limit($product->deskripsi, 100);
+            $product->readAblePrice = 'Rp.' . number_format($product->harga, 0, ',', '.');
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $products
+        ]);
+    }
+
 }
