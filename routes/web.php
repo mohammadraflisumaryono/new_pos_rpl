@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
     Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+
 });
 
 Route::prefix('menus')->group(function () {

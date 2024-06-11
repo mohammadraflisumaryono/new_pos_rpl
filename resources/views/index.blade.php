@@ -71,15 +71,23 @@
 <section class="products">
     <div class="container">
     <div class="row justify-content-center"> 
-            @foreach($products as $product)
-            <div class="card-product col-md-2 mb-1">
-                <div class="card" style="width: 100%; height: 350px;">
-                    <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Card image cap" style="height: 50%; object-fit: cover;">
-                    <div class="card-body" style="height: 50%;">
-                        <div class="text-center"> <!-- Mengelompokkan teks dan tombol dalam div -->
-                            <h5 class="card-title font-semibold" style="font-size: 14px; margin-bottom: 0;">{{$product->nama}}</h5>
-                            <p class="card-text text-green-500 text-right mb-0" style="font-size: 12px;">{{$product->readAblePrice}}</p>
-                            <a href="{{url('/products/'.$product->id .'/show')}}" class="btn btn-primary btn-sm" style="font-size: 10px; width: 80px;">BELI SEKARANG</a>
+    @foreach($products as $product)
+            <div class="col-6 col-md-4 col-lg-2 mb-4">
+                <div class="card card-custom h-100">
+                    <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
+                        <div class="price-and-button mt-auto">
+                            <p class="card-text text-right">{{$product->readAblePrice}}</p>
+                            <div class="d-flex justify-content-between">
+                                <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33">Beli</button>
+                                </form>
+                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33">Lihat</a>
+                            </div>
                         </div>
                     </div>
                 </div>
