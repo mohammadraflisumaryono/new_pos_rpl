@@ -66,30 +66,34 @@
     .navbar-nav .nav-link:hover {
         color: #7D6040;
     }
+
     .navbar-brand {
-    color: #562D33;
-    font-weight: bold;
-    font-size: 20px;
-}
+        color: #562D33;
+        font-weight: bold;
+        font-size: 20px;
+    }
 
-.navbar-search input {
-    background-color: #FFCCCB; /* Pink peach background */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
+    .navbar-search input {
+        background-color: #FFCCCB;
+        /* Pink peach background */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
 
-.navbar-search button {
-    background-color: #FFCCCB; /* Pink peach button */
-    color: #562D33;
-    border-color: #FFCCCB;
-    border-radius: 5px;
-    padding: 0.375rem 0.75rem;
-    font-weight: bold;"
-}
+    .navbar-search button {
+        background-color: #FFCCCB;
+        /* Pink peach button */
+        color: #562D33;
+        border-color: #FFCCCB;
+        border-radius: 5px;
+        padding: 0.375rem 0.75rem;
+        font-weight: bold;
+    }
 
-.navbar-search button:hover {
-    background-color: #FF6347; /* Darker pink peach on hover */
-}
+    .navbar-search button:hover {
+        background-color: #FF6347;
+        /* Darker pink peach on hover */
+    }
 </style>
 
 <nav class="main-header navbar navbar-expand navbar-light justify-content-between">
@@ -105,9 +109,9 @@
 
     <!-- Center search form slightly more to the right -->
     <div class="navbar-search d-flex" style="flex: 1; justify-content: center;">
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
-            <button class="btn my-2 my-sm-0" type="submit">Search</button>
+        <form action="{{ route('search') }}" method="GET" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 

@@ -13,7 +13,7 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::with('user')->get();
-        return response()->json($transactions);
+        return view('transactions.index', compact('transactions'));
     }
 
     // Show the form for creating a new transaction

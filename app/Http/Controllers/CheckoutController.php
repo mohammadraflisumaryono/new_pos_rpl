@@ -29,7 +29,7 @@ class CheckoutController extends Controller
 
     public function processCheckout(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
             'products' => 'required|array',
             'products.*' => 'exists:carts,id',

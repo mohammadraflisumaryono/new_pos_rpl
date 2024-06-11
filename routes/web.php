@@ -21,7 +21,7 @@ use App\Http\Controllers\ComingSoonController;
 
 // Authentication routes
 require __DIR__ . '/auth.php';
-
+Route::get('search', [HomeController::class, 'search'])->name('search');
 // Resource routes for products and categories
 Route::prefix('categories')->group(function () {
     Route::get('/index', [CategoryController::class, 'index'])->name('categories.index');
@@ -85,3 +85,7 @@ Route::prefix('checkout')->middleware('auth')->group(function () {
 });
 
 Route::get('/comingsoon', [ComingSoonController::class, 'index'])->name('comingsoon');
+
+Route::prefix('transaction')->middleware('auth')->group(function () {
+    Route::get('/', [TransactionController::class, 'index'])->name('transaction.show');
+});

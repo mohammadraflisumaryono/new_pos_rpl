@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Slider;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
+
 
 class HomeController extends Controller
 {
@@ -41,19 +43,16 @@ class HomeController extends Controller
             $products = Product::where('nama', 'LIKE', "%{$query}%")
                 ->orWhere('deskripsi', 'LIKE', "%{$query}%")
                 ->get();
+
+            // Simpan hasil pencarian di session
+            Session::flash('search_results', $products);
         } else {
-            $products = Product::all();
+            // Jika query kosong, redirect kembali ke halaman indeks
+            return redirect()->route('dashboard');
         }
 
-        foreach ($products as $product) {
-            $product->short_description = Str::limit($product->deskripsi, 100);
-            $product->readAblePrice = 'Rp.' . number_format($product->harga, 0, ',', '.');
-        }
 
-        return response()->json([
-            'status' => 'success',
-            'data' => $products
-        ]);
+        // Redirect kembali ke halaman indeks
+        return redirect()->route('dashboard');
     }
-
 }

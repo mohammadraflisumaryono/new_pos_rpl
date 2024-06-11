@@ -659,6 +659,7 @@ Blog section style start
 
 </header>
 
+
 <section id="banner">
     <div class="swiper main-swiper">
         <div class="swiper-wrapper">
@@ -714,6 +715,36 @@ Blog section style start
 <section class="products">
     <div class="container">
         <div class="row">
+            @if(Session::has('search_results'))
+            <h5 class="text-center;">Search Result</h5>
+            @foreach(Session::get('search_results') as $product)
+
+            <div class="col-6 col-md-4 col-lg-2 mb-4">
+                <div class="card card-custom h-100">
+                    <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
+                        <div class="price-and-button mt-auto">
+                            <p class="card-text text-green-500 text-right">{{$product->readAblePrice}}</p>
+                            <div class="d-flex justify-content-between">
+                                <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="btn btn-primary btn-custom">Beli</button>
+                                </form>
+                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-secondary d-inline-block">Lihat</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            <hr>
+            @endif
+
+
+            <h5 class="mt-2">Product</h5>
             @foreach($products as $product)
             <div class="col-6 col-md-4 col-lg-2 mb-4">
                 <div class="card card-custom h-100">
@@ -739,6 +770,10 @@ Blog section style start
         </div>
     </div>
 </section>
+
+
+
+
 
 
 <section id="banner-2" class="my-3 d-flex">
@@ -851,6 +886,8 @@ Blog section style start
 
         </div>
     </div>
+
+
 </section>
 
 <footer class="footer mt-auto py-5" style="background-color: #FFCCCB80;">
@@ -947,4 +984,5 @@ Blog section style start
         document.getElementById("prev").addEventListener("click", goPrev);
     });
 </script>
+
 @endsection
