@@ -73,7 +73,8 @@ class TransactionController extends Controller
     public function show($id)
     {
         $transaction = Transaction::with('transactionDetails.product')->findOrFail($id);
-        return response()->json($transaction);
+        return view('comingsoon');
+        // return view('transactions.show', compact('transaction'));
     }
 
     // Show the form for editing the specified transaction

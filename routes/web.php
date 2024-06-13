@@ -87,5 +87,5 @@ Route::prefix('checkout')->middleware('auth')->group(function () {
 Route::get('/comingsoon', [ComingSoonController::class, 'index'])->name('comingsoon');
 
 Route::prefix('transaction')->middleware('auth')->group(function () {
-    Route::get('/', [TransactionController::class, 'index'])->name('transaction.show');
+    Route::get('/', [TransactionController::class, 'index'])->name('transactions.show');
 });
