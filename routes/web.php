@@ -84,8 +84,8 @@ Route::prefix('checkout')->middleware('auth')->group(function () {
     Route::post('/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 });
 
-Route::get('/comingsoon', [ComingSoonController::class, 'index'])->name('comingsoon');
-
+// Route::get('/comingsoon', [ComingSoonController::class, 'index'])->name('comingsoon');
+Route::view('/comingsoon', 'comingsoon')->name('comingsoon');
 Route::prefix('transaction')->middleware('auth')->group(function () {
     Route::get('/', [TransactionController::class, 'index'])->name('transactions.show');
 });
