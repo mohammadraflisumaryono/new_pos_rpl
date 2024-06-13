@@ -11,13 +11,13 @@ class DiscountProductController extends Controller
     public function index()
     {
         $discounts = DiscountProduct::with('product')->get();
-        return view('discount_products.index', compact('discounts'));
+        return view('discount.index', compact('discounts'));
     }
 
     public function create()
     {
         $products = Product::all();
-        return view('discount_products.create', compact('products'));
+        return view('discount.create', compact('products'));
     }
 
     public function store(Request $request)
@@ -32,14 +32,14 @@ class DiscountProductController extends Controller
         ]);
 
         DiscountProduct::create($request->all());
-        return redirect()->route('discount_products.index')->with('success', 'Discount created successfully.');
+        return redirect()->route('discount.index')->with('success', 'Discount created successfully.');
     }
 
     public function edit($id)
     {
         $discount = DiscountProduct::findOrFail($id);
         $products = Product::all();
-        return view('discount_products.edit', compact('discount', 'products'));
+        return view('discount.edit', compact('discount', 'products'));
     }
 
     public function update(Request $request, $id)
@@ -55,13 +55,13 @@ class DiscountProductController extends Controller
 
         $discount = DiscountProduct::findOrFail($id);
         $discount->update($request->all());
-        return redirect()->route('discount_products.index')->with('success', 'Discount updated successfully.');
+        return redirect()->route('discount.index')->with('success', 'Discount updated successfully.');
     }
 
     public function destroy($id)
     {
         $discount = DiscountProduct::findOrFail($id);
         $discount->delete();
-        return redirect()->route('discount_products.index')->with('success', 'Discount deleted successfully.');
+        return redirect()->route('discount.index')->with('success', 'Discount deleted successfully.');
     }
 }
