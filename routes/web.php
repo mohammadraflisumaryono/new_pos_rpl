@@ -89,3 +89,14 @@ Route::view('/comingsoon', 'comingsoon')->name('comingsoon');
 Route::prefix('transaction')->middleware('auth')->group(function () {
     Route::get('/', [TransactionController::class, 'index'])->name('transactions.show');
 });
+
+
+Route::prefix('discount_products')->name('discount.')->group(function () {
+    Route::get('/', [DiscountProductController::class, 'index'])->name('index');
+    Route::get('/create', [DiscountProductController::class, 'create'])->name('create');
+    Route::post('/', [DiscountProductController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [DiscountProductController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [DiscountProductController::class, 'update'])->name('update');
+    Route::delete('/{id}', [DiscountProductController::class, 'destroy'])->name('destroy');
+});
+
