@@ -1,35 +1,5 @@
 <!-- Navbar -->
 <style>
-    .navbar {
-        background-color: #FFFFFF;
-    }
-
-    .navbar .nav-link {
-        color: #562D33;
-    }
-
-    .navbar .nav-link.active {
-        font-weight: bold;
-    }
-
-    .navbar .form-control {
-        background-color: #FFFFFF;
-        color: #562D33;
-        border: 1px solid #F9DAD6;
-        border-radius: 20px;
-    }
-
-    .navbar .btn {
-        background-color: #F9DAD6;
-        color: #562D33;
-        border: none;
-        border-radius: 20px;
-    }
-
-    .navbar .btn:hover {
-        background-color: #FFE0E6;
-    }
-
     /* Style the dropdown button */
     .dropbtn {
         background-color: transparent;
@@ -56,7 +26,7 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #FFFFFF;
+        background-color: #F9DAD6;
         min-width: 160px;
         z-index: 1;
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -74,7 +44,7 @@
 
     /* Change color of dropdown links on hover */
     .dropdown-content a:hover {
-        background-color: #F9DAD6;
+        background-color: #ddd;
     }
 
     /* Show the dropdown menu on hover */
@@ -84,7 +54,7 @@
 
     /* Navbar styling */
     .navbar {
-        background-color: #F9DAD6;
+        background-color: #FFFFFF;
         padding: 0.75rem 1rem;
     }
 
@@ -102,6 +72,7 @@
     font-size: 20px;
 }
 
+<<<<<<< HEAD
 .navbar-search input {
     background-color: #FFCCCB; /* Pink peach background */
     border: 1px solid #ddd;
@@ -120,6 +91,29 @@
 .navbar-search button:hover {
     background-color: #FF6347; /* Darker pink peach on hover */
 }
+=======
+    .navbar-search input {
+        background-color: #F9DAD6;
+        /* Pink peach background */
+        border: 1px solid #ddd;
+        border-radius: 100px;
+    }
+
+    .navbar-search button {
+        background-color: #F9DAD6;
+        /* Pink peach button */
+        color: #562D33;
+        border-color: #F9DAD6;
+        border-radius: 100px;
+        padding: 0.375rem 0.75rem;
+        font-weight: bold;
+    }
+
+    .navbar-search button:hover {
+        background-color: #F9DAD6;
+        /* Darker pink peach on hover */
+    }
+>>>>>>> 0a431c9260647caf551386779d155ad19e962315
 </style>
 
 <nav class="main-header navbar navbar-expand navbar-light justify-content-between">
@@ -144,7 +138,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('dashboard') }}" class="nav-link active">Home</a>
+            <a href="{{route('dashboard')}}" class="nav-link active">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="contact.html" class="nav-link">Contact</a>
@@ -185,7 +179,7 @@
 </nav>
 
 <script>
-    // Add event listener to handle click on dropdown button
+    // Tambahkan event listener untuk menangani klik pada tombol dropdown
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.dropbtn').forEach(function(dropbtn) {
             dropbtn.addEventListener('click', function() {
@@ -194,7 +188,7 @@
         });
     });
 
-    // Close dropdown when user clicks outside of it
+    // Tutup dropdown saat pengguna mengklik di luar dropdown
     window.onclick = function(event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");

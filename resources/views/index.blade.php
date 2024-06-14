@@ -739,6 +739,13 @@ Blog section style start
 </section>
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 0a431c9260647caf551386779d155ad19e962315
 <section id="banner-2" class="my-3 d-flex">
     <div class="card img-fluid" style="width:100%">
         <div class="row align-items-center">
@@ -845,7 +852,10 @@ Blog section style start
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </div>
+=======
+>>>>>>> 0a431c9260647caf551386779d155ad19e962315
 
         </div>
     </div>

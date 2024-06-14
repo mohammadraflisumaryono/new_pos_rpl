@@ -3,7 +3,11 @@
 @section('page_content')
 <div class="container">
     @if($carts->isEmpty())
+<<<<<<< HEAD
     <p style="color: #FFA07A;">Keranjang belanja Anda kosong.</p>
+=======
+    <p style="color: #F9DAD6;">Keranjang belanja Anda kosong.</p>
+>>>>>>> 0a431c9260647caf551386779d155ad19e962315
     @else
 
     <form id="cartForm" action="{{ route('checkout.show') }}" method="POST">
@@ -30,12 +34,17 @@
                     <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
                     <td class="product-total">{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
                     <td>
+<<<<<<< HEAD
                         <button type="button" class="btn btn-primary btn-sm edit-btn" data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Edit</button>
                         <form action="{{ route('cart.destroy', $cart->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
+=======
+                        <button type="button" class="btn btn-warning btn-sm mr-1 edit-btn" style="background-color: #F9DAD6; border-color: #F9DAD6" data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Ubah</button>
+                        <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ $cart->id }}">Hapus</button>
+>>>>>>> 0a431c9260647caf551386779d155ad19e962315
                     </td>
                 </tr>
                 @endforeach
