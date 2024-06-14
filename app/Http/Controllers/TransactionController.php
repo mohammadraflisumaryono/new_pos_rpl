@@ -72,14 +72,28 @@ class TransactionController extends Controller
     // }
 
     // Display the specified transaction
+    // Display the specified transaction
     public function show($id)
     {
         $page_title = 'Transaction Detail';
         $transaction = Transaction::with('transactionDetails.product')->findOrFail($id);
-        return view('transactions.show', compact('transaction', 'page_title'));
 
-        // return view('transactions.show', compact('transaction'));
+        // Loop through transaction details to calculate total price and apply discount
+        foreach ($transaction->transactionDetails as $detail) {
+            $product = $detail->product;
+            $discount = $product->getDiscount();
+
+            // Calculate discounted price per unit
+            if ($discount) {
+                $detail->discounted_price_per_unit = $detail->price - ($detail->price * $discount->discount_percentage / 100);
+            } else {
+                $detail->discounted_price_per_unit = $detail->price;
+            }
+        }
+
+        return view('transactions.show', compact('transaction', 'page_title'));
     }
+
 
     // // Show the form for editing the specified transaction
     // public function edit($id)

@@ -9,13 +9,21 @@ class DiscountProduct extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nama',
-        'barcode',
-        'image',
-        'harga',
-        'stock',
-        'netto',
-        'dimensi',
-        'deskripsi',
+        'product_id',
+        'id',
+        'url',
+        'discount_percentage',
+        'start_date',
+        'end_date',
     ];
+
+
+    protected $dates = [
+        'start_date', 'end_date',
+    ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

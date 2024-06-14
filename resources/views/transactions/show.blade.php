@@ -4,7 +4,6 @@
 <style>
     .centered-content {
         display: flex;
-
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -12,25 +11,19 @@
 
     .centered-content img {
         width: 200px;
-        /* Adjust the width as needed */
         height: auto;
         margin-bottom: 20px;
-        /* Adjust the margin as needed */
     }
 </style>
 @endsection
 
-
 @section('page_content')
 <div class="container">
-
 
     <div class="centered-content">
         <img src="{{ asset('storage/images/qualityservice.png') }}" alt="Success">
         <p>Transaction Success</p>
     </div>
-
-
 
     <table class="table">
         <tr>
@@ -74,6 +67,7 @@
                 <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                <th>Discounted Price Per Unit</th> <!-- Add new column -->
                 <th>Total</th>
             </tr>
         </thead>
@@ -83,6 +77,7 @@
                 <td>{{ $detail->product->name }}</td>
                 <td>{{ $detail->quantity }}</td>
                 <td>{{ number_format($detail->price, 2) }}</td>
+                <td>{{ isset($detail->discounted_price_per_unit) ? number_format($detail->discounted_price_per_unit, 2) : '-' }}</td> <!-- Display discounted price per unit -->
                 <td>{{ number_format($detail->quantity * $detail->price, 2) }}</td>
             </tr>
             @endforeach

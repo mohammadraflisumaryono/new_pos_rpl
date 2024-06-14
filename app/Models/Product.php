@@ -33,4 +33,15 @@ class Product extends Model
     {
         return $this->hasMany(TransactionDetail::class);
     }
+
+    public function discountProducts()
+    {
+        return $this->hasMany(DiscountProduct::class);
+    }
+
+    public function getDiscount()
+    {
+        return $this->discountProducts()->whereDate('start_date', '<=', now())
+            ->whereDate('end_date', '>=', now())->first();
+    }
 }
