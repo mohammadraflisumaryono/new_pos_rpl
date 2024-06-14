@@ -20,7 +20,11 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ComingSoonController;
 
 // Authentication routes
-require __DIR__ . '/auth.php';
+require _DIR_ . '/auth.php';
+Route::get('/', function () {
+    return view('home'); 
+})->name('home')->middleware('auth');
+
 Route::get('search', [HomeController::class, 'search'])->name('search');
 // Resource routes for products and categories
 Route::prefix('categories')->group(function () {
@@ -98,4 +102,3 @@ Route::prefix('discount_products')->name('discount.')->group(function () {
     Route::put('/{id}', [DiscountProductController::class, 'update'])->name('update');
     Route::delete('/{id}', [DiscountProductController::class, 'destroy'])->name('destroy');
 });
-
