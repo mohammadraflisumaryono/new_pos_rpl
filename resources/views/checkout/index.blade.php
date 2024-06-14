@@ -33,8 +33,8 @@
         <div class="form-group">
             <label for="delivery_type">Delivery Type:</label>
             <select class="form-control" id="delivery_type" name="delivery_type" required>
-                <option value="home_delivery">Home Delivery</option>
                 <option value="store_pickup">Store Pickup</option>
+                <option value="home_delivery">Home Delivery</option>
             </select>
         </div>
         <div class="form-group" id="addressDiv" style="display: none;">

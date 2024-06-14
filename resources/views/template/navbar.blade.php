@@ -96,9 +96,9 @@
 
     <!-- Center search form slightly more to the right -->
     <div class="navbar-search d-flex" style="flex: 1; justify-content: center;">
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search">
-            <button class="btn my-2 my-sm-0" type="submit">Search</button>
+        <form action="{{ route('search') }}" method="GET" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 

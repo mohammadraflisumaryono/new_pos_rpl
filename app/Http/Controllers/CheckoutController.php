@@ -20,6 +20,7 @@ class CheckoutController extends Controller
         $cartIds = $request->input('products');
         $carts = Cart::with('product')->whereIn('id', $cartIds)->get();
         $totalAmount = $carts->sum(function ($cart) {
+
             return $cart->quantity * $cart->product->harga;
         });
 
@@ -30,13 +31,14 @@ class CheckoutController extends Controller
     public function processCheckout(Request $request)
     {
         // dd($request->all());
-        $request->validate([
-            'products' => 'required|array',
-            'products.*' => 'exists:carts,id',
-            'phone_number' => 'required|string',
-            'delivery_type' => 'required|in:home_delivery,store_pickup',
-            'address' => 'required_if:delivery_type,home_delivery|string',
-        ]);
+        // $request->validate([
+        //     'products' => 'required|array',
+        //     'products.*' => 'exists:carts,id',
+        //     'phone_number' => 'required|string',
+        //     'delivery_type' => 'required|in:home_delivery,store_pickup',
+        //     'address' => 'required_if:delivery_type,home_delivery|string',
+        // ]);
+        // dd($request->method());
 
         $carts = Cart::with('product')->whereIn('id', $request->products)->get();
         $totalAmount = $carts->sum(function ($cart) {
@@ -69,6 +71,16 @@ class CheckoutController extends Controller
             $cart->delete();
         }
 
-        return redirect()->route('transactions.show', $transaction->id)->with('success', 'Checkout successful!');
+        // return view('redirecting', ['url' => route('transactions.show', $transaction->id)]);
+        // dd($transaction);
+
+
+        return redirect()->route('transactions.show', $transaction->id)->with('success', 'Transaction success');
+    }
+
+    public function destroy(Cart $cart)
+    {
+        $cart->delete();
+        return redirect()->route('cart.index');
     }
 }
