@@ -24,33 +24,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-<<<<<<< HEAD
         // dd($request->authenticate());
         $request->authenticate();
 
         
         // dd($request->all());
         $request->session()->regenerate();
-=======
-        try {
-            // Attempt to authenticate the user
-            $request->authenticate();
-    
-            // Regenerate the session to prevent fixation
-            $request->session()->regenerate();
-    
-            // Set a session message
-            $request->session()->flash('message', 'You are successfully logged in!');
-    
-            // Redirect to intended route or home
-            return redirect()->intended('dashboard');
-        } catch (\Exception $e) {
-            // Authentication failed, redirect back with errors
-            return back()->withErrors([
-                'email' => 'The provided credentials do not match our records.',
-            ])->onlyInput('email');
-        }
->>>>>>> 82331c7c3478c69f2291a0ae67d1686aa579e4bf
 
         $userRole = Auth::user()->role;
         switch ($userRole) {
