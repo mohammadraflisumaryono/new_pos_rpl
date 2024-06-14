@@ -77,10 +77,10 @@
                         <div class="price-and-button mt-auto">
                             <p class="card-text text-right">
                                 @if($product->discounted_price && $product->discounted_price < $product->harga) <!-- Check if the product has discount and it's less than original price -->
-                                    <span class="discounted-price">{{ number_format($product->discounted_price, 2) }}</span> <!-- Display discounted price per unit -->
-                                    <del>{{ number_format($product->harga, 2) }}</del> <!-- Display original price with strike-through -->
+                                    <span class="discounted-price" style="color:red">{{ number_format($product->discounted_price) }}</span> <!-- Display discounted price per unit -->
+                                    <del>{{ number_format($product->harga) }}</del> <!-- Display original price with strike-through -->
                                     @else
-                                    {{ number_format($product->harga, 2) }} <!-- Display regular price if no discount -->
+                                    Rp. {{ number_format($product->harga) }} <!-- Display regular price if no discount -->
                                     @endif
                             </p>
                             <div class="d-flex justify-content-between">
@@ -114,10 +114,9 @@
                             <p class="card-text text-right">
                                 @if($product->discounted_price && $product->discounted_price < $product->harga) <!-- Check if the product has discount and it's less than original price -->
                                     <span class="discounted-price">Rp. {{ number_format($product->discounted_price) }}</span> <!-- Display discounted price per unit -->
-                                    <del>{{ number_format($product->harga, 2) }}</del> <!-- Display original price with strike-through -->
+                                    <del style="color:red">Rp. {{number_format($product->harga) }}</del> <!-- Display original price with strike-through -->
                                     @else
-                                    Rp.
-                                    {{ number_format($product->harga) }} <!-- Display regular price if no discount -->
+                                    Rp. {{ number_format($product->harga) }} <!-- Display regular price if no discount -->
                                     @endif
                             </p>
                             <div class="d-flex justify-content-between">
