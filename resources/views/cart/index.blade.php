@@ -3,7 +3,7 @@
 @section('page_content')
 <div class="container">
     @if($carts->isEmpty())
-    <p style="color: #FFA07A;">Keranjang belanja Anda kosong.</p>
+    <p style="color: #F9DAD6;">Keranjang belanja Anda kosong.</p>
     @else
 
     <form id="cartForm" action="{{ route('checkout.show') }}" method="POST">
