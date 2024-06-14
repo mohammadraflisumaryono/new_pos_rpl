@@ -84,6 +84,11 @@
     </style>
 </head>
 <body>
+        @if (session('message'))
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                @endif
     <div class="container">
         <h2>Login</h2>
         <form method="POST" action="{{ route('login') }}">
