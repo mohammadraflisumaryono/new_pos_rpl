@@ -7,7 +7,7 @@
         @csrf
         <div class="mb-3">
             <label for="product_id" class="form-label">Product</label>
-            <select name="product_id" id="product_id" class="form-control" required>
+            <select name="product_id" id="product_id" class="form-control select2" required>
                 <option value="">Select Product</option>
                 @foreach ($products as $product)
                 <option value="{{ $product->id }}">{{ $product->nama }}</option>
@@ -38,4 +38,12 @@
         <a href="{{ route('discount.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>
 @endsection

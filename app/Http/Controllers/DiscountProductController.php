@@ -11,17 +11,20 @@ class DiscountProductController extends Controller
     public function index()
     {
         $discounts = DiscountProduct::with('product')->get();
-        return view('discount.index', compact('discounts'));
+        $page_title = 'Discount Management';
+        return view('discount.index', compact('discounts', 'page_title'));
     }
 
     public function create()
     {
         $products = Product::all();
-        return view('discount.create', compact('products'));
+        $page_title = 'Create Discount';
+        return view('discount.create', compact('products', 'page_title'));
     }
 
     public function store(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'image_url' => 'required|string|max:255',
@@ -39,6 +42,7 @@ class DiscountProductController extends Controller
     {
         $discount = DiscountProduct::findOrFail($id);
         $products = Product::all();
+        $page_title = 'Edit Discount';
         return view('discount.edit', compact('discount', 'products'));
     }
 
