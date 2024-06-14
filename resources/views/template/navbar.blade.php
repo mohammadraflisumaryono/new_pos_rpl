@@ -66,12 +66,11 @@
     .navbar-nav .nav-link:hover {
         color: #7D6040;
     }
-
     .navbar-brand {
-        color: #562D33;
-        font-weight: bold;
-        font-size: 20px;
-    }
+    color: #562D33;
+    font-weight: bold;
+    font-size: 20px;
+}
 
     .navbar-search input {
         background-color: #F9DAD6;
@@ -159,7 +158,6 @@
 </nav>
 
 <script>
-    // Tambahkan event listener untuk menangani klik pada tombol dropdown
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.dropbtn').forEach(function(dropbtn) {
             dropbtn.addEventListener('click', function() {
@@ -168,7 +166,6 @@
         });
     });
 
-    // Tutup dropdown saat pengguna mengklik di luar dropdown
     window.onclick = function(event) {
         if (!event.target.matches('.dropbtn')) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
