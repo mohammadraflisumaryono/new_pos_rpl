@@ -52,11 +52,7 @@
         </table>
         <div class="total">
             <h3>Total: <span id="totalAmount">{{ 'Rp.' . number_format(0, 0, ',', '.') }}</span></h3>
-        </div>
-        <div class="d-flex justify-content-center">
-            <button type="button" id="checkoutBtn" class="btn btn-warning btn-sm mr-1 edit-btn" style="background-color: #F9DAD6; border-color: #F9DAD6; font-weight: bold">
-            Lanjut ke Pembayaran
-            </button>
+            <button type="button" id="checkoutBtn" class="btn btn-primary float-right">Lanjut ke Pembayaran</button>
         </div>
 
     </form>
