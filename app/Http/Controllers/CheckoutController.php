@@ -16,34 +16,54 @@ class CheckoutController extends Controller
             'products' => 'required|array',
             'products.*' => 'exists:carts,id',
         ]);
+
         $page_title = 'Checkout';
         $cartIds = $request->input('products');
         $carts = Cart::with('product')->whereIn('id', $cartIds)->get();
-        $totalAmount = $carts->sum(function ($cart) {
 
-            return $cart->quantity * $cart->product->harga;
-        });
+        $totalAmount = 0;
+        $totalDiscount = 0; // Tambahkan inisialisasi total diskon
 
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+            $totalAmount += $cart->quantity * $product->harga;
 
-        return view('checkout.index', compact('carts', 'totalAmount', 'page_title'));
+            // Hitung diskon untuk setiap produk
+            $discount = $product->getDiscount();
+
+            // dd($discount); // Debug diskon (hapus setelah selesai debug
+            if ($discount) {
+                $totalDiscount += ($cart->quantity * $product->harga * $discount->discount_percentage) / 100;
+            }
+        }
+
+        // Kurangi total harga dengan total diskon
+        $totalAmount -= $totalDiscount;
+
+        return view('checkout.index', compact('carts', 'totalAmount', 'totalDiscount', 'page_title'));
     }
+
 
     public function processCheckout(Request $request)
     {
-        // dd($request->all());
-        // $request->validate([
-        //     'products' => 'required|array',
-        //     'products.*' => 'exists:carts,id',
-        //     'phone_number' => 'required|string',
-        //     'delivery_type' => 'required|in:home_delivery,store_pickup',
-        //     'address' => 'required_if:delivery_type,home_delivery|string',
-        // ]);
-        // dd($request->method());
-
         $carts = Cart::with('product')->whereIn('id', $request->products)->get();
         $totalAmount = $carts->sum(function ($cart) {
             return $cart->quantity * $cart->product->harga;
         });
+
+        // Hitung diskon berdasarkan produk yang ada di keranjang
+        $totalDiscount = 0;
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+            $discount = $product->getDiscount();
+            if ($discount) {
+                $totalDiscount += ($cart->quantity * $cart->product->harga * $discount->discount_percentage) / 100;
+            }
+        }
+
+        // Kurangi total harga dengan total diskon
+        $totalAmount -= $totalDiscount;
+
         $serviceFee = $request->delivery_type == 'home_delivery' ? 5000 : 0;
 
         $transaction = Transaction::create([
@@ -71,12 +91,11 @@ class CheckoutController extends Controller
             $cart->delete();
         }
 
-        // return view('redirecting', ['url' => route('transactions.show', $transaction->id)]);
-        // dd($transaction);
-
-
-        return redirect()->route('transactions.show', $transaction->id)->with('success', 'Transaction success');
+        return redirect()->route('transactions.show', $transaction->id)
+            ->with('success', 'Transaction success')
+            ->with('totalDiscount', $totalDiscount);
     }
+
 
     public function destroy(Cart $cart)
     {

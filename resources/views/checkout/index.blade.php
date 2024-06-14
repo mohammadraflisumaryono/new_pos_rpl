@@ -11,6 +11,7 @@
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                    <th>Discount</th> <!-- New column for displaying discount -->
                     <th>Total</th>
                 </tr>
             </thead>
@@ -20,6 +21,17 @@
                     <td>{{ $cart->product->nama }}</td>
                     <td>{{ $cart->quantity }}</td>
                     <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
+                    <td> <!-- Display discount for each product -->
+                        @php
+                        $discount = $cart->product->getDiscount();
+                        if($discount) {
+                        echo 'Rp.' . number_format($cart->product->harga * $discount->discount_percentage / 100, 0, ',', '.');
+                        } else {
+                        echo '-';
+                        }
+                        @endphp
+
+                    </td>
                     <td>{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
                     <input type="hidden" name="products[]" value="{{ $cart->id }}">
                 </tr>
@@ -42,6 +54,7 @@
             <textarea class="form-control" id="address" name="address"></textarea>
         </div>
         <h3>Total: {{ 'Rp.' . number_format($totalAmount, 0, ',', '.') }}</h3>
+        <h3>Total Discount: {{ 'Rp.' . number_format($totalDiscount, 0, ',', '.') }}</h3> <!-- Display total discount -->
         <button type="submit" class="btn btn-primary">Complete Purchase</button>
     </form>
 

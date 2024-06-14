@@ -24,9 +24,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+<<<<<<< HEAD
         try {
             // Attempt to authenticate the user
             $request->authenticate();
+=======
+        $request->authenticate();
+        
+>>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
 
             // Regenerate the session to prevent fixation
             $request->session()->regenerate();

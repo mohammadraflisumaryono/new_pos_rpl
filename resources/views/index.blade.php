@@ -3,10 +3,15 @@
 @section('head_khusus')
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<<<<<<< HEAD
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
 @endsection
+=======
+@endsection
+
+>>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
 @section('page_content')
 
 <header>
@@ -32,25 +37,28 @@
 </section>
 
 <section id="categories" class="py-24 sm:py-8 px-4">
+<<<<<<< HEAD
     <div class="container mx-auto max-w-[calc(100%-4rem)]"> 
+=======
+    <div class="container mx-auto max-w-[calc(100%-4rem)]">
+>>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
         <div class="relative flex items-center justify-center">
-            <button aria-label="slide backward" class=" z-30 left-0 ml-4 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer rounded-full border-2 border-gray-400 p-2" id="prev">
+            <button aria-label="slide backward" class="z-30 left-0 ml-4 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer rounded-full border-2 border-gray-400 p-2" id="prev">
                 <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 1L1 7L7 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </button>
             <div class="w-full h-full mx-auto overflow-hidden relative px-12">
-                <div id="slider" class="h-full flex items-center justify-start transition-transform ease-out duration-700" style="text-align: left;"> <!-- Geser isi ke kiri -->
-                    @foreach($categories as $category)
+                <div id="slider" class="h-full flex items-center justify-start transition-transform ease-out duration-700" style="text-align: left;">
+                    @foreach($categories as $index => $category)
                     <div class="flex flex-shrink-0 relative w-auto sm:w-auto text-center mx-2">
-                        <a href="#" class="categories-item text-decoration-none d-inline-block">
+                        <a href="{{ route('products.category', ['category' => $category->category_id]) }}" class="categories-item text-decoration-none d-inline-block" data-index="{{ $index }}">
                             <span class="badge bg-light text-dark d-flex align-items-center justify-center" style="font-size: 1em; padding: 0.5em;">
                                 <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->nama }}" class="img-fluid me-2" style="max-width: 20px;">
                                 {{ $category->nama }}
                             </span>
                         </a>
                     </div>
-
                     @endforeach
                 </div>
             </div>
@@ -60,7 +68,6 @@
                 </svg>
             </button>
         </div>
-    </div>
     </div>
 </section>
 
@@ -73,26 +80,38 @@
                 <hr>
             </div>
             @foreach(Session::get('search_results') as $product)
+<<<<<<< HEAD
             <div class="col-8 col-md-4 col-lg-2 mb-4">
+=======
+            <div class="col-6 col-md-4 col-lg-2 mb-4">
+>>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
                 <div class="card card-custom h-100">
                     <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
                         <div class="price-and-button mt-auto">
-                            <p class="card-text text-green-500 text-right">{{$product->readAblePrice}}</p>
+                            <p class="card-text text-right">
+                                @if($product->discounted_price && $product->discounted_price < $product->harga) <!-- Check if the product has discount and it's less than original price -->
+                                    <span class="discounted-price" style="color:red">{{ number_format($product->discounted_price) }}</span> <!-- Display discounted price per unit -->
+                                    <del>{{ number_format($product->harga) }}</del> <!-- Display original price with strike-through -->
+                                    @else
+                                    Rp. {{ number_format($product->harga) }} <!-- Display regular price if no discount -->
+                                    @endif
+                            </p>
                             <div class="d-flex justify-content-between">
                                 <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <input type="hidden" name="quantity" value="1">
-                                    <button type="submit" class="btn btn-primary btn-custom">Beli</button>
+                                    <button type="submit" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33">Beli</button>
                                 </form>
-                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-secondary d-inline-block">Lihat</a>
+                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33">Lihat</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             @endforeach
             @endif
 
@@ -107,7 +126,18 @@
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
                         <div class="price-and-button mt-auto">
+<<<<<<< HEAD
                             <p class="card-text text-right">{{$product->readAblePrice}}</p>
+=======
+                            <p class="card-text text-right">
+                                @if($product->discounted_price && $product->discounted_price < $product->harga) <!-- Check if the product has discount and it's less than original price -->
+                                    <span class="discounted-price">Rp. {{ number_format($product->discounted_price) }}</span> <!-- Display discounted price per unit -->
+                                    <del style="color:red">Rp. {{number_format($product->harga) }}</del> <!-- Display original price with strike-through -->
+                                    @else
+                                    Rp. {{ number_format($product->harga) }} <!-- Display regular price if no discount -->
+                                    @endif
+                            </p>
+>>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
                             <div class="d-flex justify-content-between">
                                 <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
                                     @csrf
@@ -153,6 +183,7 @@
 </section>
 @endif
 
+<<<<<<< HEAD
 <section id="service">
     <div class="container py-5 my-5">
         <div class="row g-md-5 pt-4">
@@ -234,12 +265,67 @@
                     <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-twitter"></i></a></li>
                     <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-instagram"></i></a></li>
                     <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-linkedin"></i></a></li>
+=======
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h5><img src="storage/images/logo.png" alt="logo"></h5>
+                <ul class="list-unstyled d-flex justify-content-center mt-2">
+                    <li class="ms-2"><a href="#" class="text-muted"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="ms-2"><a href="#" class="text-muted"><i class="fab fa-twitter"></i></a></li>
+                    <li class="ms-2"><a href="#" class="text-muted"><i class="fab fa-instagram"></i></a></li>
+                    <li class="ms-2"><a href="#" class="text-muted"><i class="fab fa-linkedin-in"></i></a></li>
+                </ul>
+                <p class="text-muted mt-2">© 2023 Your Company. All rights reserved.</p>
+            </div>
+>>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
         </div>
-    </div>
-    <div class="container text-center">
-        <p class="text-muted mb-0" style="color: #562D33;">© 2024 SunnyMart. All rights reserved.</p>
     </div>
 </footer>
 
+<<<<<<< HEAD
 
+=======
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const swiper = new Swiper(".main-swiper", {
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            autoplay: {
+                delay: 5000,
+            },
+        });
+
+        const slider = document.getElementById("slider");
+        const sliderItems = slider.querySelectorAll(".categories-item");
+        let activeIndex = 0;
+
+        document.getElementById("prev").addEventListener("click", () => goPrev(sliderItems));
+        document.getElementById("next").addEventListener("click", () => goNext(sliderItems));
+
+        function goNext(items) {
+            if (activeIndex < items.length - 1) {
+                activeIndex++;
+                showSlide(items, activeIndex);
+            }
+        }
+
+        function goPrev(items) {
+            if (activeIndex > 0) {
+                activeIndex--;
+                showSlide(items, activeIndex);
+            }
+        }
+
+        function showSlide(items, index) {
+            const offset = index * 200; // Adjust based on item width
+            slider.style.transform = `translateX(-${offset}px)`;
+        }
+    });
+</script>
+>>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
 @endsection

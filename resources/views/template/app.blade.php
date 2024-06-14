@@ -8,7 +8,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Sunny Mart</title>
+<<<<<<< HEAD
     <link rel="icon" href="{{ asset('storage/images/logo.png') }}" type="image/x-icon" />
+=======
+    <link rel="icon" href="{{ asset('storage/images/logo.png')}}">
+>>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
     @include('template.css')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
