@@ -1,17 +1,9 @@
-
 @extends('template.app')
 @section('head_khusus')
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<<<<<<< HEAD
-<meta name="author" content="">
-<meta name="keywords" content="">
-<meta name="description" content="">
-@endsection
-=======
 @endsection
 
->>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
 @section('page_content')
 
 <header>
@@ -37,11 +29,7 @@
 </section>
 
 <section id="categories" class="py-24 sm:py-8 px-4">
-<<<<<<< HEAD
-    <div class="container mx-auto max-w-[calc(100%-4rem)]"> 
-=======
     <div class="container mx-auto max-w-[calc(100%-4rem)]">
->>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
         <div class="relative flex items-center justify-center">
             <button aria-label="slide backward" class="z-30 left-0 ml-4 focus:outline-none focus:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 cursor-pointer rounded-full border-2 border-gray-400 p-2" id="prev">
                 <svg class="dark:text-gray-900" width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,11 +68,7 @@
                 <hr>
             </div>
             @foreach(Session::get('search_results') as $product)
-<<<<<<< HEAD
-            <div class="col-8 col-md-4 col-lg-2 mb-4">
-=======
             <div class="col-6 col-md-4 col-lg-2 mb-4">
->>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
                 <div class="card card-custom h-100">
                     <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
                     <div class="card-body d-flex flex-column">
@@ -126,9 +110,6 @@
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
                         <div class="price-and-button mt-auto">
-<<<<<<< HEAD
-                            <p class="card-text text-right">{{$product->readAblePrice}}</p>
-=======
                             <p class="card-text text-right">
                                 @if($product->discounted_price && $product->discounted_price < $product->harga) <!-- Check if the product has discount and it's less than original price -->
                                     <span class="discounted-price">Rp. {{ number_format($product->discounted_price) }}</span> <!-- Display discounted price per unit -->
@@ -137,7 +118,6 @@
                                     Rp. {{ number_format($product->harga) }} <!-- Display regular price if no discount -->
                                     @endif
                             </p>
->>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
                             <div class="d-flex justify-content-between">
                                 <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
                                     @csrf
@@ -183,89 +163,6 @@
 </section>
 @endif
 
-<<<<<<< HEAD
-<section id="service">
-    <div class="container py-5 my-5">
-        <div class="row g-md-5 pt-4">
-            <div class="col-md-3 my-3">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-center mb-3">
-                            <img src="storage/images/qualityservice.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
-                            <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Quality Service</h3>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Hubungi kami, maka kami siap melayani anda</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 my-3">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-center mb-3">
-                            <img src="storage/images/securepayment.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
-                            <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">100% Secure Payment</h3>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Kami menjamin pembayaran anda aman dan terlindungi.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 my-3">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-center mb-3">
-                            <img src="storage/images/dailyoffer.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
-                            <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Daily Offer</h3>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Jangan lewatkan penawaran harian kami!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 my-3">
-                <div class="card border-0 shadow">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center justify-content-center mb-3">
-                            <img src="storage/images/qualityguarantee.png" class="rounded-circle me-3" alt="Gambar Kiri" style="width: 70px; height: 70px;">
-                            <h3 class="card-title py-2 m-0" style="font-size: 0.9rem; font-weight: bold; color: #2c3e50;">Quality Guarantee</h3>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="blog-paragraph fs-6" style="color: #7f8c8d;">Jangan khawatir! Kami siap memberikan kualitas terbaik!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<footer class="footer mt-auto py-5" style="background-color: #F9DAD680;">
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <h5 class="mb-4" style="color: #562D33">Tentang Kami</h5>
-                <p style="color: 62D33 ">Sunny Mart merupakan website supermarket yang bisa anda gunakan kapan dan dimana saja untuk memenuhi kebutuhan anda..</p>
-            </div>
-            <div class="col-md-4 mb-4">
-                <h5 class="mb-4" style="color: #562D33;">Hubungi Kami</h5>
-                <p style="color: #562D33;">Alamat: Jalan A.H Nasution No.76, Bandung, Jawa Barat, 40614</p>
-                <p style="color: #562D33;">Email: sunnymart@gmail.com</p>
-                <p style="color: #562D33;">Telepon: 123-456-7890</p>
-            </div>
-            <div class="col-md-4">
-                <h5 class="mb-4" style="color: #562D33;">Ikuti Kami</h5>
-                <ul class="list-inline social-icons">
-                    <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-facebook-f"></i></a></li>
-                    <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-twitter"></i></a></li>
-                    <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-instagram"></i></a></li>
-                    <li class="list-inline-item"><a href="{{route('comingsoon')}}" style="color: #562D33;"><i class="fab fa-linkedin"></i></a></li>
-=======
 <footer>
     <div class="container">
         <div class="row">
@@ -279,14 +176,10 @@
                 </ul>
                 <p class="text-muted mt-2">© 2023 Your Company. All rights reserved.</p>
             </div>
->>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
         </div>
     </div>
 </footer>
 
-<<<<<<< HEAD
-
-=======
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const swiper = new Swiper(".main-swiper", {
@@ -327,5 +220,4 @@
         }
     });
 </script>
->>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
 @endsection
