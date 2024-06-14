@@ -30,7 +30,7 @@
                     <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
                     <td class="product-total">{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm edit-btn" data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Ubah</button>
+                        <button type="button" class="btn btn-warning btn-sm mr-1 edit-btn" style="background-color: #F9DAD6; border-color: #F9DAD6" data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Ubah</button>
                         <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ $cart->id }}">Hapus</button>
                     </td>
                 </tr>
