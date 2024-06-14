@@ -13,7 +13,7 @@ class TransactionController extends Controller
     public function index()
     {
         $transactions = Transaction::with('user')->get();
-        return response()->json($transactions);
+        return view('transactions.index', compact('transactions'));
     }
 
     // Show the form for creating a new transaction
@@ -73,7 +73,8 @@ class TransactionController extends Controller
     public function show($id)
     {
         $transaction = Transaction::with('transactionDetails.product')->findOrFail($id);
-        return response()->json($transaction);
+        return view('comingsoon');
+        // return view('transactions.show', compact('transaction'));
     }
 
     // Show the form for editing the specified transaction
