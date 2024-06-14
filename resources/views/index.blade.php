@@ -40,14 +40,14 @@
             <div class="w-full h-full mx-auto overflow-hidden relative px-12">
                 <div id="slider" class="h-full flex items-center justify-start transition-transform ease-out duration-700" style="text-align: left;">
                     @foreach($categories as $index => $category)
-                        <div class="flex flex-shrink-0 relative w-auto sm:w-auto text-center mx-2">
-                            <a href="{{ route('products.category', ['category_id' => $category->category_id]) }}" class="categories-item text-decoration-none d-inline-block" data-index="{{ $index }}">
-                                <span class="badge bg-light text-dark d-flex align-items-center justify-center" style="font-size: 1em; padding: 0.5em;">
-                                    <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->nama }}" class="img-fluid me-2" style="max-width: 20px;">
-                                    {{ $category->nama }}
-                                </span>
-                            </a>
-                        </div>
+                    <div class="flex flex-shrink-0 relative w-auto sm:w-auto text-center mx-2">
+                        <a href="{{ route('products.category', ['category' => $category->category_id]) }}" class="categories-item text-decoration-none d-inline-block" data-index="{{ $index }}">
+                            <span class="badge bg-light text-dark d-flex align-items-center justify-center" style="font-size: 1em; padding: 0.5em;">
+                                <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->nama }}" class="img-fluid me-2" style="max-width: 20px;">
+                                {{ $category->nama }}
+                            </span>
+                        </a>
+                    </div>
                     @endforeach
                 </div>
             </div>
