@@ -38,8 +38,7 @@ Route::prefix('products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
     Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
-
-    Route::get('/display', [ProductController::class, 'display'])->name('products.display');
+    Route::get('/category/{category}', [ProductController::class, 'showByCategory'])->name('products.category');
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/addstock', [ProductController::class, 'addstock'])->name('products.addstock');
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');

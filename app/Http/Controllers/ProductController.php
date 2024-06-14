@@ -39,8 +39,7 @@ class ProductController extends Controller
             'dimensi' => 'required',
             'deskripsi' => 'required',
             'categories' => 'required|array',
-            'categories.*' => 'exists:categories,category_id',
-
+            'categories.*' => 'exists:categories,id', // Ubah category_id menjadi id
         ]);
 
         $product = new Product($request->all());
@@ -56,7 +55,6 @@ class ProductController extends Controller
 
         // Attach each selected category to the product
         $product->categories()->attach($request->categories);
-
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
@@ -76,7 +74,6 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        // dd($request->all());
         $request->validate([
             'nama' => 'required',
             'barcode' => 'required',
@@ -86,7 +83,7 @@ class ProductController extends Controller
             'dimensi' => 'required',
             'deskripsi' => 'required',
             'categories' => 'required|array',
-            'categories.*' => 'exists:categories,category_id',
+            'categories.*' => 'exists:categories,id', // Ubah category_id menjadi id
         ]);
 
         $product->fill($request->all());
@@ -105,27 +102,11 @@ class ProductController extends Controller
 
         $product->save();
 
-        // Ambil kategori yang dipilih
-        $selectedCategories = $request->input('categories');
-
-        // Ambil kategori-kategori yang memiliki class 'active'
-        $activeCategories = Category::whereHas('products', function ($query) use ($product) {
-            $query->where('product_id', $product->id);
-        })->get();
-
-        // Detach kategori yang tidak dipilih
-        foreach ($activeCategories as $category) {
-            if (!in_array($category->id, $selectedCategories)) {
-                $product->categories()->detach($category->id);
-            }
-        }
-
         // Attach kategori yang dipilih
-        $product->categories()->sync($selectedCategories);
+        $product->categories()->sync($request->categories);
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
-
 
     public function destroy(Product $product)
     {
@@ -144,10 +125,8 @@ class ProductController extends Controller
     {
         $products = Product::all();
         $page_title = "Add Stock";
-        // @dd($products);
         return view('products.add_stock', compact('products', 'page_title'));
     }
-    // app/Http/Controllers/ProductController.php
 
     public function getProductInfo(Request $request)
     {
@@ -168,8 +147,6 @@ class ProductController extends Controller
         return response()->json(['error' => 'Product not found'], 404);
     }
 
-    // app/Http/Controllers/ProductController.php
-
     public function updatestock(Request $request)
     {
         $request->validate([
@@ -182,5 +159,22 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('products.index')->with('success', 'Stock updated successfully.');
+    }
+
+    // Pilih salah satu dari dua method ini dan hapus yang lain
+    public function showCategory($categorySlug)
+    {
+        $category = Category::where('slug', $categorySlug)->firstOrFail();
+        $products = Product::where('category_id', $category->id)->get();
+
+        return view('products.index', compact('products', 'category'));
+    }
+
+    public function showByCategory($category_id)
+    {
+        $category = Category::findOrFail($category_id);
+        $products = Product::where('category_id', $category_id)->get();
+
+        return view('products.category', compact('category', 'products'));
     }
 }
