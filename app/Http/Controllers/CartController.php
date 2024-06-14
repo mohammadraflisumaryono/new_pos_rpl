@@ -65,19 +65,14 @@ class CartController extends Controller
 
     public function update(Request $request, $cart_id)
     {
+        // dd($request->all());
+        // $cart = Cart::class;
         $request->validate([
             'quantity' => 'required|integer|min:1'
         ]);
         $cart = Cart::find($cart_id);
-        if (!$cart || $cart->user_id != auth()->id()) {
-            return redirect()->route('cart.index')->withErrors('Cart not found');
-        }
-        if ($cart->product_id == $request->product_id) {
-            $cart->update([
-                'quantity' => $request->quantity
-            ]);
-        }
-        return redirect()->route('cart.index');
+       $cart->update($request->all());
+       return redirect()->route('cart.index');
     }
 }
 
