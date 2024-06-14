@@ -59,6 +59,7 @@ class CartController extends Controller
     }
     public function update(Request $request, Cart $cart)
     {
+        // dd($request->all());
         $request->validate([
             'quantity' => 'required|integer|min:1'
         ]);
