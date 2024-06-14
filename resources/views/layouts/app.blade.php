@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}"> <!-- Tambahkan baris ini -->
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,32 +22,21 @@
 
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <!-- Sidebar content here -->
-            <!-- You can include your sidebar code here -->
-        </aside>
+        @include('layouts.navigation')
 
-        <!-- Main content -->
-        <div class="main-content">
-            <!-- Navigation -->
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @if (isset($header))
+        <!-- Page Heading -->
+        @if (isset($header))
             <header class="bg-white shadow">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>
-            @endif
+        @endif
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-        <!-- /.main-content -->
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
     </div>
 </body>
 

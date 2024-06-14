@@ -38,7 +38,7 @@
                                 <option value="n" {{ $menu->is_aktif == 'n' ? 'selected' : '' }}>No</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Menu</button>
+                        <button type="submit" class="btn btn-primary" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33" >Update Menu</button>
                     </form>
                 </div>
             </div>

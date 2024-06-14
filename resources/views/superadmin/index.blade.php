@@ -1,122 +1,232 @@
 @extends('template.app')
+
 @section('styles')
-@parent
-<style>
-    .box {
-        background-color: #AAD7D9;
-        border: 1px solid #ccc;
-        padding: 20px;
-        width: 1000px;
-        /* Sesuaikan dengan lebar yang diinginkan */
-        margin-bottom: 20px;
-        border-radius: 20px 20px;
-    }
+    @parent
+    <style>
+        .box {
+            background-color: #F9DAD6;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    h2 {
-        color: #effafc;
-        margin: 5px;
-        margin-bottom: 10px;
-    }
+        h2 {
+            color: #562D33;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
 
-    .header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
-    .header .icon {
-        color: #d3ea7b;
-        margin-right: 10px;
+        .header .icon {
+            color: #562D33;
+            font-size: 24px;
+            margin-right: 10px;
+        }
 
-        padding-bottom: 32px;
-    }
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 15px;
+        }
 
-    .options {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 20px;
-    }
+        .option {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
 
-    .option {
-        text-decoration: none;
-        color: #000000;
-        display: flex;
-        align-items: center;
-        padding: 5px;
-        background: #fff;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        cursor: pointer;
-    }
+        .option .icon {
+            color: #562D33;
+            font-size: 20px;
+        }
 
-    .option .icon {
-        color: #197f9a;
-        margin-right: 5px;
-        padding-bottom: 40px;
-        font-size: 23px;
-        /* Sesuaikan dengan ukuran yang diinginkan */
-    }
+        .option:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    .option p {
-        margin: 0;
-    }
+        .option a {
+            text-decoration: none;
+            color: #000000;
+            margin-left: 10px;
+            flex: 1;
+        }
 
-    .option a {
-        text-decoration: none;
-        color: #000000;
-        border: none;
-        padding: 5px;
-        display: block;
-        margin-left: 10px;
-        width: calc(100% - 20px);
-    }
+        .kasir {
+            background-color: #F9DAD6;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .option:hover {
-        background-color: #f5f5f5;
-        /* Add hover effect */
-    }
+        .kasir h2 {
+            color: #562D33;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
 
-    .row {
-        margin-bottom: 25px
-    }
+        .kasir .options {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-    .rowdashboard {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-</style>
+        .kasir .option {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            min-width: calc(33.33% - 15px);
+        }
+
+        .kasir .option .icon {
+            color: #562D33;
+            font-size: 20px;
+        }
+
+        .kasir .option:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .kasir .option a {
+            text-decoration: none;
+            color: #000000;
+            margin-left: 10px;
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .kasir .option {
+                min-width: calc(50% - 15px);
+            }
+        }
+
+        /* Responsive untuk mb-4 */
+        @media (min-width: 768px) {
+            .mb-4 {
+                margin-bottom: 1.5rem; /* sesuaikan sesuai kebutuhan */
+            }
+        }
+    </style>
 @endsection
-
-@section('page_title_actions')
-@endsection
-
 
 @section('page_content')
-<div class="row rowdashboard">
-    @foreach($menus as $menu)
-    @if($menu->menu_parent == 0 && $menu->is_aktif == 'y')
-    <div class="box">
-        <div class="header">
-            <span class="icon"><i class="{{ $menu->icon }}"></i></span>
-            <h2>{{ $menu->title }}</h2>
-        </div>
-
-        <div class="options">
-            @foreach($menu->children as $child)
-            @if($child->is_aktif == 'y')
-            <div class="option">
-                <span class="icon ms-2"><i class="{{ $child->icon }}"></i></span>
-
-                <a href="{{ $child->url }}">{{ $child->title }}</a>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <!-- Bagian Master Data -->
+                <div class="box">
+                    <div class="header">
+                        <span class="icon"><i class="fas fa-database"></i></span>
+                        <h2>Master Data</h2>
+                    </div>
+                    <div class="options">
+                        @foreach($menus as $menu)
+                            @if($menu->menu_parent == 0 && $menu->is_aktif == 'y' && $menu->title == 'Master Data')
+                                @foreach($menu->children as $child)
+                                    @if($child->is_aktif == 'y')
+                                        <div class="option">
+                                            <span class="icon"><i class="{{ $child->icon }}"></i></span>
+                                            <a href="{{ route($child->url) }}">{{ $child->title }}</a>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
             </div>
-
-            <!-- Tambahkan opsi lainnya di sini dengan format yang sama -->
-            @endif
-            @endforeach
+            <div class="col-md-4 mb-6">
+                <!-- Bagian Layanan -->
+                <div class="box">
+                    <div class="header">
+                        <span class="icon"><i class="fas fa-cogs"></i></span>
+                        <h2>Layanan</h2>
+                    </div>
+                    <div class="options">
+                        @foreach($menus as $menu)
+                            @if($menu->menu_parent == 0 && $menu->is_aktif == 'y' && $menu->title == 'Layanan')
+                                @foreach($menu->children as $child)
+                                    @if($child->is_aktif == 'y')
+                                        <div class="option">
+                                            <span class="icon"><i class="{{ $child->icon }}"></i></span>
+                                            <a href="{{ route($child->url) }}">{{ $child->title }}</a>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-6">
+                <!-- Bagian User -->
+                <div class="box">
+                    <div class="header">
+                        <span class="icon"><i class="fas fa-user"></i></span>
+                        <h2>User</h2>
+                    </div>
+                    <div class="options">
+                        @foreach($menus as $menu)
+                            @if($menu->menu_parent == 0 && $menu->is_aktif == 'y' && $menu->title == 'User')
+                                @foreach($menu->children as $child)
+                                    @if($child->is_aktif == 'y')
+                                        <div class="option">
+                                            <span class="icon"><i class="{{ $child->icon }}"></i></span>
+                                            <a href="{{ route($child->url) }}">{{ $child->title }}</a>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Bagian Kasir -->
+                <div class="kasir">
+                    <div class="header">
+                        <span class="icon"><i class="fas fa-cash-register"></i></span>
+                        <h2>Kasir</h2>
+                    </div>
+                    <div class="options">
+                        @foreach($menus as $menu)
+                            @if($menu->menu_parent == 0 && $menu->is_aktif == 'y' && $menu->title == 'Kasir')
+                                @foreach($menu->children as $child)
+                                    @if($child->is_aktif == 'y')
+                                        <div class="option">
+                                            <span class="icon"><i class="{{ $child->icon }}"></i></span>
+                                            <a href="{{ route($child->url) }}">{{ $child->title }}</a>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    @endif
-    @endforeach
-</div>
 @endsection

@@ -1,0 +1,9 @@
+.bg-white-pink {
+    background: linear-gradient(to bottom right, #ffffff, #ffcccc);
+}
+.font-semibold {
+    color: #ff66b2; /* Warna pink */
+}
+.text-gray-900 {
+    color: #333333;
+}
