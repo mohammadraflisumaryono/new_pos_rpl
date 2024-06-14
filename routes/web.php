@@ -86,9 +86,9 @@ Route::prefix('checkout')->middleware('auth')->group(function () {
 
 // Route::get('/comingsoon', [ComingSoonController::class, 'index'])->name('comingsoon');
 Route::view('/comingsoon', 'comingsoon')->name('comingsoon');
-Route::prefix('transaction')->middleware('auth')->group(function () {
-    Route::get('/show', [TransactionController::class, 'show'])->name('transactions.show');
-});
+// Route::prefix('transaction')->middleware('auth')->group(function () {
+//     Route::get('/{id}/show', [TransactionController::class, 'show'])->name('transactions.show');
+// });
 
 
 Route::prefix('discount_products')->name('discount.')->group(function () {
@@ -99,3 +99,6 @@ Route::prefix('discount_products')->name('discount.')->group(function () {
     Route::put('/{id}', [DiscountProductController::class, 'update'])->name('update');
     Route::delete('/{id}', [DiscountProductController::class, 'destroy'])->name('destroy');
 });
+
+
+Route::resource('transactions', TransactionController::class);

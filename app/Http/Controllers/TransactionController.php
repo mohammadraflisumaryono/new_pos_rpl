@@ -74,8 +74,10 @@ class TransactionController extends Controller
     // Display the specified transaction
     public function show($id)
     {
+        $page_title = 'Transaction Detail';
         $transaction = Transaction::with('transactionDetails.product')->findOrFail($id);
-        return view('comingsoon');
+        return view('transactions.show', compact('transaction', 'page_title'));
+
         // return view('transactions.show', compact('transaction'));
     }
 
