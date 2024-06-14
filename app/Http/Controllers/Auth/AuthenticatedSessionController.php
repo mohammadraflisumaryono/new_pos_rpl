@@ -27,13 +27,13 @@ class AuthenticatedSessionController extends Controller
         try {
             // Attempt to authenticate the user
             $request->authenticate();
-    
+
             // Regenerate the session to prevent fixation
             $request->session()->regenerate();
-    
+
             // Set a session message
             $request->session()->flash('message', 'You are successfully logged in!');
-    
+
             // Redirect to intended route or home
             return redirect()->intended('dashboard');
         } catch (\Exception $e) {
@@ -47,7 +47,7 @@ class AuthenticatedSessionController extends Controller
         switch ($userRole) {
             case 1:
                 # code...
-                return redirect()->intended(route('dashboard', absolute: false));
+                return redirect()->intended(route('/', absolute: false));
                 break;
             case 2:
                 # code...
