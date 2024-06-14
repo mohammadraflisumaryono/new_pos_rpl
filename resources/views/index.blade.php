@@ -69,26 +69,34 @@
                 <hr>
             </div>
             @foreach(Session::get('search_results') as $product)
-            <div class="col-8 col-md-4 col-lg-2 mb-4">
+            <div class="col-6 col-md-4 col-lg-2 mb-4">
                 <div class="card card-custom h-100">
                     <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
                         <div class="price-and-button mt-auto">
-                            <p class="card-text text-green-500 text-right">{{$product->readAblePrice}}</p>
+                            <p class="card-text text-right">
+                                @if($product->discounted_price && $product->discounted_price < $product->harga) <!-- Check if the product has discount and it's less than original price -->
+                                    <span class="discounted-price">{{ number_format($product->discounted_price, 2) }}</span> <!-- Display discounted price per unit -->
+                                    <del>{{ number_format($product->harga, 2) }}</del> <!-- Display original price with strike-through -->
+                                    @else
+                                    {{ number_format($product->harga, 2) }} <!-- Display regular price if no discount -->
+                                    @endif
+                            </p>
                             <div class="d-flex justify-content-between">
                                 <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <input type="hidden" name="quantity" value="1">
-                                    <button type="submit" class="btn btn-primary btn-custom">Beli</button>
+                                    <button type="submit" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33">Beli</button>
                                 </form>
-                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-secondary d-inline-block">Lihat</a>
+                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33">Lihat</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             @endforeach
             @endif
 
@@ -103,7 +111,14 @@
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
                         <div class="price-and-button mt-auto">
-                            <p class="card-text text-right">{{$product->readAblePrice}}</p>
+                            <p class="card-text text-right">
+                                @if($product->discounted_price && $product->discounted_price < $product->harga) <!-- Check if the product has discount and it's less than original price -->
+                                    <span class="discounted-price">{{ number_format($product->discounted_price, 2) }}</span> <!-- Display discounted price per unit -->
+                                    <del>{{ number_format($product->harga, 2) }}</del> <!-- Display original price with strike-through -->
+                                    @else
+                                    {{ number_format($product->harga, 2) }} <!-- Display regular price if no discount -->
+                                    @endif
+                            </p>
                             <div class="d-flex justify-content-between">
                                 <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
                                     @csrf

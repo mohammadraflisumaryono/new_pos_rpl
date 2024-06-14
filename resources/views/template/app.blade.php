@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{$page_title}}</title>
+    <title>Sunny Mart</title>
+    <link rel="icon" href="{{ asset('storage/images/logo.png') }}" type="image/x-icon" />
     @include('template.css')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
@@ -36,7 +37,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            @if($page_title != 'SunnyMart')
+            @if($page_title != 'Blank')
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
