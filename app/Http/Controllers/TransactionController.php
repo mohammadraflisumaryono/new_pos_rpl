@@ -122,52 +122,35 @@ class TransactionController extends Controller
     }
 
     // Update the specified transaction in storage
+
+    // TransactionController.php
+
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'status' => 'required|in:pending,completed,canceled',
-            'delivery_type' => 'required|in:home_delivery,store_pickup',
-            'address' => 'required_if:delivery_type,home_delivery',
-            'phone_number' => 'required_if:delivery_type,home_delivery',
-            'products' => 'required|array',
-            'products.*.id' => 'required|exists:products,id',
-            'products.*.quantity' => 'required|integer|min:1',
-        ]);
-
         $transaction = Transaction::findOrFail($id);
-        $serviceFee = $request->delivery_type == 'home_delivery' ? 5000 : 0;
-        $totalAmount = 0;
+        $transaction->status = $request->input('status');
+        $transaction->save();
 
-        // Calculate total amount
-        foreach ($request->products as $product) {
-            $productData = Product::find($product['id']);
-            $totalAmount += $productData->harga * $product['quantity'];
-        }
-
-        $transaction->update([
-            'status' => $request->status,
-            'delivery_type' => $request->delivery_type,
-            'address' => $request->address,
-            'phone_number' => $request->phone_number,
-            'total_amount' => $totalAmount + $serviceFee,
-            'service_fee' => $serviceFee,
-        ]);
-
-        // Delete existing transaction details
-        $transaction->transactionDetails()->delete();
-
-        // Save new transaction details
-        foreach ($request->products as $product) {
-            TransactionDetail::create([
-                'transaction_id' => $transaction->id,
-                'product_id' => $product['id'],
-                'quantity' => $product['quantity'],
-                'price' => Product::find($product['id'])->harga,
-            ]);
-        }
-
-        return response()->json($transaction, 200);
+        return redirect()->route('transactions.index')->with('success', 'Status updated successfully');
     }
+
+    // TransactionController.php
+
+    public function editStatus($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        return response()->json($transaction);
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->status = $request->status;
+        $transaction->save();
+
+        return response()->json(['success' => 'Status updated successfully']);
+    }
+
 
     // // Remove the specified transaction from storage
     // public function destroy($id)

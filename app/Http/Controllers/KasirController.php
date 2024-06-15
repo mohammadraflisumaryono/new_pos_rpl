@@ -16,7 +16,11 @@ class KasirController extends Controller
 
     public function cekPesanan()
     {
-        $transactions = Transaction::with('transactionDetails.product', 'user')->get();
+        $transactions = Transaction::with('transactionDetails.product', 'user')
+            ->whereNotIn('status', ['Completed', 'Canceled'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         $page_title = 'Pesanan Masuk';
         return view('kasir.cekpesanan', compact('transactions', 'page_title'));
     }

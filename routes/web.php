@@ -107,9 +107,21 @@ Route::prefix('discount_products')->name('discount.')->group(function () {
 
 Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
 Route::get('/transactions/riwayat', [TransactionController::class, 'riwayattransaksi'])->name('transactions.riwayattransaksi');
+Route::get('/transactions/{transaction}/edit', [TransactionController::class, 'edit'])->name('transactions.edit');
+Route::post('/transactions/{transaction}', [TransactionController::class, 'post'])->name('transactions.update');
 Route::get('/transactions/{transaction}/show', [TransactionController::class, 'show'])->name('transactions.show');
 Route::get('/transactions/{transaction}/success', [TransactionController::class, 'success'])->name('transactions.success');
 
+Route::get('/transactions/{id}/edit-status', [TransactionController::class, 'editStatus'])->name('transactions.editStatus');
+Route::post('/transactions/{id}/update-status', [TransactionController::class, 'updateStatus'])->name('transactions.updateStatus');
+
+
+
+
+Route::prefix('kasir')->group(function () {
+    Route::get('/', [KasirController::class, 'index'])->name('kasir.index');
+    Route::get('/cekpesanan', [KasirController::class, 'cekPesanan'])->name('kasir.cekpesanan');
+});
 
 // Route::get('transactions/{transaction}/show', [TransactionController::class, 'show'])->name('transactions.show');
 // Route::get('transactions/', [TransactionController::class, 'index'])->name('transactions.index');
