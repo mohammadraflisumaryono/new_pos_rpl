@@ -7,31 +7,23 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Product::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     public function definition()
     {
+        $createdAt = $this->faker->dateTimeBetween('-6 months', 'now');
+        $updatedAt = (clone $createdAt)->modify('+' . rand(0, 30) . ' days');
+
         return [
             'nama' => $this->faker->word,
-            'barcode' => $this->faker->isbn13,
-            'image' => $this->faker->imageUrl(),
-            'harga' => $this->faker->randomFloat(2, 10000, 500000),
-            'netto' => $this->faker->randomFloat(2, 500, 2000),
-            'dimensi' => $this->faker->randomElement(['10x10x20 cm', '8x8x15 cm', '12x12x25 cm']),
-            'deskripsi' => $this->faker->sentence(10),
-            'category_id' => \App\Models\Category::inRandomOrder()->first()->category_id,
-            'created_at' => now(),
-            'updated_at' => now(),
+            'barcode' => $this->faker->ean13,
+            'image' => $this->faker->imageUrl(640, 480, 'product'),
+            'harga' => $this->faker->randomFloat(2, 1000, 1000000),
+            'netto' => $this->faker->randomFloat(2, 1, 1000),
+            'dimensi' => $this->faker->randomElement(['5x5x5 cm', '10x10x10 cm', '20x20x20 cm']),
+            'deskripsi' => $this->faker->paragraph,
+            'created_at' => $createdAt,
+            'updated_at' => $updatedAt
         ];
     }
 }

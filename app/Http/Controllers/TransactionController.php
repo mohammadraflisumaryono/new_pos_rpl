@@ -20,7 +20,9 @@ class TransactionController extends Controller
 
     public function riwayattransaksi()
     {
-        $transactions = Transaction::with('transactionDetails.product', 'user')->get();
+        $transactions = Transaction::with(['transactionDetails.product', 'user'])
+            ->orderBy('created_at', 'desc')
+            ->get();
         $page_title = 'Riwayat Transaksi';
         return view('transactions.riwayattransaksi', compact('transactions', 'page_title'));
     }
