@@ -104,7 +104,7 @@
     }
 
     .delivery button {
-        background-color: #007bff;
+        background-color: #F9DAD6;
         color: white;
         padding: 10px 20px;
         border: none;
@@ -117,7 +117,7 @@
         display: inline-block;
         padding: 10px 20px;
         color: white;
-        background-color: #007bff;
+        background-color: #F9DAD6;
         text-align: center;
         border: none;
         cursor: pointer;

@@ -69,7 +69,7 @@
                 <hr>
             </div>
             @foreach(Session::get('search_results') as $product)
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
+            <div class="col-4 col-md-3 col-lg-2 mb-1">
                 <div class="card card-custom h-100">
                     <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
                     <div class="card-body d-flex flex-column">
@@ -96,16 +96,14 @@
                     </div>
                 </div>
             </div>
-
             @endforeach
             @endif
-
-            <div class="col-12 text-center mb-3">
+            <div class="col-12 text-center mb-2">
                 <h5>Product</h5>
                 <hr>
             </div>
             @foreach($products as $product)
-            <div class="col-6 col-md-4 col-lg-2 mb-4">
+            <div class="col-3 col-md-2 col-lg-2 mb-2">
                 <div class="card card-custom h-100">
                     <img class="card-img-top" src="{{ asset('storage/'.$product->image) }}" alt="Product Image">
                     <div class="card-body d-flex flex-column">

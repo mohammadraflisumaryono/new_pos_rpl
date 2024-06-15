@@ -39,7 +39,7 @@ class ProductController extends Controller
             'dimensi' => 'required',
             'deskripsi' => 'required',
             'categories' => 'required|array',
-            'categories.*' => 'exists:categories,id', // Ubah category_id menjadi id
+            'categories.*' => 'exists:categories,category_id', // Ubah category_id menjadi id
         ]);
 
         $product = new Product($request->all());

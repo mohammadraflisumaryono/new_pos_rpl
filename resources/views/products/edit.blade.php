@@ -26,8 +26,8 @@
     }
 
     .category-bubble.active {
-        background-color: #3490dc;
-        border-color: #3490dc;
+        background-color: #F9DAD6;
+        border-color: #F9DAD6;
         color: #fff;
     }
 
