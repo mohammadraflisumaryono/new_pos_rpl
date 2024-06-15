@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Slider;
 
 class ProductController extends Controller
 {
     public function index()
     {
         $products = Product::all();
+
         $productHampirHabis = Product::where('stock', '<=', 5)->get();
         foreach ($products as $product) {
             $product->readAblePrice = 'Rp.' .  number_format($product->harga, 0, ',', '.');
@@ -182,5 +184,18 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('products.index')->with('success', 'Stock updated successfully.');
+    }
+
+    public function showByCategory(Category $category)
+    {
+        $page_h1 = false;
+        $categories = Category::all();
+        $sliders = Slider::all();
+        $productHampirHabis = Product::where('stock', '<=', 5)->get();
+        $products = $category->products;
+        $page_title = "Product Management - " . $category->nama;
+        $selectedCategory = $category;
+
+        return view('index', compact('categories', 'sliders', 'products', 'page_h1', 'page_title', 'selectedCategory', 'productHampirHabis'));
     }
 }

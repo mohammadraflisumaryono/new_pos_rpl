@@ -43,6 +43,7 @@ Route::prefix('products')->group(function () {
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/addstock', [ProductController::class, 'addstock'])->name('products.addstock');
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::get('/{category}/category', [ProductController::class, 'showByCategory'])->name('products.category');
 })->middleware(['auth', 'verified', 'superadmin', 'manager']);
 
 Route::post('/product/info', [ProductController::class, 'getProductInfo'])->name('product.info');
