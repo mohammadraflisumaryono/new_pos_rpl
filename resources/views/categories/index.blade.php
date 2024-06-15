@@ -2,7 +2,7 @@
 
 @section('page_content')
 <div class="container my-3 py-5">
-    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Create Category</a>
+    <a href="{{ route('categories.create') }}" class="btn btn-primary mb-3" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33; font-weight: bold;">Create Category</a>
     <table id="categoriesTable" class="table table-striped table-bordered" style="background-color: #FFECDB;">
         <thead>
             <tr>
@@ -25,7 +25,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('categories.edit', $category) }}" class="btn btn-sm btn-danger" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33" >Edit</a>
+                    <a href="{{ route('categories.edit', $category) }}" class="btn btn-sm btn-danger" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33" >Edit</a>
                     <form action="{{ route('categories.destroy', $category) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')

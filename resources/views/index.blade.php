@@ -2,7 +2,7 @@
 
 @section('head_khusus')
 <meta name="format-detection" content="telephone=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">*
 @endsection
 
 @section('page_content')
@@ -26,7 +26,6 @@
         <div class="swiper-pagination"></div>
     </div>
 </section>
-
 <section id="categories" class="py-24 sm:py-8 px-4">
     <div class="container mx-auto max-w-[calc(100%-4rem)]">
         <div class="relative flex items-center justify-center">
@@ -72,6 +71,7 @@
                     <div class="card-body d-flex flex-column">
                         <h6 class="card-title font-semibold title-clamp">{{$product->nama}}</h6>
                         <div class="price-and-button mt-auto">
+
                             <p class="card-text text-right">
                                 @if($product->discounted_price && $product->discounted_price < $product->harga)
                                     <span class="discounted-price" style="color:red">Rp. {{ number_format($product->discounted_price) }}</span>
@@ -80,6 +80,7 @@
                                     Rp. {{ number_format($product->harga) }}
                                     @endif
                             </p>
+
                             <div class="d-flex justify-content-between">
                                 <form action="{{ route('cart.store') }}" method="POST" class="d-inline-block">
                                     @csrf
@@ -125,7 +126,9 @@
 </section>
 @endif
 
-<footer>
+
+<footer class="footer mt-auto py-5" style="background-color: #F9DAD680;">
+
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">

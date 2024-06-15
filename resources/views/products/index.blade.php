@@ -1,10 +1,10 @@
 @extends('template.app')
 
 @section('page_content')
-<a href="{{ route('products.create') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Create Product</a>
-<a href="{{ route('products.addstock') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Add Stock Products</a>
+<a href="{{ route('products.create') }}" class="btn btn-primary mb-3" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33; font-weight: bold;">Create Product</a>
+<a href="{{ route('products.addstock') }}" class="btn btn-primary mb-3" style="background-color: #F9DAD6; border-color: #F9DAD6; color: #562D33; font-weight: bold;">Add Stock Products</a>
 @if($productHampirHabis->count() > 0)
-<div class="alert alert-danger">
+<div class="alert alert-danger" style="border-color: #F9DAD6; background-color: #F9DAD6;">
     <h4>Produk Hampir Habis</h4>
     <ul>
         @foreach($productHampirHabis as $product)
@@ -44,6 +44,7 @@
             <td class="d-flex">
                 <a href="{{route('products.show',$product)}}" class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Show</a>
                 <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Edit</a>
+
                 <form action="{{ route('products.destroy', $product) }}" method="POST" class="mr-1">
                     @csrf
                     @method('DELETE')
