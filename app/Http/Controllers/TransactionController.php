@@ -21,7 +21,6 @@ class TransactionController extends Controller
     public function riwayattransaksi()
     {
         $transactions = Transaction::with('transactionDetails.product', 'user')->get();
-        // dd($transactions);
         $page_title = 'Riwayat Transaksi';
         return view('transactions.riwayattransaksi', compact('transactions', 'page_title'));
     }
@@ -98,7 +97,7 @@ class TransactionController extends Controller
                 $detail->discounted_price_per_unit = $detail->price;
             }
         }
-        
+
 
         return view('transactions.show', compact('transaction', 'page_title'));
     }

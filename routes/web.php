@@ -101,5 +101,11 @@ Route::prefix('discount_products')->name('discount.')->group(function () {
     Route::delete('/{id}', [DiscountProductController::class, 'destroy'])->name('destroy');
 });
 
+Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+Route::get('/transactions/riwayat', [TransactionController::class, 'riwayattransaksi'])->name('transactions.riwayattransaksi');
+Route::get('/transactions/{transaction}/show', [TransactionController::class, 'show'])->name('transactions.show');
 
-Route::resource('transactions', TransactionController::class);
+
+// Route::get('transactions/{transaction}/show', [TransactionController::class, 'show'])->name('transactions.show');
+// Route::get('transactions/', [TransactionController::class, 'index'])->name('transactions.index');
+// Route::get('transactions/riwayattransaksi', TransactionController::class)->name('transactions.riwayattransaksi');
