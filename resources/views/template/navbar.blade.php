@@ -54,7 +54,7 @@
 
     /* Navbar styling */
     .navbar {
-        background-color: #F9DAD6;
+        background-color: #FFFFFF;
         padding: 0.75rem 1rem;
     }
 
@@ -66,34 +66,54 @@
     .navbar-nav .nav-link:hover {
         color: #7D6040;
     }
-
     .navbar-brand {
-        color: #562D33;
-        font-weight: bold;
-        font-size: 20px;
-    }
+    color: #562D33;
+    font-weight: bold;
+    font-size: 20px;
+}
 
+<<<<<<< HEAD
+.navbar-search input {
+    background-color: #FFCCCB; /* Pink peach background */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.navbar-search button {
+    background-color: #FFCCCB; /* Pink peach button */
+    color: #562D33;
+    border-color: #FFCCCB;
+    border-radius: 5px;
+    padding: 0.375rem 0.75rem;
+    font-weight: bold;"
+}
+
+.navbar-search button:hover {
+    background-color: #FF6347; /* Darker pink peach on hover */
+}
+=======
     .navbar-search input {
-        background-color: #FFCCCB;
+        background-color: #F9DAD6;
         /* Pink peach background */
         border: 1px solid #ddd;
-        border-radius: 5px;
+        border-radius: 100px;
     }
 
     .navbar-search button {
-        background-color: #FFCCCB;
+        background-color: #F9DAD6;
         /* Pink peach button */
         color: #562D33;
-        border-color: #FFCCCB;
-        border-radius: 5px;
+        border-color: #F9DAD6;
+        border-radius: 100px;
         padding: 0.375rem 0.75rem;
         font-weight: bold;
     }
 
     .navbar-search button:hover {
-        background-color: #FF6347;
+        background-color: #F9DAD6;
         /* Darker pink peach on hover */
     }
+>>>>>>> 0a431c9260647caf551386779d155ad19e962315
 </style>
 
 <nav class="main-header navbar navbar-expand navbar-light justify-content-between">

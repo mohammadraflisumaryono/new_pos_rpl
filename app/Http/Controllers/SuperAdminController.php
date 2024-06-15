@@ -13,6 +13,7 @@ class SuperAdminController extends Controller
     {
         $data['page_title'] = "Dashboard Super Admin";
 
+
         // Ambil data pengguna baru tiap bulan
         $currentYear = Carbon::now()->year;
 
@@ -64,5 +65,6 @@ class SuperAdminController extends Controller
         // dd($monthlyRevenue);
 
         return view('superadmin.index', $data);
+
     }
 }

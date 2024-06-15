@@ -16,7 +16,7 @@
             <img src="{{ asset('storage/' . $category->icon) }}" alt="Icon" class="img-thumbnail mt-2" width="100">
             @endif
         </div>
-        <button type="submit" class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Update</button>
+        <button type="submit" class="btn btn-warning btn-sm mr-1" style="background-color: #F9DAD6; border-color: #F9DAD6;">Update</button>
     </form>
 </div>
 @endsection
