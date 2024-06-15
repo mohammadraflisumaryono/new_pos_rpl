@@ -20,9 +20,9 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ComingSoonController;
 
 // Authentication routes
-require _DIR_ . '/auth.php';
+require __DIR__ . '/auth.php';
 Route::get('/', function () {
-    return view('home'); 
+    return view('home');
 })->name('home')->middleware('auth');
 
 Route::get('search', [HomeController::class, 'search'])->name('search');
@@ -101,11 +101,11 @@ Route::prefix('discount_products')->name('discount.')->group(function () {
     Route::get('/{id}/edit', [DiscountProductController::class, 'edit'])->name('edit');
     Route::put('/{id}', [DiscountProductController::class, 'update'])->name('update');
     Route::delete('/{id}', [DiscountProductController::class, 'destroy'])->name('destroy');
-<<<<<<< HEAD
-});
-=======
 });
 
 
-Route::resource('transactions', TransactionController::class);
->>>>>>> 080968ea05f7ed2e649df38d332473a50db46ed0
+
+
+Route::prefix('manager')->group(function () {
+    Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
+})->middleware(['auth', 'verified', 'manager']);
