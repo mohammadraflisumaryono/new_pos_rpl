@@ -22,7 +22,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $discounts = DiscountProduct::all();
 
-        $page_title = "Blank";
+        // $page_title = "Blank";
 
         // Loop melalui produk untuk menambahkan informasi diskon
         foreach ($products as $product) {
@@ -43,7 +43,7 @@ class HomeController extends Controller
         }
 
         // Kirim data produk, slider, dan diskon ke view
-        return view('index', compact('products', 'sliders', 'discounts', 'categories', 'page_title'));
+        return view('index', compact('products', 'sliders', 'discounts', 'categories'));
     }
 
 
