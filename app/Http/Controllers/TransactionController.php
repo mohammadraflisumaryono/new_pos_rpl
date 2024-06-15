@@ -18,6 +18,14 @@ class TransactionController extends Controller
         return view('transactions.index', compact('transactions', 'page_title'));
     }
 
+    public function riwayattransaksi()
+    {
+        $transactions = Transaction::with('transactionDetails.product', 'user')->get();
+        // dd($transactions);
+        $page_title = 'Riwayat Transaksi';
+        return view('transactions.riwayattransaksi', compact('transactions', 'page_title'));
+    }
+
     // Show the form for creating a new transaction
     // public function create()
     // {
@@ -90,6 +98,7 @@ class TransactionController extends Controller
                 $detail->discounted_price_per_unit = $detail->price;
             }
         }
+        
 
         return view('transactions.show', compact('transaction', 'page_title'));
     }
