@@ -41,13 +41,14 @@ Route::prefix('products')->group(function () {
 
     Route::get('/display', [ProductController::class, 'display'])->name('products.display');
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
-    Route::get('/addstock', [ProductController::class, 'addstock'])->name('products.addstock');
+
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/{category}/category', [ProductController::class, 'showByCategory'])->name('products.category');
 })->middleware(['auth', 'verified', 'superadmin', 'manager']);
 
 Route::post('/product/info', [ProductController::class, 'getProductInfo'])->name('product.info');
 Route::post('/products/updatestock', [ProductController::class, 'updatestock'])->name('products.updatestock');
+Route::get('/products/addstock', [ProductController::class, 'addStock'])->name('products.addstock');
 
 Route::resource('sliders', SliderController::class);
 
@@ -70,6 +71,9 @@ Route::prefix('menus')->group(function () {
 Route::prefix('superadmin')->group(function () {
     Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin.index');
 })->middleware(['auth', 'verified', 'superadmin']);
+Route::prefix('manager')->group(function () {
+    Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
+})->middleware(['auth', 'verified', 'manager']);
 
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 

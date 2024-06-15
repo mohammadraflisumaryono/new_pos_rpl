@@ -42,7 +42,7 @@
                 @endforeach
             </td>
             <td class="d-flex">
-                <a href=""class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Show</a>
+                <a href="{{route('products.show',$product)}}" class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Show</a>
                 <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Edit</a>
                 <form action="{{ route('products.destroy', $product) }}" method="POST" class="mr-1">
                     @csrf
@@ -52,7 +52,7 @@
             </td>
 
 
-        @endforeach
+            @endforeach
     </tbody>
 </table>
 @endsection

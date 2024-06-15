@@ -142,12 +142,12 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 
-    public function addstock()
+    public function addStock()
     {
+        dd('add stock');
         $products = Product::all();
         $page_title = "Add Stock";
-        // @dd($products);
-        return view('products.add_stock', compact('products', 'page_title'));
+        return view('products.add_stock', compact('product', 'page_title'));
     }
     // app/Http/Controllers/ProductController.php
 
