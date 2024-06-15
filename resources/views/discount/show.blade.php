@@ -8,10 +8,6 @@
         <p>{{ $discount->product->nama }}</p>
     </div>
     <div class="mb-3">
-        <label class="form-label">Image URL</label>
-        <p>{{ $discount->image_url }}</p>
-    </div>
-    <div class="mb-3">
         <label class="form-label">URL</label>
         <p>{{ $discount->url }}</p>
     </div>

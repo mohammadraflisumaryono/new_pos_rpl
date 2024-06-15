@@ -24,10 +24,9 @@ class DiscountProductController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'image_url' => 'required|string|max:255',
             'url' => 'required|string|max:255',
             'discount_percentage' => 'required|numeric|min:0|max:100',
             'start_date' => 'required|date',
@@ -43,14 +42,13 @@ class DiscountProductController extends Controller
         $discount = DiscountProduct::findOrFail($id);
         $products = Product::all();
         $page_title = 'Edit Discount';
-        return view('discount.edit', compact('discount', 'products'));
+        return view('discount.edit', compact('discount', 'products', 'page_title'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
-            'image_url' => 'required|string|max:255',
             'url' => 'required|string|max:255',
             'discount_percentage' => 'required|numeric|min:0|max:100',
             'start_date' => 'required|date',

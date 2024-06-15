@@ -11,6 +11,7 @@
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                    <th>Discount</th> <!-- New column for displaying discount -->
                     <th>Total</th>
                 </tr>
             </thead>
@@ -20,6 +21,17 @@
                     <td>{{ $cart->product->nama }}</td>
                     <td>{{ $cart->quantity }}</td>
                     <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
+                    <td> <!-- Display discount for each product -->
+                        @php
+                        $discount = $cart->product->getDiscount();
+                        if($discount) {
+                        echo 'Rp.' . number_format($cart->product->harga * $discount->discount_percentage / 100, 0, ',', '.');
+                        } else {
+                        echo '-';
+                        }
+                        @endphp
+
+                    </td>
                     <td>{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
                     <input type="hidden" name="products[]" value="{{ $cart->id }}">
                 </tr>
@@ -41,7 +53,13 @@
             <label for="address">Address:</label>
             <textarea class="form-control" id="address" name="address"></textarea>
         </div>
-        <h3>Total: {{ 'Rp.' . number_format($totalAmount, 0, ',', '.') }}</h3>
+        <h5>Discount: {{ ' - Rp.' . number_format($totalDiscount, 0, ',', '.') }}</h5>
+        <!-- Display total discount -->
+        <h5 id="servicefee">Service Fee : + Rp. 5.000 </h5>
+
+        <h3 id="total">Total: {{ 'Rp.' . number_format($totalAmount, 0, ',', '.') }}</h3>
+        <h3 id="totalservicefee">Total: {{ 'Rp.' . number_format($totalAmount+5000, 0, ',', '.') }}</h3>
+
         <button type="submit" class="btn btn-primary">Complete Purchase</button>
     </form>
 
@@ -51,11 +69,20 @@
 
 <script>
     $(document).ready(function() {
+        $('#servicefee').hide();
+        $('#totalservicefee').hide();
         $('#delivery_type').change(function() {
             if ($(this).val() === 'home_delivery') {
                 $('#addressDiv').show();
+                $('#servicefee').show();
+                $('#totalservicefee').show();
+                $('#total').hide();
+
             } else {
                 $('#addressDiv').hide();
+                $('#servicefee').hide();
+                $('#total').show();
+                $('#totalservicefee').hide();
             }
         });
     });

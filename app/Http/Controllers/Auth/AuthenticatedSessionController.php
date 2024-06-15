@@ -26,6 +26,7 @@ class AuthenticatedSessionController extends Controller
     {
         // dd($request->authenticate());
         $request->authenticate();
+        
 
         
         // dd($request->all());

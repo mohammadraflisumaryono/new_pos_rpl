@@ -1,12 +1,31 @@
 @extends('template.app')
 
+@section('styles')
+<style>
+    .centered-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .centered-content img {
+        width: 200px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+</style>
+@endsection
+
 @section('page_content')
 <div class="container">
-    <h1>Transaction Details</h1>
+
+    <div class="centered-content">
+        <img src="{{ asset('storage/images/qualityservice.png') }}" alt="Success">
+        <p>Transaction Success</p>
+    </div>
+
     <table class="table">
-        @foreach ($transactions as $transaction )
-        
-        @endforeach
         <tr>
             <th>ID</th>
             <td>{{ $transaction->id }}</td>
@@ -39,15 +58,6 @@
             <th>Service Fee</th>
             <td>{{ number_format($transaction->service_fee, 2) }}</td>
         </tr>
-        <tr>
-            <th>Created At</th>
-            <td>{{ $transaction->created_at }}</td>
-        </tr>
-        <tr>
-            <th>Updated At</th>
-            <td>{{ $transaction->updated_at }}</td>
-        </tr>
-        
     </table>
 
     <h2>Products</h2>
@@ -57,6 +67,7 @@
                 <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                <th>Discounted Price Per Unit</th> <!-- Add new column -->
                 <th>Total</th>
             </tr>
         </thead>
@@ -66,6 +77,7 @@
                 <td>{{ $detail->product->name }}</td>
                 <td>{{ $detail->quantity }}</td>
                 <td>{{ number_format($detail->price, 2) }}</td>
+                <td>{{ isset($detail->discounted_price_per_unit) ? number_format($detail->discounted_price_per_unit, 2) : '-' }}</td> <!-- Display discounted price per unit -->
                 <td>{{ number_format($detail->quantity * $detail->price, 2) }}</td>
             </tr>
             @endforeach

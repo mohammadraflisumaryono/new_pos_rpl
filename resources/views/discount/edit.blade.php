@@ -15,10 +15,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="mb-3">
-            <label for="image_url" class="form-label">Image URL</label>
-            <input type="text" name="image_url" id="image_url" class="form-control" value="{{ $discount->image_url }}" required>
-        </div>
+
         <div class="mb-3">
             <label for="url" class="form-label">URL</label>
             <input type="text" name="url" id="url" class="form-control" value="{{ $discount->url }}" required>

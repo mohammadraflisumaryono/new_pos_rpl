@@ -21,6 +21,7 @@
         "vite": "^5.2.13"
     },
     "dependencies": {
+        "apexcharts": "^3.49.1",
         "jquery": "^3.7.1"
     }
 }

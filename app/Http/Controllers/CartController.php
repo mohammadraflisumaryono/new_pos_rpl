@@ -66,7 +66,7 @@ class CartController extends Controller
     public function update(Request $request, $cart_id)
     {
         // dd($request->all());
-        // $cart = Cart::class;
+
         $request->validate([
             'quantity' => 'required|integer|min:1'
         ]);
