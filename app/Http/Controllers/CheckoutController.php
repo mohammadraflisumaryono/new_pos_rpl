@@ -91,7 +91,7 @@ class CheckoutController extends Controller
             $cart->delete();
         }
 
-        return redirect()->route('transactions.show', $transaction->id)
+        return redirect()->route('transactions.success', $transaction->id)
             ->with('success', 'Transaction success')
             ->with('totalDiscount', $totalDiscount);
     }

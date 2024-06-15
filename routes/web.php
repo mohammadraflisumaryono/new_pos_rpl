@@ -108,6 +108,7 @@ Route::prefix('discount_products')->name('discount.')->group(function () {
 Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
 Route::get('/transactions/riwayat', [TransactionController::class, 'riwayattransaksi'])->name('transactions.riwayattransaksi');
 Route::get('/transactions/{transaction}/show', [TransactionController::class, 'show'])->name('transactions.show');
+Route::get('/transactions/{transaction}/success', [TransactionController::class, 'success'])->name('transactions.success');
 
 
 // Route::get('transactions/{transaction}/show', [TransactionController::class, 'show'])->name('transactions.show');

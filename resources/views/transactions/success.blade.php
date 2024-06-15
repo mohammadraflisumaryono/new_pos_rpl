@@ -2,12 +2,28 @@
 
 @section('styles')
 <style>
+    .centered-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
 
+    .centered-content img {
+        width: 200px;
+        height: auto;
+        margin-bottom: 20px;
+    }
 </style>
 @endsection
 
 @section('page_content')
 <div class="container">
+
+    <div class="centered-content">
+        <img src="{{ asset('storage/images/qualityservice.png') }}" alt="Success">
+        <p>Transaction Success</p>
+    </div>
 
     <table class="table">
         <tr>
@@ -20,7 +36,7 @@
         </tr>
         <tr>
             <th>Total Amount</th>
-            <td>Rp. {{ number_format($transaction->total_amount) }}</td>
+            <td>{{ number_format($transaction->total_amount, 2) }}</td>
         </tr>
         <tr>
             <th>Status</th>
@@ -40,7 +56,7 @@
         </tr>
         <tr>
             <th>Service Fee</th>
-            <td>Rp. {{ number_format($transaction->service_fee) }}</td>
+            <td>{{ number_format($transaction->service_fee, 2) }}</td>
         </tr>
     </table>
 
@@ -60,14 +76,14 @@
             <tr>
                 <td>{{ $detail->product->name }}</td>
                 <td>{{ $detail->quantity }}</td>
-                <td>Rp. {{ number_format($detail->price) }}</td>
-                <td>Rp. {{ isset($detail->discounted_price_per_unit) ? number_format($detail->discounted_price_per_unit) : '-' }}</td> <!-- Display discounted price per unit -->
-                <td>Rp. {{ number_format($detail->quantity * $detail->price) }}</td>
+                <td>{{ number_format($detail->price, 2) }}</td>
+                <td>{{ isset($detail->discounted_price_per_unit) ? number_format($detail->discounted_price_per_unit, 2) : '-' }}</td> <!-- Display discounted price per unit -->
+                <td>{{ number_format($detail->quantity * $detail->price, 2) }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <a href="{{ route('transactions.riwayattransaksi') }}" class="btn btn-primary">Riwayat Transaksi Lainnya</a>
+    <a href="{{ route('transactions.index') }}" class="btn btn-primary">Back to Transactions</a>
 </div>
 @endsection
