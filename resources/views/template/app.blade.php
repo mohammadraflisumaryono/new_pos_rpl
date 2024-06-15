@@ -37,7 +37,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            @if($page_title != 'SunnyMart')
+            @if($page_title != 'Blank')
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
