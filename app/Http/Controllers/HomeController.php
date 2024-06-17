@@ -52,15 +52,23 @@ class HomeController extends Controller
         $query = $request->input('query');
 
         if ($query) {
-            $products = Product::where('nama', 'LIKE', "%{$query}%")
-                ->orWhere('deskripsi', 'LIKE', "%{$query}%")
-                ->get();
+            $products = Product::where(function ($q) use ($query) {
+                $q->where('nama', 'LIKE', "%{$query}%")
+                    ->orWhere('barcode', 'LIKE', "%{$query}%")
+                    ->orWhere('harga', 'LIKE', "%{$query}%")
+                    ->orWhere('stock', 'LIKE', "%{$query}%")
+                    ->orWhere('netto', 'LIKE', "%{$query}%")
+                    ->orWhere('dimensi', 'LIKE', "%{$query}%")
+                    ->orWhere('deskripsi', 'LIKE', "%{$query}%");
+            })->get();
 
             // Simpan hasil pencarian di session
             Session::flash('search_results', $products);
         } else {
             // Jika query kosong, redirect kembali ke halaman indeks
-            return redirect()->route('dashboard');
+        
+            return redirect()->route('dashboard')
+                ->with('message', 'Produk tidak ditemukan');
         }
 
 

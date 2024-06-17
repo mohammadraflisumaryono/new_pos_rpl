@@ -188,7 +188,6 @@ class ProductController extends Controller
 
     public function showByCategory(Category $category)
     {
-        $page_h1 = false;
         $categories = Category::all();
         $sliders = Slider::all();
         $productHampirHabis = Product::where('stock', '<=', 5)->get();
