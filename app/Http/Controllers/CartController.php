@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\DiscountProduct;
 
 class CartController extends Controller
 {
@@ -14,10 +15,27 @@ class CartController extends Controller
         $user = auth()->user();
         $carts = $user->carts()->with('product')->get();
 
+        $discounts = DiscountProduct::whereDate('start_date', '<=', now())
+            ->whereDate('end_date', '>=', now())->get();
+
         foreach ($carts as $cart) {
+            $product = $cart->product;
+            $discount = $discounts->firstWhere('product_id', $product->id);
+            $total_discount = 0;
+            // var_dump($discount);
+            if ($discount) {
+
+                $discounted_price = $product->harga - ($product->harga * $discount->discount_percentage / 100);
+                $total_discount += $product->harga * $discount->discount_percentage / 100;
+            } else {
+                $discounted_price = $product->harga;
+            }
             $cart->product->readable_price = 'Rp.' . number_format($cart->product->harga, 0, ',', '.');
             $cart->readable_total = 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.');
+            $cart->product->discounted_price = $discounted_price;
+            $cart->product->total_discount = $total_discount;
         }
+        // die;
 
         $page_title = 'Cart';
         return view('cart.index', compact('carts', 'page_title'));

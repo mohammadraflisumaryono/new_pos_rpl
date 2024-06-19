@@ -22,13 +22,14 @@
             </thead>
             <tbody>
                 @foreach($carts as $cart)
+
                 <tr id="cart-{{ $cart->id }}">
                     <td><input type="checkbox" class="product-checkbox" name="products[]" value="{{ $cart->id }}"></td>
                     <td><img src="{{ asset('storage/'.$cart->product->image) }}" alt="{{ $cart->product->nama }}" style="width: 40px;"></td>
                     <td>{{ $cart->product->nama }}</td>
                     <td>{{ $cart->quantity }}</td>
-                    <td>{{ 'Rp.' . number_format($cart->product->harga, 0, ',', '.') }}</td>
-                    <td class="product-total">{{ 'Rp.' . number_format($cart->quantity * $cart->product->harga, 0, ',', '.') }}</td>
+                    <td>{{ 'Rp.' . number_format($cart->product->discounted_price, 0, ',', '.') }}</td>
+                    <td class="product-total">{{ 'Rp.' . number_format($cart->quantity * $cart->product->discounted_price, 0, ',', '.') }}</td>
                     <td>
                         <button type="button" class="btn btn-primary btn-sm edit-btn" data-id="{{ $cart->id }}" data-quantity="{{ $cart->quantity }}">Ubah</button>
                         <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ $cart->id }}">Hapus</button>
@@ -37,6 +38,7 @@
                 @endforeach
             </tbody>
         </table>
+
         <div class="total">
             <h3>Total: <span id="totalAmount">{{ 'Rp.' . number_format(0, 0, ',', '.') }}</span></h3>
             <button type="button" id="checkoutBtn" class="btn btn-primary float-right">Lanjut ke Pembayaran</button>

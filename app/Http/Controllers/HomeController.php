@@ -20,9 +20,12 @@ class HomeController extends Controller
         $products = Product::all();
         $sliders = Slider::all();
         $categories = Category::all();
-        $discounts = DiscountProduct::all();
+        $discounts = DiscountProduct::whereDate('start_date', '<=', now())
+            ->whereDate('end_date', '>=', now())->get();
 
-        
+        // dd($discounts);
+
+
 
         // $page_title = "Blank";
 
