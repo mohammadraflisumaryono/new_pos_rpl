@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class ManagerController extends Controller
 {
@@ -34,5 +35,15 @@ class ManagerController extends Controller
             ->get();
 
         return view('manager/index', $data);
+    }
+
+    // Data Kasir
+    public function datakasir()
+    {
+        $data['page_title'] = "Data Kasir";
+        $data['kasirs'] = User::where('role', 2)->get();
+
+
+        return view('manager/datakasir', $data);
     }
 }

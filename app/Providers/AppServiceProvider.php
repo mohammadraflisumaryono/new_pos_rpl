@@ -23,13 +23,31 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //Load Menus
+        // Load Menus
         View::composer('*', function ($view) {
             // Fetch all active menus
             $menus = Menu::where('is_aktif', 'y')
                 ->orderBy('menu_parent')
                 ->orderBy('id')
                 ->get();
+
+            $user = Auth::user();
+
+            // Filter menus based on user role
+            if ($user) {
+                $userRole = $user->role;
+
+                $menus = $menus->filter(function ($menu) use ($userRole) {
+                    $menuRoles = explode(',', $menu->menu_roles);
+                    return in_array('all', $menuRoles) || in_array($userRole, $menuRoles);
+                });
+            } else {
+                // If user is not authenticated, only show menus accessible to 'all'
+                $menus = $menus->filter(function ($menu) {
+                    $menuRoles = explode(',', $menu->menu_roles);
+                    return in_array('all', $menuRoles);
+                });
+            }
 
             // Share the menu data with all views
             $view->with('menus', $menus);

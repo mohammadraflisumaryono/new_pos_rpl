@@ -1,12 +1,14 @@
 <!-- resources/views/auth/register.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <style>
-        body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
@@ -15,7 +17,7 @@
             align-items: center;
             background: linear-gradient(135deg, #71b7e6, #9b59b6);
         }
-        
+
         .container {
             background: white;
             padding: 20px;
@@ -84,9 +86,23 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Sign Up</h2>
+
+        @if ($errors->any())
+        <div style="color: red; margin-bottom: 15px;">
+            <ul style="list-style-type: none; padding: 0;">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <input type="text" name="name" placeholder="Username" required>
@@ -103,4 +119,5 @@
         <p class="signup-link">Already have an account? <a href="{{ route('login') }}">Sign In</a></p>
     </div>
 </body>
+
 </html>

@@ -36,9 +36,9 @@ class CartController extends Controller
             return redirect()->route('login')->withErrors('User not authenticated');
         }
 
-        if (!method_exists($user, 'carts')) {
-            dd('Method carts tidak ditemukan pada model User', $user);
-        }
+        // if (!method_exists($user, 'carts')) {
+        //     dd('Method carts tidak ditemukan pada model User', $user);
+        // }
 
         $cart = $user->carts()->where('product_id', $request->product_id)->first();
 

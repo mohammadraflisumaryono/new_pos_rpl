@@ -1,12 +1,14 @@
 <!-- resources/views/auth/login.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
-        body, html {
+        body,
+        html {
             height: 100%;
             margin: 0;
             font-family: Arial, sans-serif;
@@ -15,7 +17,7 @@
             align-items: center;
             background: linear-gradient(135deg, #71b7e6, #9b59b6);
         }
-        
+
         .container {
             background: white;
             padding: 20px;
@@ -83,9 +85,19 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Login</h2>
+        @if ($errors->any())
+        <div style="color: red; margin-bottom: 10px;">
+            <ul style="list-style-type: none; padding: 0;">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <input type="email" name="email" placeholder="Email" required>
@@ -100,4 +112,5 @@
         <p class="signup-link">Don't have an account? <a href="{{ route('register') }}">Sign Up</a></p>
     </div>
 </body>
+
 </html>

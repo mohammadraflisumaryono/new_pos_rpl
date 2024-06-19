@@ -1,38 +1,75 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SuperAdminController;
-use App\Http\Controllers\ManagerController;
-use App\Http\Controllers\KasirController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\SuperAdmin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\DiscountProductController;
-use App\Http\Controllers\SliderController;
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\ComingSoonController;
+use App\Http\Middleware\CheckRoleMiddleware;
+use App\Http\Controllers\{
+    HomeController,
+    ProfileController,
+    SuperAdminController,
+    ManagerController,
+    KasirController,
+    MenuController,
+    ProductController,
+    CategoryController,
+    DiscountProductController,
+    SliderController,
+    CartController,
+    CheckoutController,
+    TransactionController
+};
 
-// Authentication routes
+
+//  ROLE 
+//     1 = User
+//     2 = Kasir
+//     3 = Manager
+//     4 = Super Admin
+
+
 require __DIR__ . '/auth.php';
+
+// single page
+
+Route::get('/unauthorized', function () {
+    return view('unauthorized');
+})->name('unauthorized');
+
+Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::view('/comingsoon', 'comingsoon')->name('comingsoon');
 Route::get('search', [HomeController::class, 'search'])->name('search');
+
+
+
+
+// Super Admin
+Route::prefix('superadmin')->middleware(['auth', 'verified', 'role:4'])->group(function () {
+    Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin.index');
+});
+Route::prefix('menus')->middleware(['auth', 'verified', 'role:4'])->group(function () {
+    Route::get('/index', [MenuController::class, 'index'])->name('menus.index');
+    Route::get('/create', [MenuController::class, 'create'])->name('menus.create');
+    Route::post('/', [MenuController::class, 'store'])->name('menus.store');
+    Route::get('/{menu}/edit', [MenuController::class, 'edit'])->name('menus.edit');
+    Route::put('/{menu}', [MenuController::class, 'update'])->name('menus.update');
+    Route::delete('/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
+});
+
+
+
 // Resource routes for products and categories
-Route::prefix('categories')->group(function () {
+Route::prefix('categories')->middleware(['auth', 'verified', 'superadmin'])->group(function () {
     Route::get('/index', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
     Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-})->middleware(['auth', 'verified', 'superadmin']);
+});
 
-Route::prefix('products')->group(function () {
+Route::prefix('products')->middleware(['auth', 'verified', 'superadmin', 'manager'])->group(function () {
     Route::get('/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/', [ProductController::class, 'store'])->name('products.store');
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
@@ -44,13 +81,11 @@ Route::prefix('products')->group(function () {
 
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/{category}/category', [ProductController::class, 'showByCategory'])->name('products.category');
-})->middleware(['auth', 'verified', 'superadmin', 'manager']);
+    Route::post('/products/updatestock', [ProductController::class, 'updatestock'])->name('products.updatestock');
+    Route::get('/products/addstock', [ProductController::class, 'addStock'])->name('products.addstock');
+});
 
 Route::post('/product/info', [ProductController::class, 'getProductInfo'])->name('product.info');
-Route::post('/products/updatestock', [ProductController::class, 'updatestock'])->name('products.updatestock');
-Route::get('/products/addstock', [ProductController::class, 'addStock'])->name('products.addstock');
-
-Route::resource('sliders', SliderController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
@@ -59,23 +94,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('checkout.destroy');
 });
 
-Route::prefix('menus')->group(function () {
-    Route::get('/index', [MenuController::class, 'index'])->name('menus.index');
-    Route::get('/create', [MenuController::class, 'create'])->name('menus.create');
-    Route::post('/', [MenuController::class, 'store'])->name('menus.store');
-    Route::get('/{menu}/edit', [MenuController::class, 'edit'])->name('menus.edit');
-    Route::put('/{menu}', [MenuController::class, 'update'])->name('menus.update');
-    Route::delete('/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
-})->middleware(['auth', 'verified', 'superadmin']);
+Route::resource('sliders', SliderController::class)->middleware(['auth', 'verified', 'role:4,3']);
 
-Route::prefix('superadmin')->group(function () {
-    Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin.index');
-})->middleware(['auth', 'verified', 'superadmin']);
-Route::prefix('manager')->group(function () {
+Route::prefix('manager')->middleware(['auth', 'verified', 'role:3'])->group(function () {
     Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
-})->middleware(['auth', 'verified', 'manager']);
-
-Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/datakasir', [ManagerController::class, 'datakasir'])->name('manager.datakasir');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -89,14 +113,8 @@ Route::prefix('checkout')->middleware('auth')->group(function () {
     Route::post('/process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
 });
 
-// Route::get('/comingsoon', [ComingSoonController::class, 'index'])->name('comingsoon');
-Route::view('/comingsoon', 'comingsoon')->name('comingsoon');
-// Route::prefix('transaction')->middleware('auth')->group(function () {
-//     Route::get('/{id}/show', [TransactionController::class, 'show'])->name('transactions.show');
-// });
 
-
-Route::prefix('discount_products')->name('discount.')->group(function () {
+Route::prefix('discount_products')->middleware('auth', 'role:3,4')->name('discount.')->group(function () {
     Route::get('/', [DiscountProductController::class, 'index'])->name('index');
     Route::get('/create', [DiscountProductController::class, 'create'])->name('create');
     Route::post('/', [DiscountProductController::class, 'store'])->name('store');
@@ -118,7 +136,7 @@ Route::post('/transactions/{id}/update-status', [TransactionController::class, '
 
 
 
-Route::prefix('kasir')->group(function () {
+Route::prefix('kasir')->middleware('auth', 'role:2')->group(function () {
     Route::get('/', [KasirController::class, 'index'])->name('kasir.index');
     Route::get('/cekpesanan', [KasirController::class, 'cekPesanan'])->name('kasir.cekpesanan');
 });

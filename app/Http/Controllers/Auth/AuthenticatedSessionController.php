@@ -25,7 +25,7 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-        
+
 
         $request->session()->regenerate();
 
@@ -37,15 +37,15 @@ class AuthenticatedSessionController extends Controller
                 break;
             case 2:
                 # code...
-                return redirect()->intended(route('kasir', absolute: false));
+                return redirect()->intended(route('kasir.index', absolute: false));
                 break;
             case 3:
                 # code...
-                return redirect()->intended(route('manager', absolute: false));
+                return redirect()->intended(route('manager.index', absolute: false));
                 break;
             case 4:
                 # code...
-                return redirect()->intended(route('superadmin', absolute: false));
+                return redirect()->intended(route('superadmin.index', absolute: false));
                 break;
 
             default:
