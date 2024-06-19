@@ -84,6 +84,6 @@
         </tbody>
     </table>
 
-    <a href="{{ route('transactions.index') }}" class="btn btn-primary">Back to Transactions</a>
+    <a href="{{ route('dashboard') }}" class="btn btn-primary">Back to Shop</a>
 </div>
 @endsection

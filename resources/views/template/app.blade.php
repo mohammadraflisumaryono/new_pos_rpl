@@ -43,7 +43,7 @@
         @endif
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper @if(!auth()->check() || auth()->user()->isUser()) no-margin @endif">
+        <div class="content-wrapper ">
             <!-- Content Header (Page header) -->
             @if(isset($page_title))
             <div class="content-header">

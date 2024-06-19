@@ -6,6 +6,7 @@
         <span class="brand-text font-weight-bold" style="color: #562D33; font-size: 20px; text-decoration: none;">SunnyMart</span>
     </a>
 
+
     <!-- Sidebar -->
     <div class="sidebar" style="background-color: #FFFFFF;">
         <div class="user-panel align-items-center justify-content-center text-center user-info" style="background-color: #F9DAD6; border-radius: 10px; padding: 10px 5px; margin: 10px auto; width: auto; max-width: 90%;">
@@ -57,7 +58,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @foreach($menus as $menu)
-                @if($menu->menu_parent == 0 && $menu->is_aktif == 'y')
+                
+                @if($menu->menu_parent == null && $menu->is_aktif == 'y')
                 <li class="nav-item menu-open" style="background-color: #FFFFFF; border-radius: 10px;">
                     <!-- Highlight specific menus -->
                     <a href="#" class="nav-link" style="color:#562D33; font-weight: bold;">

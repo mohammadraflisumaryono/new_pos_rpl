@@ -51,6 +51,7 @@ class AppServiceProvider extends ServiceProvider
                 });
             }
 
+
             // Share the menu data with all views
             $view->with('menus', $menus);
         });

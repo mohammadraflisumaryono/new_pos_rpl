@@ -62,7 +62,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 text-center mb-3">
-                <h5>{{ isset($page_title)  }}</h5>
+                <h5>{{$page_title}}</h5>
                 <hr>
             </div>
             @foreach($products as $product)

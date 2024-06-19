@@ -12,10 +12,10 @@ class CheckoutController extends Controller
 {
     public function showCheckoutForm(Request $request)
     {
-        $request->validate([
-            'products' => 'required|array',
-            'products.*' => 'exists:carts,id',
-        ]);
+        // $request->validate([
+        //     'products' => 'required|array',
+        //     'products.*' => 'exists:carts,id',
+        // ]);
 
         $page_title = 'Checkout';
         $cartIds = $request->input('products');

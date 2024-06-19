@@ -42,6 +42,7 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 Route::view('/comingsoon', 'comingsoon')->name('comingsoon');
 Route::get('search', [HomeController::class, 'search'])->name('search');
 Route::get('/search/?', [HomeController::class, 'search'])->name('searchPage');
+Route::get('/{category}/category', [ProductController::class, 'showByCategory'])->name('products.category');
 
 
 
@@ -103,7 +104,6 @@ Route::prefix('products')->middleware(['auth', 'verified', 'role:4,3'])->group(f
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
 
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
-    Route::get('/{category}/category', [ProductController::class, 'showByCategory'])->name('products.category');
 });
 
 Route::post('/product/info', [ProductController::class, 'getProductInfo'])->name('product.info');

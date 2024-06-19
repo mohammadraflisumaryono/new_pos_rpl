@@ -192,9 +192,10 @@ class ProductController extends Controller
         $sliders = Slider::all();
         $productHampirHabis = Product::where('stock', '<=', 5)->get();
         $products = $category->products;
-        $page_title = "Product Management - " . $category->nama;
+        $page_title = "Product - " . $category->nama;
         $selectedCategory = $category;
+        
 
-        return view('index', compact('categories', 'sliders', 'products', 'page_h1', 'page_title', 'selectedCategory', 'productHampirHabis'));
+        return view('index', compact('categories', 'sliders', 'products', 'page_title', 'selectedCategory', 'productHampirHabis'));
     }
 }
