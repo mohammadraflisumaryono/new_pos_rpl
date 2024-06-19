@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use App\Models\DiscountProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -109,6 +110,24 @@ class TransactionController extends Controller
     public function show($id)
     {
         $transaction = Transaction::with('transactionDetails.product')->findOrFail($id);
+        $product = $transaction->transactionDetails->first()->product;
+
+        // $transaction->created_at;
+        // dd($transaction->created_at);
+        $discounts = DiscountProduct::whereDate('start_date', '<=', $transaction->created_at)
+            ->whereDate('end_date', '>=', $transaction->created_at)->get();
+
+        foreach ($transaction->transactionDetails as $detail) {
+            $product = $detail->product;
+            $discount = $discounts->firstWhere('product_id', $product->id);
+
+            if ($discount) {
+                $detail->discounted_price = $product->harga - ($product->harga * $discount->discount_percentage / 100);
+            } else {
+                $detail->discounted_price = $product->harga;
+            }
+        }
+
         $page_title = 'Transaction Detail';
         return view('transactions.show', compact('transaction', 'page_title'));
     }

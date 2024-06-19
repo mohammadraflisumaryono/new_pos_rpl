@@ -85,6 +85,7 @@ class CheckoutController extends Controller
             ]);
 
             $product = Product::find($cart->product_id);
+
             $product->stock -= $cart->quantity;
             $product->save();
 

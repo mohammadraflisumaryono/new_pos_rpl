@@ -9,6 +9,7 @@
 @section('page_content')
 <div class="container">
 
+
     <table class="table">
         <tr>
             <th>ID</th>
@@ -58,11 +59,11 @@
         <tbody>
             @foreach ($transaction->transactionDetails as $detail)
             <tr>
-                <td>{{ $detail->product->name }}</td>
+                <td>{{ $detail->product->nama }}</td>
                 <td>{{ $detail->quantity }}</td>
                 <td>Rp. {{ number_format($detail->price) }}</td>
-                <td>Rp. {{ isset($detail->discounted_price_per_unit) ? number_format($detail->discounted_price_per_unit) : '-' }}</td> <!-- Display discounted price per unit -->
-                <td>Rp. {{ number_format($detail->quantity * $detail->price) }}</td>
+                <td>Rp. {{ isset($detail->discounted_price) ? number_format($detail->discounted_price) : '-' }}</td> <!-- Display discounted price per unit -->
+                <td>Rp. {{ number_format($detail->quantity * $detail->discounted_price) }}</td>
             </tr>
             @endforeach
         </tbody>

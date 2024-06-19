@@ -67,14 +67,14 @@
                 <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>Discounted Price Per Unit</th> <!-- Add new column -->
+                <th>Price After Discount</th> <!-- Add new column -->
                 <th>Total</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($transaction->transactionDetails as $detail)
             <tr>
-                <td>{{ $detail->product->name }}</td>
+                <td>{{ $detail->product->nama }}</td>
                 <td>{{ $detail->quantity }}</td>
                 <td>{{ number_format($detail->price, 2) }}</td>
                 <td>{{ isset($detail->discounted_price_per_unit) ? number_format($detail->discounted_price_per_unit, 2) : '-' }}</td> <!-- Display discounted price per unit -->
