@@ -39,4 +39,8 @@ class User extends Authenticatable
     {
         return $this->role === 4;
     }
+    public function isUser()
+    {
+        return $this->role === 1;
+    }
 }

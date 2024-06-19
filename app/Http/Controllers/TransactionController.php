@@ -7,6 +7,7 @@ use App\Models\TransactionDetail;
 use App\Models\DiscountProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
@@ -21,9 +22,14 @@ class TransactionController extends Controller
 
     public function riwayattransaksi()
     {
-        $transactions = Transaction::with(['transactionDetails.product', 'user'])
+        $user = Auth::user();
+        $transactions = Transaction::whereHas('transactionDetails', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })
+            ->with(['transactionDetails.product', 'user'])
             ->orderBy('created_at', 'desc')
             ->get();
+        // dd($transactions);
         $page_title = 'Riwayat Transaksi';
         return view('transactions.riwayattransaksi', compact('transactions', 'page_title'));
     }

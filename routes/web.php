@@ -70,10 +70,14 @@ Route::prefix('categories')->middleware(['auth', 'verified', 'role:4'])->group(f
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
+Route::get('products/', [ProductController::class, 'index'])->middleware('auth', 'role:2,3,4')->name('products.index');
+Route::get('/products/addstock', [ProductController::class, 'addStock'])->middleware('auth', 'role:2,3,4')->name('products.addstock');
+Route::post('/products/updatestock', [ProductController::class, 'updatestock'])->middleware('auth', 'role:2,3,4')->name('products.updatestock');
+
+
 Route::prefix('products')->middleware(['auth', 'verified', 'role:4,3'])->group(function () {
     Route::get('/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/', [ProductController::class, 'index'])->name('products.index');
     Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
 
@@ -82,8 +86,6 @@ Route::prefix('products')->middleware(['auth', 'verified', 'role:4,3'])->group(f
 
     Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/{category}/category', [ProductController::class, 'showByCategory'])->name('products.category');
-    Route::post('/products/updatestock', [ProductController::class, 'updatestock'])->name('products.updatestock');
-    Route::get('/products/addstock', [ProductController::class, 'addStock'])->name('products.addstock');
 });
 
 Route::post('/product/info', [ProductController::class, 'getProductInfo'])->name('product.info');

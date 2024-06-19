@@ -37,14 +37,13 @@
     <div class="wrapper">
         @include('template.navbar')
 
-        @if(Auth::check())
-        @if(Auth::user()->role == 4)
+        @if(Auth::check()|| Auth::user()->role != 1)
+
         @include('template.sidebar')
-        @endif
         @endif
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper @if(!auth()->check() || !auth()->user()->isAdmin()) no-margin @endif">
+        <div class="content-wrapper @if(!auth()->check() || auth()->user()->isUser()) no-margin @endif">
             <!-- Content Header (Page header) -->
             @if(isset($page_title))
             <div class="content-header">

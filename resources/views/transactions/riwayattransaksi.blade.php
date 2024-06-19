@@ -1,6 +1,7 @@
 @extends('template.app')
 
 @section('page_content')
+@if($transactions->count() > 0)
 <div class="container">
     <h1>{{ $page_title }}</h1>
     <table class="table">
@@ -25,6 +26,10 @@
         </tbody>
     </table>
 </div>
+@else
+<p style="color: #FFA07A;">Belum ada transaksi yang dilakukan.</p>
+@endif
+
 
 
 @endsection

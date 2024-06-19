@@ -144,10 +144,10 @@ class ProductController extends Controller
 
     public function addStock()
     {
-        dd('add stock');
+        // dd('add stock');
         $products = Product::all();
         $page_title = "Add Stock";
-        return view('products.add_stock', compact('product', 'page_title'));
+        return view('products.add_stock', compact('products', 'page_title'));
     }
     // app/Http/Controllers/ProductController.php
 

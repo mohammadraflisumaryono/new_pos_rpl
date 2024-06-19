@@ -1,7 +1,10 @@
 @extends('template.app')
 
 @section('page_content')
+@if(Auth::user()->role === 4 || Auth::user()->role === 3)
 <a href="{{ route('products.create') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Create Product</a>
+@endif
+
 <a href="{{ route('products.addstock') }}" class="btn btn-primary mb-3" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33; font-weight: bold;">Add Stock Products</a>
 @if($productHampirHabis->count() > 0)
 <div class="alert alert-danger">
@@ -24,7 +27,9 @@
             <th>Stock</th>
             <th>Netto</th>
             <th>Categories</th>
+            @if(Auth::user()->role === 4 || Auth::user()->role === 3)
             <th>Actions</th>
+            @endif
         </tr>
     </thead>
     <tbody>
@@ -41,6 +46,8 @@
                 <span class="badge badge-info">{{ $category->nama }}</span>
                 @endforeach
             </td>
+
+            @if(Auth::user()->role === 4 || Auth::user()->role === 3)
             <td class="d-flex">
                 <a href="{{route('products.show',$product)}}" class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Show</a>
                 <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-sm mr-1" style="background-color: #FFCCCB; border-color: #FFCCCB;">Edit</a>
@@ -50,6 +57,7 @@
                     <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                 </form>
             </td>
+            @endif
 
 
             @endforeach
