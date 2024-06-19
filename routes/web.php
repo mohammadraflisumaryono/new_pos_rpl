@@ -99,7 +99,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('sliders', SliderController::class)->middleware(['auth', 'verified', 'role:4,3']);
 
-Route::prefix('manager')->middleware(['auth', 'verified', 'role:3'])->group(function () {
+Route::prefix('manager')->middleware(['auth', 'verified', 'role:3,4'])->group(function () {
     Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
     Route::get('/datakasir', [ManagerController::class, 'datakasir'])->name('manager.datakasir');
 });
@@ -139,7 +139,7 @@ Route::post('/transactions/{id}/update-status', [TransactionController::class, '
 
 
 
-Route::prefix('kasir')->middleware('auth', 'role:2')->group(function () {
+Route::prefix('kasir')->middleware('auth', 'role:2,4')->group(function () {
     Route::get('/', [KasirController::class, 'index'])->name('kasir.index');
     Route::get('/cekpesanan', [KasirController::class, 'cekPesanan'])->name('kasir.cekpesanan');
 });

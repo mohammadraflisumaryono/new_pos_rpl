@@ -18,11 +18,21 @@
     #dailyRevenueChart {
         margin-bottom: 20px;
     }
+
+    .print-button {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: left;
+    }
 </style>
 @endsection
 
 @section('page_content')
 <div class="container">
+
+    <div class="print-button">
+        <button onclick="printPageContent()" class="btn btn-primary">Print Page</button>
+    </div>
 
     <div class="row">
         <div class="col-md-6">
@@ -70,8 +80,6 @@
         </div>
     </div>
 </div>
-
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -249,5 +257,9 @@
         var dailyRevenueChart = new ApexCharts(document.querySelector("#dailyRevenueChart"), dailyRevenueOptions);
         dailyRevenueChart.render();
     });
+
+    function printPageContent() {
+        window.print();
+    }
 </script>
 @endsection
