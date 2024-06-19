@@ -17,8 +17,8 @@ class TransactionFactory extends Factory
         $updatedAt = (clone $createdAt)->modify('+' . rand(0, 30) . ' days');
 
         return [
-            'user_id' => User::factory(),
-            'total_amount' => $this->faker->randomFloat(0, 5000, 2000000),
+            'user_id' => User::inRandomOrder()->value('id'),
+            'total_amount' => $this->faker->randomFloat(1000, 50000, 2000000),
             'status' => $this->faker->randomElement(['Pending', 'Completed', 'Canceled', 'Ready', 'On Delivery']),
             'delivery_type' => $this->faker->randomElement(['home_delivery', 'store_pickup']),
             'address' => $this->faker->address,

@@ -40,6 +40,7 @@ Route::get('/unauthorized', function () {
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 Route::view('/comingsoon', 'comingsoon')->name('comingsoon');
 Route::get('search', [HomeController::class, 'search'])->name('search');
+Route::get('/search/?', [HomeController::class, 'search'])->name('searchPage');
 
 
 
@@ -60,7 +61,7 @@ Route::prefix('menus')->middleware(['auth', 'verified', 'role:4'])->group(functi
 
 
 // Resource routes for products and categories
-Route::prefix('categories')->middleware(['auth', 'verified', 'superadmin'])->group(function () {
+Route::prefix('categories')->middleware(['auth', 'verified', 'role:4'])->group(function () {
     Route::get('/index', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
@@ -69,7 +70,7 @@ Route::prefix('categories')->middleware(['auth', 'verified', 'superadmin'])->gro
     Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
-Route::prefix('products')->middleware(['auth', 'verified', 'superadmin', 'manager'])->group(function () {
+Route::prefix('products')->middleware(['auth', 'verified', 'role:4,3'])->group(function () {
     Route::get('/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/', [ProductController::class, 'store'])->name('products.store');
     Route::get('/', [ProductController::class, 'index'])->name('products.index');

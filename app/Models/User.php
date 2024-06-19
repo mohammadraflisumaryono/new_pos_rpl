@@ -35,4 +35,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaction::class);
     }
+    public function isAdmin()
+    {
+        return $this->role === 4;
+    }
 }

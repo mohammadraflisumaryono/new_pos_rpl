@@ -23,6 +23,10 @@
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
         }
+
+        .no-margin {
+            margin: 0 !important;
+        }
     </style>
 
 
@@ -32,10 +36,15 @@
 
     <div class="wrapper">
         @include('template.navbar')
+
+        @if(Auth::check())
+        @if(Auth::user()->role == 4)
         @include('template.sidebar')
+        @endif
+        @endif
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper @if(!auth()->check() || !auth()->user()->isAdmin()) no-margin @endif">
             <!-- Content Header (Page header) -->
             @if(isset($page_title))
             <div class="content-header">

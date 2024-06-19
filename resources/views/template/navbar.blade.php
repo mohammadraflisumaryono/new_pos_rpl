@@ -96,12 +96,16 @@
     }
 </style>
 
-<nav class="main-header navbar navbar-expand navbar-light justify-content-between">
+<nav class="main-header navbar navbar-expand navbar-light justify-content-between @if(!auth()->check() || auth()->user()->role === 1) no-margin @endif">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
+        @if(Auth::check())
+        @if(Auth::user()->role == 4)
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
+        @endif
+        @endif
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Category</a>
         </li>

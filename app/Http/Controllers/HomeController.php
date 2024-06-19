@@ -22,6 +22,8 @@ class HomeController extends Controller
         $categories = Category::all();
         $discounts = DiscountProduct::all();
 
+        
+
         // $page_title = "Blank";
 
         // Loop melalui produk untuk menambahkan informasi diskon
@@ -50,6 +52,8 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
+        $page_title = "Result for: $query";
+
 
         if ($query) {
             $products = Product::where(function ($q) use ($query) {
@@ -61,12 +65,20 @@ class HomeController extends Controller
                     ->orWhere('dimensi', 'LIKE', "%{$query}%")
                     ->orWhere('deskripsi', 'LIKE', "%{$query}%");
             })->get();
+            // dd($products);
 
-            // Simpan hasil pencarian di session
-            Session::flash('search_results', $products);
+            // Loop melalui produk untuk menambahkan informasi diskon
+            foreach ($products as $product) {
+                $product->discounted_price = $product->harga; // Harga diskon awal, jika tidak ada diskon
+                $product->short_description = Str::limit($product->deskripsi, 100);
+                $product->readAblePrice = 'Rp.' .  number_format($product->harga, 0, ',', '.');
+            }
+
+            // Kirim data produk ke view
+            return view('searchpage', compact('products', 'page_title'));
         } else {
             // Jika query kosong, redirect kembali ke halaman indeks
-        
+
             return redirect()->route('dashboard')
                 ->with('message', 'Produk tidak ditemukan');
         }
