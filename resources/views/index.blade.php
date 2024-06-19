@@ -62,7 +62,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 text-center mb-3">
+                @if(isset($page_title))
                 <h5>{{$page_title}}</h5>
+                @endif
                 <hr>
             </div>
             @foreach($products as $product)
