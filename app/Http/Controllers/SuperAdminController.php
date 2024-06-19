@@ -65,4 +65,8 @@ class SuperAdminController extends Controller
 
         return view('superadmin.index', $data);
     }
+    
+
+
+    
 }

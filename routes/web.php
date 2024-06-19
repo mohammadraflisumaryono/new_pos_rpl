@@ -18,7 +18,8 @@ use App\Http\Controllers\{
     SliderController,
     CartController,
     CheckoutController,
-    TransactionController
+    TransactionController,
+    UserController
 };
 
 
@@ -48,6 +49,23 @@ Route::get('/search/?', [HomeController::class, 'search'])->name('searchPage');
 // Super Admin
 Route::prefix('superadmin')->middleware(['auth', 'verified', 'role:4'])->group(function () {
     Route::get('/', [SuperAdminController::class, 'index'])->name('superadmin.index');
+    Route::get('/users', [UserController::class, 'index'])->name('user.index');
+
+// Menampilkan form tambah user
+Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
+
+// Menyimpan data user baru
+Route::post('/users', [UserController::class, 'store'])->name('user.store');
+
+// Menampilkan form edit user
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+
+// Menyimpan data user yang diedit
+Route::put('/users/{id}', [UserController::class, 'update'])->name('user.update');
+
+// Menghapus user
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+   
 });
 Route::prefix('menus')->middleware(['auth', 'verified', 'role:4'])->group(function () {
     Route::get('/index', [MenuController::class, 'index'])->name('menus.index');
@@ -102,6 +120,7 @@ Route::resource('sliders', SliderController::class)->middleware(['auth', 'verifi
 Route::prefix('manager')->middleware(['auth', 'verified', 'role:3,4'])->group(function () {
     Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
     Route::get('/datakasir', [ManagerController::class, 'datakasir'])->name('manager.datakasir');
+    // Route::get('/users', [ManagerController::class, 'dataUser'])->name('manager.users');
 });
 
 Route::middleware('auth')->group(function () {

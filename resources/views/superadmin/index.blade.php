@@ -16,6 +16,10 @@
 @endsection
 
 @section('page_content')
+<div class="print-button">
+        <button onclick="printPageContent()" class="btn btn-primary">Print Page</button>
+    </div>
+
 <div class="container mt-4">
     <div id="transactionChart"></div>
     <div id="userChart"></div>
@@ -89,6 +93,9 @@
         transactionChart.render();
         revenueChart.render();
     });
+    function printPageContent() {
+        window.print();
+    }
 </script>
 
 @endsection

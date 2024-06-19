@@ -46,4 +46,11 @@ class ManagerController extends Controller
 
         return view('manager/datakasir', $data);
     }
+
+    public function dataUser()
+    {
+        $data['page_title'] = "Data Pengguna";
+        $data['users'] = User::where('role', 1)->get();
+        return view('manager.datauser', $data);
+    }
 }
