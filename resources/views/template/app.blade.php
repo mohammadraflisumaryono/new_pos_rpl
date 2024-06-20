@@ -37,7 +37,7 @@
     <div class="wrapper">
         @include('template.navbar')
 
-        @if(Auth::check()|| Auth::user()->role != 1)
+        @if(Auth::check() || Auth::user()->role != 1)
 
         @include('template.sidebar')
         @endif
