@@ -127,20 +127,32 @@
 </section>
 @endif
 
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h5><img src="{{ asset('storage/images/logo.png') }}" alt="logo"></h5>
-                <ul class="list-unstyled d-flex justify-content-center mt-2">
-                    <li class="ms-2"><a href="#" class="text-muted"><i class="fab fa-facebook-f"></i></a></li>
-                    <li class="ms-2"><a href="#" class="text-muted"><i class="fab fa-twitter"></i></a></li>
-                    <li class="ms-2"><a href="#" class="text-muted"><i class="fab fa-instagram"></i></a></li>
-                    <li class="ms-2"><a href="#" class="text-muted"><i class="fab fa-linkedin"></i></a></li>
+<footer class="footer mt-auto py-4" style="background-color: #F9DAD6;">
+    <div class="container-fluid">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-4 mb-3">
+                <h5 class="mb-3" style="color: #562D33;">Tentang Kami</h5>
+                <p style="color: #562D33;">Sunny Mart merupakan website supermarket yang bisa anda gunakan kapan dan dimana saja untuk memenuhi kebutuhan anda.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h5 class="mb-3" style="color: #562D33;">Hubungi Kami</h5>
+                <p style="color: #562D33;">Alamat: Jalan A.H Nasution No.76, Bandung, Jawa Barat, 40614</p>
+                <p style="color: #562D33;">Email: sunnymart@gmail.com</p>
+                <p style="color: #562D33;">Telepon: 123-456-7890</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h5 class="mb-3" style="color: #562D33;">Ikuti Kami</h5>
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="#" style="color: #562D33;"><i class="fab fa-linkedin"></i></a></li>
                 </ul>
-                <p class="mt-2">© 2023 Your Company. All Rights Reserved.</p>
             </div>
         </div>
+    </div>
+    <div class="container-fluid text-center py-3">
+        <p class="text-muted mb-0" style="color: #562D33;">© 2024 SunnyMart. All rights reserved.</p>
     </div>
 </footer>
 
