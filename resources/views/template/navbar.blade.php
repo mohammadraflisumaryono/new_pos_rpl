@@ -77,7 +77,7 @@
         background-color: #FFCCCB;
         /* Pink peach background */
         border: 1px solid #ddd;
-        border-radius: 5px;
+        border-radius: 30px;
     }
 
     .navbar-search button {
@@ -85,7 +85,7 @@
         /* Pink peach button */
         color: #562D33;
         border-color: #FFCCCB;
-        border-radius: 5px;
+        border-radius: 30px;
         padding: 0.375rem 0.75rem;
         font-weight: bold;
     }
