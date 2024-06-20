@@ -54,7 +54,7 @@
 
     /* Navbar styling */
     .navbar {
-        background-color: #F9DAD6;
+        background-color: #FFFFFF;
         padding: 0.75rem 1rem;
     }
 
@@ -66,32 +66,31 @@
     .navbar-nav .nav-link:hover {
         color: #7D6040;
     }
-
     .navbar-brand {
-        color: #562D33;
-        font-weight: bold;
-        font-size: 20px;
-    }
+    color: #562D33;
+    font-weight: bold;
+    font-size: 20px;
+}
 
     .navbar-search input {
-        background-color: #FFCCCB;
+        background-color: #F9DAD6;
         /* Pink peach background */
         border: 1px solid #ddd;
-        border-radius: 30px;
+        border-radius: 100px;
     }
 
     .navbar-search button {
-        background-color: #FFCCCB;
+        background-color: #F9DAD6;
         /* Pink peach button */
         color: #562D33;
-        border-color: #FFCCCB;
-        border-radius: 30px;
+        border-color: #F9DAD6;
+        border-radius: 100px;
         padding: 0.375rem 0.75rem;
         font-weight: bold;
     }
 
     .navbar-search button:hover {
-        background-color: #FF6347;
+        background-color: #F9DAD6;
         /* Darker pink peach on hover */
     }
 </style>
