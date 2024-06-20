@@ -32,7 +32,7 @@
             <label for="end_date" class="form-label">End Date</label>
             <input type="date" name="end_date" id="end_date" class="form-control" value="{{ $discount->end_date }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary" style="background-color: #FFCCCB; border-color: #FFCCCB; color: #562D33">Update</button>
         <a href="{{ route('discount.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
